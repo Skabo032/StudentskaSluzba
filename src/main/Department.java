@@ -1,8 +1,37 @@
 package main;
 
+import java.util.List;
+
 public class Department {
 	private String departmentID;
 	private String departmentName;
 	private Professor departmentCheif;
-	//lista Profesora
+	
+	
+	public String getDepartmentID() {
+		return departmentID;
+	}
+	public void setDepartmentID(String departmentID) {
+		this.departmentID = departmentID;
+	}
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+	public Professor getDepartmentCheif() {
+		return departmentCheif;
+	}
+	public void setDepartmentCheif(Professor departmentCheif) {
+		this.departmentCheif = departmentCheif;
+	}
+	public List<Professor> getProfessors() {
+		return professors;
+	}
+	public void setProfessors(List<Professor> professors) {
+		this.professors = professors;
+	}
+	private List<Professor> professors;
+	
 }
