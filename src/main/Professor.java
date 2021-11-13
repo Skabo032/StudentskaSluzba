@@ -16,6 +16,27 @@ public class Professor {
 	private int yearsOfExperience;
 	private List<Course> courses;
 	
+	
+	public Professor() {
+		super();
+	}
+	public Professor(String lastName, String firstName, LocalDate dateOfBirth, Address homeAddress, String phoneNumber,
+			String email, Address officeAddress, String idNumber, String title, int yearsOfExperience,
+			List<Course> courses) {
+		super();
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.dateOfBirth = dateOfBirth;
+		this.homeAddress = homeAddress;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.officeAddress = officeAddress;
+		this.idNumber = idNumber;
+		this.title = title;
+		this.yearsOfExperience = yearsOfExperience;
+		this.courses = courses;
+	}
+	
 	public String getLastName() {
 		return lastName;
 	}
