@@ -8,6 +8,19 @@ public class Department {
 	private Professor departmentCheif;
 	
 	
+	public Department(String departmentID, String departmentName, Professor departmentCheif,
+			List<Professor> professors) {
+		super();
+		this.departmentID = departmentID;
+		this.departmentName = departmentName;
+		this.departmentCheif = departmentCheif;
+		this.professors = professors;
+	}
+	public Department() {
+		super();
+	}
+	
+	
 	public String getDepartmentID() {
 		return departmentID;
 	}

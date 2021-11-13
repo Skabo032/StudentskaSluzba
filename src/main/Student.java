@@ -24,6 +24,31 @@ public class Student {
 	private List<Grade> unfinishedExams;
 
 	
+	public Student(String lastName, String firstName, LocalDate dateOfBirth, String adress, String phoneNumber,
+			String email, String indexNumber, int yearOfEnrolment, int currentYearOfStudies, Status status,
+			double avgGrade, List<Grade> passedExams, List<Grade> unfinishedExams) {
+		super();
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.dateOfBirth = dateOfBirth;
+		this.adress = adress;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.indexNumber = indexNumber;
+		this.yearOfEnrolment = yearOfEnrolment;
+		this.currentYearOfStudies = currentYearOfStudies;
+		this.status = status;
+		this.avgGrade = avgGrade;
+		this.passedExams = passedExams;
+		this.unfinishedExams = unfinishedExams;
+	}
+	
+	
+	public Student() {
+		super();
+	}
+
+
 	public String getLastName() {
 		return lastName;
 	}
