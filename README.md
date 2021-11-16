@@ -1,4 +1,5 @@
 Prvi student treba da implementira stavke sa sledećim oznakama:
+```
 student
 ocena
 katedra
@@ -24,9 +25,10 @@ uklanjanje_predmeta_sa_profesora
 deserijalizacija
 lokaliyacija
 postavljanje sefa katedre
-
+```
 
 Drugi student treba da implementira stavke sa sledećim oznakama:
+```
 profesor
 predmet
 adresa
@@ -51,3 +53,4 @@ sortiranje_predmeta
 dodavanje_profesora_na_predmet
 uklanjanje_profesora_sa_predmeta
 serijalizacija
+```
