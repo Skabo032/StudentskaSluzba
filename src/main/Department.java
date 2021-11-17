@@ -6,7 +6,7 @@ public class Department {
 	private String departmentID;
 	private String departmentName;
 	private Professor departmentCheif;
-	
+	private List<Professor> professors;
 	
 	public Department(String departmentID, String departmentName, Professor departmentCheif,
 			List<Professor> professors) {
@@ -45,6 +45,5 @@ public class Department {
 	public void setProfessors(List<Professor> professors) {
 		this.professors = professors;
 	}
-	private List<Professor> professors;
 	
 }
