@@ -6,6 +6,7 @@ public class Main {
 		
 		MainFrame mf = new MainFrame();
 		mf.setVisible(true);
+		
 	}
 
 }

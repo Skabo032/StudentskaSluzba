@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -19,5 +20,9 @@ public class MainFrame extends JFrame{
 		setTitle("Studentska služba");
 		// must set default close operation because otherwise the window would just APPEAR closed
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		ToolBar tb = new ToolBar();
+		tb.setVisible(true);
+		add(tb, BorderLayout.NORTH);
 	}
 }
