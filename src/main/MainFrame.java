@@ -21,6 +21,9 @@ public class MainFrame extends JFrame{
 		// must set default close operation because otherwise the window would just APPEAR closed
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		MenuBar mb = new MenuBar();
+		this.setJMenuBar(mb);
+		
 		ToolBar tb = new ToolBar();
 		tb.setVisible(true);
 		add(tb, BorderLayout.NORTH);
