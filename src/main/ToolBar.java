@@ -30,7 +30,7 @@ public class ToolBar extends JToolBar {
 		Image newImgDelete = imgDelete.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
 		ImageIcon deleteIco = new ImageIcon(newImgDelete);
 	
-		ImageIcon searchImg = new ImageIcon("images/delete.png");
+		ImageIcon searchImg = new ImageIcon("images/search.png");
 		Image imgSearch = searchImg.getImage();
 		Image newImgSearch = imgSearch.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
 		ImageIcon searchIco = new ImageIcon(newImgSearch);
