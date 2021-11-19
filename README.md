@@ -1,4 +1,6 @@
-Prvi student treba da implementira stavke sa sledećim oznakama:
+JavaJDK version 11
+
+Prvi student(Boško Ristović) treba da implementira stavke sa sledećim oznakama:
 ```
 student
 ocena
@@ -27,7 +29,7 @@ lokaliyacija
 postavljanje sefa katedre
 ```
 
-Drugi student treba da implementira stavke sa sledećim oznakama:
+Drugi student(Ratko Ružičić) treba da implementira stavke sa sledećim oznakama:
 ```
 profesor
 predmet
