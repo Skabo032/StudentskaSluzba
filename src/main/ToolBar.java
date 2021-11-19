@@ -36,29 +36,29 @@ public class ToolBar extends JToolBar {
 		ImageIcon searchIco = new ImageIcon(newImgSearch);
 		
 		JButton btnAdd = new JButton();
-		btnAdd.setToolTipText("Kreiraj entitet");
+		btnAdd.setToolTipText("Add entity");
 		btnAdd.setIcon(addIco);
 		add(btnAdd);
 		
 		JButton btnEdit = new JButton();
-		btnEdit.setToolTipText("Izmeni entitet");
+		btnEdit.setToolTipText("Edit entity");
 		btnEdit.setIcon(editIco);
 		add(btnEdit);
 		
 		JButton btnDelete = new JButton();
-		btnDelete.setToolTipText("Izbriši");
+		btnDelete.setToolTipText("Delete");
 		btnDelete.setIcon(deleteIco);
 		add(btnDelete);
 		
 		add(Box.createHorizontalGlue());
 		
 		JTextField textField = new JTextField(20); // had to limit the minimum size of textfield ...
-		textField.setToolTipText("Pretraga");
+		textField.setToolTipText("Search");
 		textField.setMaximumSize(new Dimension(200, 30)); // ... and the maximum size of textfield
 		add(textField);
 		
 		JButton btnSearch = new JButton();
-		btnSearch.setToolTipText("Pretraži");
+		btnSearch.setToolTipText("Search");
 		btnSearch.setIcon(searchIco);
 		add(btnSearch);
 	}
