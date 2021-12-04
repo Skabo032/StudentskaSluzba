@@ -15,6 +15,7 @@ public class ToolBar extends JToolBar {
 		super(SwingConstants.HORIZONTAL);
 		
 		// all of the icon images are imported and resized
+		// TODO: make a separate method that handles resizing icons
 		ImageIcon addImg = new ImageIcon("images/add.png");
 		Image imgAdd = addImg.getImage();
 		Image newImgAdd = imgAdd.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
@@ -61,5 +62,6 @@ public class ToolBar extends JToolBar {
 		btnSearch.setToolTipText("Search");
 		btnSearch.setIcon(searchIco);
 		add(btnSearch);
+		setFloatable(false);
 	}
 }
