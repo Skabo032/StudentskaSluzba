@@ -27,5 +27,8 @@ public class MainFrame extends JFrame{
 		ToolBar tb = new ToolBar();
 		tb.setVisible(true);
 		add(tb, BorderLayout.NORTH);
+		
+		MainViewTabbedPane mvtp = new MainViewTabbedPane();
+		add(mvtp, BorderLayout.CENTER);
 	}
 }
