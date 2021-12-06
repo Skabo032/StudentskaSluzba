@@ -1,11 +1,16 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -36,9 +41,11 @@ public class ToolBar extends JToolBar {
 		Image newImgSearch = imgSearch.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
 		ImageIcon searchIco = new ImageIcon(newImgSearch);
 		
+		MouseListener mAdd = new AddBtnMouseListener();
 		JButton btnAdd = new JButton();
 		btnAdd.setToolTipText("Add entity");
 		btnAdd.setIcon(addIco);
+		btnAdd.addMouseListener(mAdd);
 		add(btnAdd);
 		
 		JButton btnEdit = new JButton();
@@ -64,4 +71,36 @@ public class ToolBar extends JToolBar {
 		add(btnSearch);
 		setFloatable(false);
 	}
+		
+		class AddBtnMouseListener implements MouseListener{
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
+				case 0:
+					
+					break;
+				case 1:
+					JDialog addProfessor = new JDialog(MainFrame.getInstance(), "Dodaj profesora", true);
+					addProfessor.setLayout( new FlowLayout() );  
+					addProfessor.add( new JLabel ("Click button to continue."));  
+					addProfessor.setSize(300,300);    
+					addProfessor.setVisible(true);
+					break;
+				case 2:
+					/* skip */
+					break;
+				default:
+					/* skip */
+				}
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {}
+			@Override
+			public void mouseExited(MouseEvent arg0) {}
+			@Override
+			public void mousePressed(MouseEvent arg0) {}
+			@Override
+			public void mouseReleased(MouseEvent arg0) {}
+		}
 }

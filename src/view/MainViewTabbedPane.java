@@ -3,6 +3,7 @@ package view;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
+
 enum Tab {
 	STUDENT,
 	PROFESSOR,
@@ -30,6 +31,7 @@ public class MainViewTabbedPane extends JTabbedPane{
 		return instance;
 	}
 	
+	/*
 	public Tab getTab() {
 		switch(instance.getSelectedIndex()) {
 		case 0:
@@ -43,4 +45,5 @@ public class MainViewTabbedPane extends JTabbedPane{
 		
 		}
 	}
+	*/
 }

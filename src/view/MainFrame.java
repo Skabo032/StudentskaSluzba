@@ -7,8 +7,15 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 public class MainFrame extends JFrame{
-	public MainFrame() {
-		super(); // passed no arguments to the parent class
+	
+	// SINGLETON design pattern
+	private static MainFrame instance = null;
+	
+	private MainFrame() {
+		super();// passed no arguments to the parent class
+		initialise();
+	}
+	private void initialise() {
 		Toolkit tKit = Toolkit.getDefaultToolkit();
 		Dimension d = tKit.getScreenSize();
 		
@@ -30,5 +37,10 @@ public class MainFrame extends JFrame{
 		
 		MainViewTabbedPane mvtp = MainViewTabbedPane.getInstance();
 		add(mvtp, BorderLayout.CENTER);
+	}
+	public static MainFrame getInstance() {
+		if(instance == null)
+			instance = new MainFrame();
+		return instance;
 	}
 }
