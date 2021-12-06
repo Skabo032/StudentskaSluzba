@@ -28,7 +28,7 @@ public class MainFrame extends JFrame{
 		tb.setVisible(true);
 		add(tb, BorderLayout.NORTH);
 		
-		MainViewTabbedPane mvtp = new MainViewTabbedPane();
+		MainViewTabbedPane mvtp = MainViewTabbedPane.getInstance();
 		add(mvtp, BorderLayout.CENTER);
 	}
 }
