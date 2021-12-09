@@ -3,13 +3,6 @@ package view;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
-
-enum Tab {
-	STUDENT,
-	PROFESSOR,
-	COURSE
-}
-
 public class MainViewTabbedPane extends JTabbedPane{	
 	
 	// SINGLETON design pattern
@@ -31,19 +24,4 @@ public class MainViewTabbedPane extends JTabbedPane{
 		return instance;
 	}
 	
-	/*
-	public Tab getTab() {
-		switch(instance.getSelectedIndex()) {
-		case 0:
-			return Tab.STUDENT;
-		case 1:
-			return Tab.PROFESSOR;
-		case 2:
-			return Tab.COURSE;
-		default:
-			return null;
-		
-		}
-	}
-	*/
 }

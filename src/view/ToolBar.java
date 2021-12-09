@@ -76,17 +76,13 @@ public class ToolBar extends JToolBar {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
-				case 0:
+				case 0:	// STUDENT
 					
 					break;
-				case 1:
-					JDialog addProfessor = new JDialog(MainFrame.getInstance(), "Dodaj profesora", true);
-					addProfessor.setLayout( new FlowLayout() );  
-					addProfessor.add( new JLabel ("Click button to continue."));  
-					addProfessor.setSize(300,300);    
-					addProfessor.setVisible(true);
+				case 1:	// PROFFESOR
+					AddProfessorDialog profDiag = new AddProfessorDialog();
 					break;
-				case 2:
+				case 2:	// COURSE
 					/* skip */
 					break;
 				default:
