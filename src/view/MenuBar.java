@@ -3,13 +3,18 @@ package view;
 import javax.swing.JMenuBar;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
+
+import view.ToolBar.AddBtnMouseListener;
 
 public class MenuBar extends JMenuBar {
 	/**
@@ -20,9 +25,13 @@ public class MenuBar extends JMenuBar {
 	public MenuBar() {
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
+		
+		ActionListener aAdd = new AddBtnMouseListener();
 		JMenuItem fNew = new JMenuItem("New");
 		fNew.setMnemonic(KeyEvent.VK_N);
 		fNew.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+		fNew.addActionListener(aAdd);
+		
 		JMenuItem fSave = new JMenuItem("Save");
 		fSave.setMnemonic(KeyEvent.VK_S);
 		fSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
@@ -78,11 +87,24 @@ public class MenuBar extends JMenuBar {
 		add(file);
 		add(edit);
 		add(help);
-		
-		
-		
-		
-		
 	}
-
+		class AddBtnMouseListener implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
+				case 0:	// STUDENT
+					
+					break;
+				case 1:	// PROFFESOR
+					AddProfessorDialog profDiag = new AddProfessorDialog();
+					break;
+				case 2:	// COURSE
+					/* skip */
+					break;
+				default:
+					/* skip */
+				}
+			}
+		}
 }

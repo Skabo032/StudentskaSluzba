@@ -89,7 +89,6 @@ public class ToolBar extends JToolBar {
 					/* skip */
 				}
 			}
-
 			@Override
 			public void mouseEntered(MouseEvent arg0) {}
 			@Override
