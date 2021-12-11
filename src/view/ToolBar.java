@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -21,27 +20,11 @@ public class ToolBar extends JToolBar {
 		super(SwingConstants.HORIZONTAL);
 		
 		// all of the icon images are imported and resized
-		// TODO: make a separate method that handles resizing icons
-		ImageIcon addImg = new ImageIcon("images/add.png");
-		Image imgAdd = addImg.getImage();
-		Image newImgAdd = imgAdd.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
-		ImageIcon addIco = new ImageIcon(newImgAdd);
-		
-		ImageIcon editImg = new ImageIcon("images/edit.png");
-		Image imgEdit = editImg.getImage();
-		Image newImgEdit = imgEdit.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
-		ImageIcon editIco = new ImageIcon(newImgEdit);
-		
-		ImageIcon deleteImg = new ImageIcon("images/delete.png");
-		Image imgDelete = deleteImg.getImage();
-		Image newImgDelete = imgDelete.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
-		ImageIcon deleteIco = new ImageIcon(newImgDelete);
-	
-		ImageIcon searchImg = new ImageIcon("images/search.png");
-		Image imgSearch = searchImg.getImage();
-		Image newImgSearch = imgSearch.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
-		ImageIcon searchIco = new ImageIcon(newImgSearch);
-		
+		ImageIcon addIco = new ResizeIcon("images/add.png", 20, 20).getIcon();
+		ImageIcon editIco = new ResizeIcon("images/edit.png", 20, 20).getIcon();
+		ImageIcon deleteIco = new ResizeIcon("images/delete.png", 20, 20).getIcon();
+		ImageIcon searchIco = new ResizeIcon("images/search.png", 20, 20).getIcon();
+
 		MouseListener mAdd = new AddBtnMouseListener();
 		JButton btnAdd = new JButton();
 		btnAdd.setToolTipText("Add entity");

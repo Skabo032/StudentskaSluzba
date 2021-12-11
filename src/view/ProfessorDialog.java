@@ -26,7 +26,7 @@ public class ProfessorDialog extends JDialog{
 		int sizeX = 400;
 		int sizeY = 500;
 		setSize(sizeX,sizeY);    
-		setLocation(mfLocX+ (mfW-sizeX)/2, mfLocY + (mfH - sizeY)/2);
+		setLocation(mfLocX + (mfW-sizeX)/2, mfLocY + (mfH - sizeY)/2);
 		
 		
 		GridBagLayout gbl = new GridBagLayout();
@@ -148,6 +148,8 @@ public class ProfessorDialog extends JDialog{
 		p.add(cancel, gb);
 		
 		add(p);
+		setResizable(false);
 		setVisible(true);
+		
 	}
 }
