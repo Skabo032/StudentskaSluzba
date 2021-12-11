@@ -10,9 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AddProfessorDialog extends JDialog{
-	public AddProfessorDialog() {
-		super(MainFrame.getInstance(), "Dodaj profesora", true);  
+public class ProfessorDialog extends JDialog{
+	public ProfessorDialog(String dialogTitle) {
+		super(MainFrame.getInstance(), dialogTitle, true); 
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
 		int mfLocY = (int)MainFrame.getInstance().getLocation().getY();
 		int mfW = MainFrame.getInstance().getSize().width;

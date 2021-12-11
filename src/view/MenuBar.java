@@ -26,7 +26,7 @@ public class MenuBar extends JMenuBar {
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
 		
-		ActionListener aAdd = new AddBtnMouseListener();
+		ActionListener aAdd = new AddBtnActionListener();
 		JMenuItem fNew = new JMenuItem("New");
 		fNew.setMnemonic(KeyEvent.VK_N);
 		fNew.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_N, ActionEvent.CTRL_MASK));
@@ -64,9 +64,11 @@ public class MenuBar extends JMenuBar {
 		JMenu edit = new JMenu("Edit");
 		edit.setMnemonic(KeyEvent.VK_E);
 		//file.setAccelerator(KeyStroke.getKeyStroke(ActionEvent.CTRL_MASK, KeyEvent.VK_F));
+		ActionListener aEdit = new EditBtnActionListener();
 		JMenuItem eEdit = new JMenuItem("Edit");
 		eEdit.setMnemonic(KeyEvent.VK_E);
 		eEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.CTRL_MASK));
+		eEdit.addActionListener(aEdit);
 		JMenuItem eDelete = new JMenuItem("Delete");
 		eDelete.setMnemonic(KeyEvent.VK_D);
 		eDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));
@@ -88,16 +90,33 @@ public class MenuBar extends JMenuBar {
 		add(edit);
 		add(help);
 	}
-		class AddBtnMouseListener implements ActionListener{
+		class AddBtnActionListener implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
 				case 0:	// STUDENT
 					
 					break;
 				case 1:	// PROFFESOR
-					AddProfessorDialog profDiag = new AddProfessorDialog();
+					ProfessorDialog profDiag = new ProfessorDialog("Dodaj profesora");
+					break;
+				case 2:	// COURSE
+					/* skip */
+					break;
+				default:
+					/* skip */
+				}
+			}
+		}
+		class EditBtnActionListener implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
+				case 0:	// STUDENT
+					
+					break;
+				case 1:	// PROFFESOR
+					ProfessorDialog profDiag = new ProfessorDialog("Izmeni profesora");
 					break;
 				case 2:	// COURSE
 					/* skip */

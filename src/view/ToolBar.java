@@ -48,9 +48,11 @@ public class ToolBar extends JToolBar {
 		btnAdd.addMouseListener(mAdd);
 		add(btnAdd);
 		
+		MouseListener mEdit = new EditBtnMouseListener();
 		JButton btnEdit = new JButton();
 		btnEdit.setToolTipText("Edit entity");
 		btnEdit.setIcon(editIco);
+		btnEdit.addMouseListener(mEdit);
 		add(btnEdit);
 		
 		JButton btnDelete = new JButton();
@@ -80,7 +82,33 @@ public class ToolBar extends JToolBar {
 					
 					break;
 				case 1:	// PROFFESOR
-					AddProfessorDialog profDiag = new AddProfessorDialog();
+					ProfessorDialog profDiag = new ProfessorDialog("Dodaj profesora");
+					break;
+				case 2:	// COURSE
+					/* skip */
+					break;
+				default:
+					/* skip */
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {}
+			@Override
+			public void mouseExited(MouseEvent arg0) {}
+			@Override
+			public void mousePressed(MouseEvent arg0) {}
+			@Override
+			public void mouseReleased(MouseEvent arg0) {}
+		}
+		class EditBtnMouseListener implements MouseListener{
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
+				case 0:	// STUDENT
+					
+					break;
+				case 1:	// PROFFESOR
+					ProfessorDialog profDiag = new ProfessorDialog("Izmeni profesora");
 					break;
 				case 2:	// COURSE
 					/* skip */
