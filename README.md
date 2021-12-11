@@ -63,3 +63,4 @@ serijalizacija
 - [ ] Add icons to menu
 - [ ] Make a method for resizing icons
 - [ ] Add Toolbar accelerators
+- [ ] Add constraints to entities
