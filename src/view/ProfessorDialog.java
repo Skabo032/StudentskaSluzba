@@ -11,6 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class ProfessorDialog extends JDialog{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ProfessorDialog(String dialogTitle) {
 		super(MainFrame.getInstance(), dialogTitle, true); 
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();

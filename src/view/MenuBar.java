@@ -5,16 +5,10 @@ import javax.swing.JMenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
-
-import view.ToolBar.AddBtnMouseListener;
 
 public class MenuBar extends JMenuBar {
 	/**
@@ -98,7 +92,7 @@ public class MenuBar extends JMenuBar {
 					
 					break;
 				case 1:	// PROFFESOR
-					ProfessorDialog profDiag = new ProfessorDialog("Dodaj profesora");
+					new ProfessorDialog("Dodaj profesora");
 					break;
 				case 2:	// COURSE
 					/* skip */
@@ -116,7 +110,7 @@ public class MenuBar extends JMenuBar {
 					
 					break;
 				case 1:	// PROFFESOR
-					ProfessorDialog profDiag = new ProfessorDialog("Izmeni profesora");
+					new ProfessorDialog("Izmeni profesora");
 					break;
 				case 2:	// COURSE
 					/* skip */

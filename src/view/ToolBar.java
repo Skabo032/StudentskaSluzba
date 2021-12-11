@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -9,13 +8,15 @@ import java.awt.event.MouseListener;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 public class ToolBar extends JToolBar {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public ToolBar() {
 		super(SwingConstants.HORIZONTAL);
 		
@@ -82,7 +83,7 @@ public class ToolBar extends JToolBar {
 					
 					break;
 				case 1:	// PROFFESOR
-					ProfessorDialog profDiag = new ProfessorDialog("Dodaj profesora");
+					new ProfessorDialog("Dodaj profesora");
 					break;
 				case 2:	// COURSE
 					/* skip */
@@ -108,7 +109,7 @@ public class ToolBar extends JToolBar {
 					
 					break;
 				case 1:	// PROFFESOR
-					ProfessorDialog profDiag = new ProfessorDialog("Izmeni profesora");
+					new ProfessorDialog("Izmeni profesora");
 					break;
 				case 2:	// COURSE
 					/* skip */

@@ -5,6 +5,10 @@ import javax.swing.JTabbedPane;
 
 public class MainViewTabbedPane extends JTabbedPane{	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// SINGLETON design pattern
 	private static MainViewTabbedPane instance = null;
 	
