@@ -1,5 +1,7 @@
+# Verzije softvera
 JavaJDK version 11
 
+# Raspodela zadataka
 Prvi student(Boško Ristović) treba da implementira stavke sa sledećim oznakama:
 ```
 student
@@ -56,3 +58,9 @@ dodavanje_profesora_na_predmet
 uklanjanje_profesora_sa_predmeta
 serijalizacija
 ```
+
+# Task List
+- [ ] Add icons to menu
+- [ ] Make a method for resizing icons
+- [ ] Add Toolbar accelerators
+- [ ] Add constraints to entities
