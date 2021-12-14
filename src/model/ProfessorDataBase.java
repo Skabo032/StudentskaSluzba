@@ -28,20 +28,17 @@ public class ProfessorDataBase {
 		Address a1 = new Address("abc", 5, "abv", "ab");
 		Professor p1 = new Professor("Peric", "Pera", LocalDate.now(), a1, "123", "email", a1, "22222", "dr", 5, null);
 		this.professors.add(p1);
+		
 	}
 	
 	public int getColumnCount() {
 		return columnNames.size();
 	}
-	public void addProfessor(Professor p) {
-		this.professors.add(p);
-	}
-	
-	public void removeProfessor(int index) {
-		professors.remove(index);
+	public String getColumnName(int column) {
+		return columnNames.get(column);
 	}
 	public int getRowCount() {
-		return 1;
+		return professors.size();
 	}
 	public String getValueAt(int row, int column) {
 		Professor professor = this.professors.get(row);
@@ -57,11 +54,5 @@ public class ProfessorDataBase {
 		default:
 			return null;
 		}
-		
 	}
-	public String getColumnName(int column) {
-		return columnNames.get(column);
-	}
-	// add changeProfessor
-	// add searchProfessor
 }

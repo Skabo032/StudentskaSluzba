@@ -7,20 +7,18 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-public class ProfessorTable extends JTable {
-
+public class ProfessorTable extends JTable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	public ProfessorTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelProfessor());
+		
 	}
-
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);
@@ -31,5 +29,4 @@ public class ProfessorTable extends JTable {
 		}
 		return c;
 	}
-
 }
