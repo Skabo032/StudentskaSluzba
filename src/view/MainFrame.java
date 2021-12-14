@@ -41,6 +41,10 @@ public class MainFrame extends JFrame{
 		tb.setVisible(true);
 		add(tb, BorderLayout.NORTH);
 		
+		StatusBar sb = new StatusBar();
+		sb.setVisible(true);
+		add(sb, BorderLayout.SOUTH);
+		
 		MainViewTabbedPane mvtp = MainViewTabbedPane.getInstance();
 		add(mvtp, BorderLayout.CENTER);
 	}
