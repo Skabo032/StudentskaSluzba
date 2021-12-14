@@ -45,8 +45,7 @@ public class StatusBar extends JPanel{
 		}
 		JLabel currentTabName = new JLabel(defaultTab);
 		add(currentTabName, BorderLayout.CENTER);
-		
-		
+				
 		MainViewTabbedPane.getInstance().addChangeListener(new ChangeListener() {
 			String currentTab = "";
 			@Override
