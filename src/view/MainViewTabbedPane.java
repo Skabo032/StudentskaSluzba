@@ -22,14 +22,16 @@ public class MainViewTabbedPane extends JTabbedPane
 	private void initialise() {
 		ProfessorTable profTable = new ProfessorTable();
 		StudentTable studTable = new StudentTable();
+		CourseTable courseTable = new CourseTable();
+
 		
 		addTab("Studenti", new JScrollPane(studTable));
 		addTab("Profesori", new JScrollPane(profTable));
-		addTab("Predmeti", new JLabel("predmeti"));
+		addTab("Predmeti", new JScrollPane(courseTable));
 		
-		AbstractTableModelProfessor modelProfessor = (AbstractTableModelProfessor)profTable.getModel();
+		/*AbstractTableModelProfessor modelProfessor = (AbstractTableModelProfessor)profTable.getModel();
 		modelProfessor.fireTableDataChanged();
-		validate();
+		validate();*/
 	}
 	
 	public static MainViewTabbedPane getInstance() {

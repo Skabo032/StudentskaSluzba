@@ -9,7 +9,7 @@ enum Semester{
 
 public class Course {
 	private int courseID;
-	private int courseName;
+	private String courseName;
 	private Semester semester;
 	private int yearOfStudy;
 	private Professor courseProffesor;
@@ -20,8 +20,13 @@ public class Course {
 	
 	public Course() {
 		super();
+		this.courseID = 1;
+		this.courseName = "oisisi";
+		this.semester = Semester.WINTER;
+		this.yearOfStudy = 3;
+		this.ectsPoints = 5;
 	}
-	public Course(int courseID, int courseName, Semester semester, int yearOfStudy, Professor courseProffesor,
+	public Course(int courseID, String courseName, Semester semester, int yearOfStudy, Professor courseProffesor,
 			int ectsPoints, List<Student> studentsPassed, List<Student> studentsFailed) {
 		super();
 		this.courseID = courseID;
@@ -40,10 +45,10 @@ public class Course {
 	public void setCourseID(int courseID) {
 		this.courseID = courseID;
 	}
-	public int getCourseName() {
+	public String getCourseName() {
 		return courseName;
 	}
-	public void setCourseName(int courseName) {
+	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
 	public Semester getSemester() {
