@@ -42,8 +42,11 @@ public class Course {
 	public int getCourseID() {
 		return courseID;
 	}
-	public void setCourseID(int courseID) {
-		this.courseID = courseID;
+	public void setCourseID(int courseID) throws Exception{
+		if (courseID >= 0)
+			this.courseID = courseID;
+		else 
+			throw new Exception("Invalid value for course ID, cannot be less than zero!");
 	}
 	public String getCourseName() {
 		return courseName;
@@ -60,8 +63,11 @@ public class Course {
 	public int getYearOfStudy() {
 		return yearOfStudy;
 	}
-	public void setYearOfStudy(int yearOfStudy) {
-		this.yearOfStudy = yearOfStudy;
+	public void setYearOfStudy(int yearOfStudy) throws Exception {
+		if (yearOfStudy >= 0)
+			this.yearOfStudy = yearOfStudy;
+		else 
+			throw new Exception("Invalid value for course year of study, cannot be less than zero!");
 	}
 	public Professor getCourseProffesor() {
 		return courseProffesor;
@@ -72,8 +78,11 @@ public class Course {
 	public int getEctsPoints() {
 		return ectsPoints;
 	}
-	public void setEctsPoints(int ectsPoints) {
-		this.ectsPoints = ectsPoints;
+	public void setEctsPoints(int ectsPoints) throws Exception {
+		if (ectsPoints >= 0)
+			this.ectsPoints = ectsPoints;
+		else 
+			throw new Exception("Invalid value for course ECTS points, cannot be less than zero!");
 	}
 	public List<Student> getStudentsPassed() {
 		return studentsPassed;

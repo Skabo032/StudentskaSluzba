@@ -27,8 +27,11 @@ public class Address {
 	public int getNumber() {
 		return number;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setNumber(int number) throws Exception {
+		if (number >= 1)
+			this.number = number;
+		else
+			throw new Exception("Invalid value for address number, cannot be less than 1!");
 	}
 	public String getCity() {
 		return city;
