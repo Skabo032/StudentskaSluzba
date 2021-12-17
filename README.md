@@ -61,6 +61,6 @@ serijalizacija
 
 # Task List
 - [ ] Add icons to menu
-- [ ] Make a method for resizing icons
-- [ ] Add Toolbar accelerators
+- [x] Make a method for resizing icons
+- [x] Add Toolbar accelerators
 - [ ] Add constraints to entities
