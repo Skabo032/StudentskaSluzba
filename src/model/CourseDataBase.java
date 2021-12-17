@@ -54,4 +54,14 @@ public class CourseDataBase {
 			return null;
 		}
 	}
+	public void removeCourse(int id) {
+		for(Course c : courses) {
+			if(c.getCourseID() == id) {
+				courses.remove(c);
+				break;
+			}
+		}
+	}
+	// addCourse
+	// editCourse
 }

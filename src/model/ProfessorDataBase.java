@@ -26,7 +26,7 @@ public class ProfessorDataBase {
 		
 		this.professors = new ArrayList<Professor>();
 		Address a1 = new Address("abc", 5, "abv", "ab");
-		Professor p1 = new Professor("Peric", "Pera", LocalDate.now(), a1, "123", "email", a1, "22222", "dr", 5, null);
+		Professor p1 = new Professor("Peric", "Pera", LocalDate.now(), a1, "123", "email", a1, "22222", Title.PROFESSOR, 5, null);
 		this.professors.add(p1);
 		
 	}
@@ -40,7 +40,7 @@ public class ProfessorDataBase {
 	public int getRowCount() {
 		return professors.size();
 	}
-	public String getValueAt(int row, int column) {
+	public Object getValueAt(int row, int column) {
 		Professor professor = this.professors.get(row);
 		switch (column) {
 		case 0:
@@ -53,6 +53,24 @@ public class ProfessorDataBase {
 			return professor.getEmail();
 		default:
 			return null;
+		}
+	}
+	public boolean addProfessor(Professor p) {
+		return this.professors.add(p);
+	}
+	public void removeProfessor(String idNumber) {
+		for (Professor prof : professors) {
+			if(prof.getIdNumber().equals(idNumber)) {
+				professors.remove(prof);
+				break;
+			}
+		}
+	}
+	public void editProfessor(String idNumber, Professor p) {
+		for (Professor prof : professors) {
+			if(prof.getIdNumber().equals(idNumber)) {
+				prof = p; 
+			}
 		}
 	}
 }
