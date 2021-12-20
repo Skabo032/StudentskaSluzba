@@ -3,12 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
-enum Title{
-	PROFESSOR,
-	DOCENT,
-	ASSISTANT,
-	INSTRUCTOR
-}
+
 
 public class Professor {
 	private String lastName;
@@ -23,6 +18,12 @@ public class Professor {
 	private int yearsOfExperience;
 	private List<Course> courses;
 	
+	public enum Title{
+		PROFESSOR,
+		DOCENT,
+		ASSISTANT,
+		INSTRUCTOR
+	}
 	
 	public Professor() {
 		super();

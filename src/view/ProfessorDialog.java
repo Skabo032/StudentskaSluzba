@@ -3,21 +3,52 @@ package view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.InputVerifier;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+
+import controller.ProfessorDocumentListener;
+import model.Professor;
 
 public class ProfessorDialog extends JDialog{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	
+	public static JTextField firstName;
+	public static JTextField lastName;
+	public static JTextField dateOfBirth;
+	public static JTextField homeAddress;
+	public static JTextField phoneNumber;
+	public static JTextField email;
+	public static JTextField officeAddress;
+	public static JTextField idNumber;
+	public static JComboBox<Professor.Title> title;
+	public static JTextField yearsOfExperience;
+	public static JButton confirm;
+	public static JButton cancel;
+	
+	
 	public ProfessorDialog(String dialogTitle) {
 		super(MainFrame.getInstance(), dialogTitle, true); 
+	
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
 		int mfLocY = (int)MainFrame.getInstance().getLocation().getY();
 		int mfW = MainFrame.getInstance().getSize().width;
@@ -27,7 +58,7 @@ public class ProfessorDialog extends JDialog{
 		int sizeY = 500;
 		setSize(sizeX,sizeY);    
 		setLocation(mfLocX + (mfW-sizeX)/2, mfLocY + (mfH - sizeY)/2);
-		
+
 		
 		GridBagLayout gbl = new GridBagLayout();
 		JPanel p = new JPanel(gbl);
@@ -41,9 +72,10 @@ public class ProfessorDialog extends JDialog{
 		gb.gridy = 0;
 		p.add(new JLabel("Ime: "), gb);
 		
-		JTextField firstName = new JTextField(20);
+		firstName = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 0;
+		firstName.getDocument().addDocumentListener(new ProfessorDocumentListener());
 		p.add(firstName, gb);
 		
 		// ===== PREZIME =====
@@ -51,9 +83,10 @@ public class ProfessorDialog extends JDialog{
 		gb.gridy = 1;
 		p.add(new JLabel("Prezime: "), gb);
 		
-		JTextField lastName = new JTextField(20);
+		lastName = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 1;
+		lastName.getDocument().addDocumentListener(new ProfessorDocumentListener());
 		p.add(lastName, gb);
 		
 		// ===== DATUM RODJENJA =====
@@ -61,9 +94,10 @@ public class ProfessorDialog extends JDialog{
 		gb.gridy = 2;
 		p.add(new JLabel("Datum rodjenja: "), gb);
 		
-		JTextField dateOfBirth = new JTextField(20);
+		dateOfBirth = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 2;
+		dateOfBirth.getDocument().addDocumentListener(new ProfessorDocumentListener());
 		p.add(dateOfBirth, gb);
 		
 		// ===== KUCNA ADRESA =====
@@ -71,9 +105,10 @@ public class ProfessorDialog extends JDialog{
 		gb.gridy = 3;
 		p.add(new JLabel("Kucna adresa: "), gb);
 		
-		JTextField homeAddress = new JTextField(20);
+		homeAddress = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 3;
+		homeAddress.getDocument().addDocumentListener(new ProfessorDocumentListener());
 		p.add(homeAddress, gb);
 		
 		// ===== BROJ TELEFONA =====
@@ -81,9 +116,10 @@ public class ProfessorDialog extends JDialog{
 		gb.gridy = 4;
 		p.add(new JLabel("Broj telefona: "), gb);
 		
-		JTextField phoneNumber = new JTextField(20);
+		phoneNumber = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 4;
+		phoneNumber.getDocument().addDocumentListener(new ProfessorDocumentListener());
 		p.add(phoneNumber, gb);
 		
 		// ==== EMAIL =====
@@ -91,9 +127,10 @@ public class ProfessorDialog extends JDialog{
 		gb.gridy = 5;
 		p.add(new JLabel("E-mail: "), gb);
 		
-		JTextField email = new JTextField(20);
+		email = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 5;
+		email.getDocument().addDocumentListener(new ProfessorDocumentListener());
 		p.add(email, gb);
 		
 		// ===== ADRESA KANCELARIJE =====
@@ -101,9 +138,10 @@ public class ProfessorDialog extends JDialog{
 		gb.gridy = 6;
 		p.add(new JLabel("Adresa kancelarije: "), gb);
 		
-		JTextField officeAddress = new JTextField(20);
+		officeAddress = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 6;
+		officeAddress.getDocument().addDocumentListener(new ProfessorDocumentListener());
 		p.add(officeAddress, gb);
 		
 		// ===== BROJ LICNE KARTE =====
@@ -111,9 +149,10 @@ public class ProfessorDialog extends JDialog{
 		gb.gridy = 7;
 		p.add(new JLabel("Broj licne karte: "), gb);
 		
-		JTextField idNumber = new JTextField(20);
+		idNumber = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 7;
+		idNumber.getDocument().addDocumentListener(new ProfessorDocumentListener());
 		p.add(idNumber, gb);
 		
 		// ===== ZVANJE =====
@@ -121,7 +160,8 @@ public class ProfessorDialog extends JDialog{
 		gb.gridy = 8;
 		p.add(new JLabel("Zvanje: "), gb);
 		
-		JTextField title = new JTextField(20);
+		title = new JComboBox<>();
+		title.setModel(new DefaultComboBoxModel<>(Professor.Title.values()));
 		gb.gridx = 1;
 		gb.gridy = 8;
 		p.add(title, gb);
@@ -131,25 +171,33 @@ public class ProfessorDialog extends JDialog{
 		gb.gridy = 9;
 		p.add(new JLabel("Godine staza: "), gb);
 		
-		JTextField yearsOfExperience = new JTextField(5);
+		yearsOfExperience = new JTextField(5);
 		gb.gridx = 1;
 		gb.gridy = 9;
+		yearsOfExperience.getDocument().addDocumentListener(new ProfessorDocumentListener());
 		p.add(yearsOfExperience, gb);
 		
 		// BUTTONS
 		gb.gridx = 0;
 		gb.gridy = 10;
-		JButton confirm = new JButton("Potvrdi");
+		confirm = new JButton("Potvrdi");
+		confirm.setEnabled(false);
 		p.add(confirm, gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 10;
-		JButton cancel = new JButton("Otkazi");
+		cancel = new JButton("Otkaži");
+		cancel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		p.add(cancel, gb);
 		
 		add(p);
 		setResizable(false);
 		setVisible(true);
-		
 	}
 }

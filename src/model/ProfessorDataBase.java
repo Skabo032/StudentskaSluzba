@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Professor.Title;
+
 public class ProfessorDataBase {
 	private static ProfessorDataBase instance = null;
 	
@@ -66,9 +68,9 @@ public class ProfessorDataBase {
 			}
 		}
 	}
-	public void editProfessor(String idNumber, Professor p) {
+	public void editProfessor(Professor p) {
 		for (Professor prof : professors) {
-			if(prof.getIdNumber().equals(idNumber)) {
+			if(prof.getIdNumber().equals(p.getIdNumber())) {
 				prof = p; 
 			}
 		}
