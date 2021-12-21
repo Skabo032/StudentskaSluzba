@@ -56,6 +56,11 @@ public class ProfessorDataBase {
 		}
 	}
 	public boolean addProfessor(Professor p) {
+		//return this.professors.add(p);
+		for (Professor prof : professors) {
+			if(prof.getIdNumber().equals(p.getIdNumber()))
+				return false;
+		}
 		return this.professors.add(p);
 	}
 	public void removeProfessor(String idNumber) {
