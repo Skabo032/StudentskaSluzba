@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.time.LocalDate;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputVerifier;
@@ -23,7 +24,10 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 import controller.ProfessorDocumentListener;
+import model.Address;
 import model.Professor;
+import model.Professor.Title;
+import model.ProfessorDataBase;
 
 public class ProfessorDialog extends JDialog{
 	/**
@@ -182,6 +186,37 @@ public class ProfessorDialog extends JDialog{
 		gb.gridy = 10;
 		confirm = new JButton("Potvrdi");
 		confirm.setEnabled(false);
+		confirm.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Professor p = new Professor();
+				p.setFirstName(firstName.getText());
+				p.setLastName(lastName.getText());
+				p.setDateOfBirth(LocalDate.parse(dateOfBirth.getText()));
+				p.setEmail(email.getText());
+				String[] hAddrArr = homeAddress.getText().split(",");
+				Address hAddress = new Address(hAddrArr[0], Integer.parseInt(hAddrArr[1]), hAddrArr[2], hAddrArr[3]);
+				p.setHomeAddress(hAddress);
+				String[] oAddrArr = homeAddress.getText().split(",");
+				Address oAddress = new Address(oAddrArr[0], Integer.parseInt(oAddrArr[1]), oAddrArr[2], oAddrArr[3]);
+				p.setHomeAddress(oAddress);
+				p.setPhoneNumber(phoneNumber.getText());
+				p.setIdNumber(idNumber.getText());
+				p.setTitle((Title)title.getSelectedItem());
+				try {
+					p.setYearsOfExperience(Integer.parseInt(yearsOfExperience.getText()));
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if(ProfessorDataBase.getInstance().addProfessor(p)) {
+					ProfessorTable.getInstance().update();
+					dispose();
+				}
+			}
+		});
 		p.add(confirm, gb);
 		
 		gb.gridx = 1;
