@@ -23,18 +23,19 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
-import controller.ProfessorDocumentListener;
+import controller.ProfessorAddDocumentListener;
 import model.Address;
 import model.Professor;
 import model.Professor.Title;
 import model.ProfessorDataBase;
 
-public class ProfessorDialog extends JDialog{
+public class ProfessorAddDialog extends JDialog{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	//public static ProfessorAddDialog instance = null;
 	
 	public static JTextField firstName;
 	public static JTextField lastName;
@@ -50,8 +51,8 @@ public class ProfessorDialog extends JDialog{
 	public static JButton cancel;
 	
 	
-	public ProfessorDialog(String dialogTitle) {
-		super(MainFrame.getInstance(), dialogTitle, true); 
+	public ProfessorAddDialog() {
+		super(MainFrame.getInstance(), "Dodaj profesora", true); 
 	
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
 		int mfLocY = (int)MainFrame.getInstance().getLocation().getY();
@@ -62,6 +63,7 @@ public class ProfessorDialog extends JDialog{
 		int sizeY = 500;
 		setSize(sizeX,sizeY);    
 		setLocation(mfLocX + (mfW-sizeX)/2, mfLocY + (mfH - sizeY)/2);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
 		
 		GridBagLayout gbl = new GridBagLayout();
@@ -79,7 +81,7 @@ public class ProfessorDialog extends JDialog{
 		firstName = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 0;
-		firstName.getDocument().addDocumentListener(new ProfessorDocumentListener());
+		firstName.getDocument().addDocumentListener(new ProfessorAddDocumentListener());
 		p.add(firstName, gb);
 		
 		// ===== PREZIME =====
@@ -90,7 +92,7 @@ public class ProfessorDialog extends JDialog{
 		lastName = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 1;
-		lastName.getDocument().addDocumentListener(new ProfessorDocumentListener());
+		lastName.getDocument().addDocumentListener(new ProfessorAddDocumentListener());
 		p.add(lastName, gb);
 		
 		// ===== DATUM RODJENJA =====
@@ -101,7 +103,7 @@ public class ProfessorDialog extends JDialog{
 		dateOfBirth = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 2;
-		dateOfBirth.getDocument().addDocumentListener(new ProfessorDocumentListener());
+		dateOfBirth.getDocument().addDocumentListener(new ProfessorAddDocumentListener());
 		p.add(dateOfBirth, gb);
 		
 		// ===== KUCNA ADRESA =====
@@ -112,7 +114,7 @@ public class ProfessorDialog extends JDialog{
 		homeAddress = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 3;
-		homeAddress.getDocument().addDocumentListener(new ProfessorDocumentListener());
+		homeAddress.getDocument().addDocumentListener(new ProfessorAddDocumentListener());
 		p.add(homeAddress, gb);
 		
 		// ===== BROJ TELEFONA =====
@@ -123,7 +125,7 @@ public class ProfessorDialog extends JDialog{
 		phoneNumber = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 4;
-		phoneNumber.getDocument().addDocumentListener(new ProfessorDocumentListener());
+		phoneNumber.getDocument().addDocumentListener(new ProfessorAddDocumentListener());
 		p.add(phoneNumber, gb);
 		
 		// ==== EMAIL =====
@@ -134,7 +136,7 @@ public class ProfessorDialog extends JDialog{
 		email = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 5;
-		email.getDocument().addDocumentListener(new ProfessorDocumentListener());
+		email.getDocument().addDocumentListener(new ProfessorAddDocumentListener());
 		p.add(email, gb);
 		
 		// ===== ADRESA KANCELARIJE =====
@@ -145,7 +147,7 @@ public class ProfessorDialog extends JDialog{
 		officeAddress = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 6;
-		officeAddress.getDocument().addDocumentListener(new ProfessorDocumentListener());
+		officeAddress.getDocument().addDocumentListener(new ProfessorAddDocumentListener());
 		p.add(officeAddress, gb);
 		
 		// ===== BROJ LICNE KARTE =====
@@ -156,7 +158,7 @@ public class ProfessorDialog extends JDialog{
 		idNumber = new JTextField(20);
 		gb.gridx = 1;
 		gb.gridy = 7;
-		idNumber.getDocument().addDocumentListener(new ProfessorDocumentListener());
+		idNumber.getDocument().addDocumentListener(new ProfessorAddDocumentListener());
 		p.add(idNumber, gb);
 		
 		// ===== ZVANJE =====
@@ -178,7 +180,7 @@ public class ProfessorDialog extends JDialog{
 		yearsOfExperience = new JTextField(5);
 		gb.gridx = 1;
 		gb.gridy = 9;
-		yearsOfExperience.getDocument().addDocumentListener(new ProfessorDocumentListener());
+		yearsOfExperience.getDocument().addDocumentListener(new ProfessorAddDocumentListener());
 		p.add(yearsOfExperience, gb);
 		
 		// BUTTONS
@@ -198,12 +200,13 @@ public class ProfessorDialog extends JDialog{
 				String[] hAddrArr = homeAddress.getText().split(",");
 				Address hAddress = new Address(hAddrArr[0], Integer.parseInt(hAddrArr[1]), hAddrArr[2], hAddrArr[3]);
 				p.setHomeAddress(hAddress);
-				String[] oAddrArr = homeAddress.getText().split(",");
+				String[] oAddrArr = officeAddress.getText().split(",");
 				Address oAddress = new Address(oAddrArr[0], Integer.parseInt(oAddrArr[1]), oAddrArr[2], oAddrArr[3]);
-				p.setHomeAddress(oAddress);
+				p.setOfficeAddress(oAddress);
 				p.setPhoneNumber(phoneNumber.getText());
 				p.setIdNumber(idNumber.getText());
 				p.setTitle((Title)title.getSelectedItem());
+				// had to add try catch but the value has already been validated
 				try {
 					p.setYearsOfExperience(Integer.parseInt(yearsOfExperience.getText()));
 				} catch (NumberFormatException e) {
@@ -235,4 +238,10 @@ public class ProfessorDialog extends JDialog{
 		setResizable(false);
 		setVisible(true);
 	}
+	
+	/*public static ProfessorAddDialog getInstance() {
+		if(instance == null)
+			instance = new ProfessorAddDialog();
+		return instance;
+	}*/
 }

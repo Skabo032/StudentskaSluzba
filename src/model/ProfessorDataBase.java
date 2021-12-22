@@ -28,7 +28,7 @@ public class ProfessorDataBase {
 		
 		this.professors = new ArrayList<Professor>();
 		Address a1 = new Address("abc", 5, "abv", "ab");
-		Professor p1 = new Professor("Peric", "Pera", LocalDate.now(), a1, "123", "email", a1, "22222", Title.PROFESSOR, 5, null);
+		Professor p1 = new Professor("Peric", "Pera", LocalDate.now(), a1, "123", "email@asd.ac", a1, "22222", Title.PROFESSOR, 5, null);
 		this.professors.add(p1);
 		
 	}
@@ -57,6 +57,14 @@ public class ProfessorDataBase {
 			return null;
 		}
 	}
+	public Professor getProfessor(int i) {
+		try {
+			return professors.get(i);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+	
 	public boolean addProfessor(Professor p) {
 		//return this.professors.add(p);
 		for (Professor prof : professors) {
@@ -73,11 +81,16 @@ public class ProfessorDataBase {
 			}
 		}
 	}
-	public void editProfessor(Professor p) {
+	public boolean editProfessor(Professor p) {
+		int i = 0;
 		for (Professor prof : professors) {
+			
 			if(prof.getIdNumber().equals(p.getIdNumber())) {
-				prof = p; 
+				professors.set(i, p);
+				return true;
 			}
+			i++;
 		}
+		return false;
 	}
 }

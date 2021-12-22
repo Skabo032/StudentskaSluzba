@@ -92,7 +92,8 @@ public class MenuBar extends JMenuBar {
 					
 					break;
 				case 1:	// PROFFESOR
-					new ProfessorDialog("Dodaj profesora");
+					//ProfessorAddDialog.getInstance();
+					new ProfessorAddDialog();
 					break;
 				case 2:	// COURSE
 					/* skip */
@@ -110,7 +111,8 @@ public class MenuBar extends JMenuBar {
 					
 					break;
 				case 1:	// PROFFESOR
-					new ProfessorDialog("Izmeni profesora");
+					if(ProfessorTable.getInstance().getSelectedRow() != -1)
+						new ProfessorEditDialog();
 					break;
 				case 2:	// COURSE
 					/* skip */
