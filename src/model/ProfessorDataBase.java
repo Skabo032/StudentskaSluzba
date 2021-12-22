@@ -73,7 +73,7 @@ public class ProfessorDataBase {
 		}
 		return this.professors.add(p);
 	}
-	public void removeProfessor(String idNumber) {
+	public void removeProfessorById(String idNumber) {
 		for (Professor prof : professors) {
 			if(prof.getIdNumber().equals(idNumber)) {
 				professors.remove(prof);
@@ -81,6 +81,10 @@ public class ProfessorDataBase {
 			}
 		}
 	}
+	public boolean removeProfessorByRowNum(int i) {
+		return professors.remove(i) != null;
+	}
+	
 	public boolean editProfessor(Professor p) {
 		int i = 0;
 		for (Professor prof : professors) {

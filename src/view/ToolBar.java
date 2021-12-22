@@ -7,9 +7,12 @@ import java.awt.event.MouseListener;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+
+import model.ProfessorDataBase;
 
 public class ToolBar extends JToolBar {
 	/**
@@ -39,9 +42,11 @@ public class ToolBar extends JToolBar {
 		btnEdit.addMouseListener(mEdit);
 		add(btnEdit);
 		
+		MouseListener mDelete = new DeleteBtnMouseListener();
 		JButton btnDelete = new JButton();
 		btnDelete.setToolTipText("Delete");
 		btnDelete.setIcon(deleteIco);
+		btnDelete.addMouseListener(mDelete);
 		add(btnDelete);
 		
 		add(Box.createHorizontalGlue());
@@ -95,6 +100,48 @@ public class ToolBar extends JToolBar {
 				case 1:	// PROFFESOR
 					if(ProfessorTable.getInstance().getSelectedRow() != -1)
 						new ProfessorEditDialog();
+					break;
+				case 2:	// COURSE
+					/* skip */
+					break;
+				default:
+					/* skip */
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {}
+			@Override
+			public void mouseExited(MouseEvent arg0) {}
+			@Override
+			public void mousePressed(MouseEvent arg0) {}
+			@Override
+			public void mouseReleased(MouseEvent arg0) {}
+		}
+		class DeleteBtnMouseListener implements MouseListener{
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
+				case 0:	// STUDENT
+					
+					break;
+				case 1:	// PROFFESOR
+					if(ProfessorTable.getInstance().getSelectedRow() != -1)
+					{
+						//System.out.println("AAA");
+						Object[] options = {"DA", "Ne"};
+						int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+																"Da li stvarno zelite da obrisete odabranog profesora?", 
+																"Brisanje profesora", 
+																JOptionPane.YES_NO_OPTION, 
+																JOptionPane.QUESTION_MESSAGE, 
+																null, 
+																options, 
+																options[0]);
+						if(answer == JOptionPane.YES_OPTION)
+							ProfessorDataBase.getInstance().removeProfessorByRowNum(ProfessorTable.getInstance().getSelectedRow());
+						ProfessorTable.getInstance().update();
+					}
 					break;
 				case 2:	// COURSE
 					/* skip */

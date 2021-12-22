@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.ProfessorAddDocumentListener;
 import controller.ProfessorEditDocumentListener;
 import model.Address;
 import model.Professor;
