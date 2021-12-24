@@ -1,5 +1,8 @@
 package controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,12 +12,9 @@ public class ProfessorAddInputVerifier {
 	public static void verify() {
 		if(!checkEmpty() && 
 			checkDate() && 
-			checkAddress(ProfessorAddDialog.homeAddress.getText()) &&
-			checkAddress(ProfessorAddDialog.officeAddress.getText()) &&
 			checkIdNumber() &&
 			checkYearsOfExperience() &&
-			checkPhoneNumber() && 
-			checkEmail()
+			checkPhoneNumber() 
 			) {
 			/*System.out.println(checkEmpty());
 			System.out.println(checkDate());
@@ -35,10 +35,16 @@ public class ProfessorAddInputVerifier {
 		if(ProfessorAddDialog.firstName.getText().isEmpty() ||
 		   ProfessorAddDialog.lastName.getText().isEmpty() ||
 		   ProfessorAddDialog.dateOfBirth.getText().isEmpty() ||
-		   ProfessorAddDialog.homeAddress.getText().isEmpty() ||
+		   ProfessorAddDialog.homeCity.getText().isEmpty() ||
+		   ProfessorAddDialog.homeStreet.getText().isEmpty() ||
+		   ProfessorAddDialog.homeNumber.getText().isEmpty() ||
+		   ProfessorAddDialog.homeCountry.getText().isEmpty() ||
+		   ProfessorAddDialog.officeCity.getText().isEmpty() ||
+		   ProfessorAddDialog.officeStreet.getText().isEmpty() ||
+		   ProfessorAddDialog.officeNumber.getText().isEmpty() ||
+		   ProfessorAddDialog.officeCountry.getText().isEmpty() ||
 		   ProfessorAddDialog.phoneNumber.getText().isEmpty() ||
 		   ProfessorAddDialog.email.getText().isEmpty() ||
-		   ProfessorAddDialog.officeAddress.getText().isEmpty() ||
 		   ProfessorAddDialog.idNumber.getText().isEmpty() ||
 		   ProfessorAddDialog.yearsOfExperience.getText().isEmpty())
 			return true;
@@ -49,9 +55,18 @@ public class ProfessorAddInputVerifier {
 	
 	private static boolean checkDate() {
 												//YYYY-[M]M-[D]D
-		Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]");
+		/*Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]");
 		Matcher matcher = datePattern.matcher(ProfessorAddDialog.dateOfBirth.getText());
-		return matcher.matches();
+		return matcher.matches();*/
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			LocalDate date = LocalDate.parse(ProfessorAddDialog.dateOfBirth.getText(), formatter);
+			return true;
+			
+		} catch (DateTimeParseException e) {
+			return false;
+		}
+		
 	}
 	private static boolean checkAddress(String address) {
 													//street,number,city,country
@@ -83,7 +98,7 @@ public class ProfessorAddInputVerifier {
 		return matcher.matches();
 	}
 	private static boolean checkEmail() {
-		Pattern emailPattern = Pattern.compile("[a-zA-Z]+@[a-zA-Z]+[.][a-zA-Z]+");
+		Pattern emailPattern = Pattern.compile("[a-zA-Z0-9\".\"_]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+");
 		Matcher matcher = emailPattern.matcher(ProfessorAddDialog.email.getText());
 		return matcher.matches();
 	}

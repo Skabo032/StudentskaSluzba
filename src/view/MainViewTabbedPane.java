@@ -1,6 +1,5 @@
 package view;
 
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 

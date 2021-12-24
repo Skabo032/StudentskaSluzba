@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
-import model.ProfessorDataBase;
+import controller.ProfessorController;
 
 public class ToolBar extends JToolBar {
 	/**
@@ -128,7 +128,6 @@ public class ToolBar extends JToolBar {
 				case 1:	// PROFFESOR
 					if(ProfessorTable.getInstance().getSelectedRow() != -1)
 					{
-						//System.out.println("AAA");
 						Object[] options = {"DA", "Ne"};
 						int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
 																"Da li stvarno zelite da obrisete odabranog profesora?", 
@@ -139,7 +138,7 @@ public class ToolBar extends JToolBar {
 																options, 
 																options[0]);
 						if(answer == JOptionPane.YES_OPTION)
-							ProfessorDataBase.getInstance().removeProfessorByRowNum(ProfessorTable.getInstance().getSelectedRow());
+							ProfessorController.getInstance().removeProfessorByRowNum(ProfessorTable.getInstance().getSelectedRow());
 						ProfessorTable.getInstance().update();
 					}
 					break;
