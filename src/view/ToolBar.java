@@ -76,6 +76,7 @@ public class ToolBar extends JToolBar {
 					new ProfessorAddDialog();
 					break;
 				case 2:	// COURSE
+					new CourseAddDialog();
 					/* skip */
 					break;
 				default:

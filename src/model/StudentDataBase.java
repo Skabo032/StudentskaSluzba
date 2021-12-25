@@ -65,7 +65,6 @@ public class StudentDataBase {
 	}
 	
 	public boolean addStudent(Student s) {
-		//return this.professors.add(p);
 		for (Student stud : students) {
 			if(stud.getIndexNumber().equals(s.getIndexNumber()))
 				return false;

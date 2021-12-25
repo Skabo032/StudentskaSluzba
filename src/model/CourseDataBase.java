@@ -9,6 +9,12 @@ public class CourseDataBase {
 	private List<Course> courses;
 	private List<String> columnNames;
 	
+	public static CourseDataBase getInstance() {
+		if(instance == null)
+			instance = new CourseDataBase();
+		return instance;
+	}
+	
 	private CourseDataBase() {
 		this.columnNames = new ArrayList<String>();
 		
@@ -23,11 +29,7 @@ public class CourseDataBase {
 		this.courses.add(c1);
 		
 	}
-	public static CourseDataBase getInstance() {
-		if(instance == null)
-			instance = new CourseDataBase();
-		return instance;
-	}
+
 	public int getColumnCount() {
 		return columnNames.size();
 	}
@@ -61,6 +63,14 @@ public class CourseDataBase {
 				break;
 			}
 		}
+	}
+	
+	public boolean addCourse(Course c) {
+		for (Course course : courses) {
+			if(course.getCourseID() == c.getCourseID())
+				return false;
+		}
+		return this.courses.add(c);
 	}
 	// addCourse
 	// editCourse

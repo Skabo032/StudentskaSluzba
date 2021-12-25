@@ -14,6 +14,20 @@ public class CourseTable extends JTable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private static CourseTable instance = null;
+	
+	public static CourseTable getInstance() {
+		if(instance == null)
+			instance = new CourseTable();
+		return instance;
+	}
+	
+	public void update() {
+		AbstractTableModelCourse modelCourse = (AbstractTableModelCourse)instance.getModel();
+		modelCourse.fireTableDataChanged();
+		validate();
+	}
+	
 	public CourseTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);

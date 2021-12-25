@@ -2,10 +2,6 @@ package model;
 
 import java.util.List;
 
-enum Semester{
-	SUMMER,
-	WINTER
-}
 
 public class Course {
 	private int courseID;
@@ -16,6 +12,11 @@ public class Course {
 	private int ectsPoints; // ESPB poeni
 	private List<Student> studentsPassed;
 	private List<Student> studentsFailed;
+	
+	public enum Semester{
+		SUMMER,
+		WINTER
+	}
 	
 	
 	public Course() {
