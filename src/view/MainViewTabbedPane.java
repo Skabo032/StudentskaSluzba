@@ -20,11 +20,11 @@ public class MainViewTabbedPane extends JTabbedPane
 	
 
 	private void initialise() {
-		StudentTable studTable = new StudentTable();
+		//StudentTable studTable = new StudentTable();
 		CourseTable courseTable = new CourseTable();
 
 		
-		addTab("Studenti", new JScrollPane(studTable));
+		addTab("Studenti", new JScrollPane(StudentTable.getInstance()));
 		addTab("Profesori", new JScrollPane(ProfessorTable.getInstance()));
 		addTab("Predmeti", new JScrollPane(courseTable));
 		

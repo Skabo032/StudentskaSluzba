@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Student.Status;
+
 public class StudentDataBase {
 	private static StudentDataBase instance = null;
 	
@@ -60,6 +62,40 @@ public class StudentDataBase {
 		default:
 			return null;
 		}
+	}
+	
+	public boolean addStudent(Student s) {
+		//return this.professors.add(p);
+		for (Student stud : students) {
+			if(stud.getIndexNumber().equals(s.getIndexNumber()))
+				return false;
+		}
+		return this.students.add(s);
+	}
+	
+	public Student getStudent(int i) {
+		try {
+			return students.get(i);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+	
+	public boolean editStudent(Student s) {
+		int i = 0;
+		for (Student stud : students) {
+			
+			if(stud.getIndexNumber().equals(s.getIndexNumber())) {
+				students.set(i, s);
+				return true;
+			}
+			i++;
+		}
+		return false;
+	}
+	
+	public boolean removeStudentByRowNum(int i) {
+		return students.remove(i) != null;
 	}
 
 }

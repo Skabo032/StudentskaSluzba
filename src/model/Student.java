@@ -3,10 +3,6 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
-enum Status{
-	B, //budzet
-	S  //sammofinansiranje
-}
 
 public class Student {
 	private String lastName;
@@ -22,6 +18,12 @@ public class Student {
 	private double avgGrade;
 	private List<Grade> passedExams;
 	private List<Grade> unfinishedExams;
+	
+	public enum Status{
+		B, //budzet
+		S  //sammofinansiranje
+	}
+
 
 	
 	public Student(String lastName, String firstName, LocalDate dateOfBirth, Address address, String phoneNumber,

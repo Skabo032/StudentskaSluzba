@@ -13,6 +13,7 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 import model.ProfessorDataBase;
+import model.StudentDataBase;
 
 public class ToolBar extends JToolBar {
 	/**
@@ -68,7 +69,7 @@ public class ToolBar extends JToolBar {
 			public void mouseClicked(MouseEvent arg0) {
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
 				case 0:	// STUDENT
-					
+					new StudentAddDialog();
 					break;
 				case 1:	// PROFFESOR
 					//ProfessorAddDialog.getInstance();
@@ -95,7 +96,8 @@ public class ToolBar extends JToolBar {
 			public void mouseClicked(MouseEvent arg0) {
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
 				case 0:	// STUDENT
-					
+					if(StudentTable.getInstance().getSelectedRow() != -1)
+						new StudentEditDialog();
 					break;
 				case 1:	// PROFFESOR
 					if(ProfessorTable.getInstance().getSelectedRow() != -1)
@@ -123,7 +125,18 @@ public class ToolBar extends JToolBar {
 			public void mouseClicked(MouseEvent arg0) {
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
 				case 0:	// STUDENT
-					
+					Object[] options1 = {"DA", "Ne"};
+					int answer1 = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+															"Da li stvarno zelite da obrisete odabranog studenta?", 
+															"Brisanje studenta", 
+															JOptionPane.YES_NO_OPTION, 
+															JOptionPane.QUESTION_MESSAGE, 
+															null, 
+															options1, 
+															options1[0]);
+					if(answer1 == JOptionPane.YES_OPTION)
+						StudentDataBase.getInstance().removeStudentByRowNum(StudentTable.getInstance().getSelectedRow());
+					StudentTable.getInstance().update();
 					break;
 				case 1:	// PROFFESOR
 					if(ProfessorTable.getInstance().getSelectedRow() != -1)
