@@ -142,7 +142,6 @@ public class ToolBar extends JToolBar {
 				case 1:	// PROFFESOR
 					if(ProfessorTable.getInstance().getSelectedRow() != -1)
 					{
-						//System.out.println("AAA");
 						Object[] options = {"DA", "Ne"};
 						int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
 																"Da li stvarno zelite da obrisete odabranog profesora?", 

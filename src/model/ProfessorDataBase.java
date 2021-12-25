@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,9 @@ public class ProfessorDataBase {
 		
 		this.professors = new ArrayList<Professor>();
 		Address a1 = new Address("abc", 5, "abv", "ab");
-		Professor p1 = new Professor("Peric", "Pera", LocalDate.now(), a1, "123", "email@asd.ac", a1, "22222", Title.PROFESSOR, 5, null);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+		LocalDate date = LocalDate.parse("11.11.2020", formatter);
+		Professor p1 = new Professor("Peric", "Pera", date, a1, "123", "email@asd.ac", a1, "22222", Title.PROFESSOR, 5, null);
 		this.professors.add(p1);
 		
 	}

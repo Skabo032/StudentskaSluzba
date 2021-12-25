@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -15,10 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.ProfessorController;
 import controller.ProfessorEditDocumentListener;
 import model.Address;
 import model.Professor;
-import model.ProfessorDataBase;
 import model.Professor.Title;
 
 public class ProfessorEditDialog extends JDialog{
@@ -33,10 +34,16 @@ public class ProfessorEditDialog extends JDialog{
 	public static JTextField firstName = new JTextField(20);
 	public static JTextField lastName = new JTextField(20);
 	public static JTextField dateOfBirth = new JTextField(20);
-	public static JTextField homeAddress = new JTextField(20);
+	public static JTextField homeStreet = new JTextField(20);
+	public static JTextField homeNumber = new JTextField(5);
+	public static JTextField homeCity = new JTextField(20);
+	public static JTextField homeCountry = new JTextField(20);
 	public static JTextField phoneNumber = new JTextField(20);
 	public static JTextField email = new JTextField(20);
-	public static JTextField officeAddress = new JTextField(20);
+	public static JTextField officeStreet = new JTextField(20);
+	public static JTextField officeNumber = new JTextField(5);
+	public static JTextField officeCity = new JTextField(20);
+	public static JTextField officeCountry = new JTextField(20);
 	public static JTextField idNumber = new JTextField(20);
 	public static JComboBox<Professor.Title> title = new JComboBox<Professor.Title>();
 	public static JTextField yearsOfExperience = new JTextField(5);
@@ -51,8 +58,8 @@ public class ProfessorEditDialog extends JDialog{
 		int mfW = MainFrame.getInstance().getSize().width;
 		int mfH = MainFrame.getInstance().getSize().height;
 		
-		int sizeX = 400;
-		int sizeY = 500;
+		int sizeX = 500;
+		int sizeY = 700;
 		setSize(sizeX,sizeY);    
 		setLocation(mfLocX + (mfW-sizeX)/2, mfLocY + (mfH - sizeY)/2);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -61,14 +68,25 @@ public class ProfessorEditDialog extends JDialog{
 		if(selectedIndex == -1) {
 			dispose();
 		}else if(selectedIndex >= 0) {
-			Professor selectedProf = ProfessorDataBase.getInstance().getProfessor(selectedIndex);
+			
+			Professor selectedProf = ProfessorController.getInstance().getProfessor(selectedIndex);
 			firstName.setText(selectedProf.getFirstName());
 			lastName.setText(selectedProf.getLastName());
-			dateOfBirth.setText(selectedProf.getDateOfBirth().toString());
-			homeAddress.setText(selectedProf.getHomeAddress().toString());
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			dateOfBirth.setText(selectedProf.getDateOfBirth().format(formatter));
+
+			homeStreet.setText(selectedProf.getHomeAddress().getStreet());
+			homeNumber.setText(Integer.toString(selectedProf.getHomeAddress().getNumber()));
+			homeCity.setText(selectedProf.getHomeAddress().getCity());
+			homeCountry.setText(selectedProf.getHomeAddress().getCountry());
+			
+			officeStreet.setText(selectedProf.getOfficeAddress().getStreet());
+			officeNumber.setText(Integer.toString(selectedProf.getOfficeAddress().getNumber()));
+			officeCity.setText(selectedProf.getOfficeAddress().getCity());
+			officeCountry.setText(selectedProf.getOfficeAddress().getCountry());
+			
 			phoneNumber.setText(selectedProf.getPhoneNumber());
 			email.setText(selectedProf.getEmail());
-			officeAddress.setText(selectedProf.getOfficeAddress().toString());
 			idNumber.setText(selectedProf.getIdNumber());
 			title.getModel().setSelectedItem(selectedProf.getTitle());
 			yearsOfExperience.setText(Integer.toString(selectedProf.getYearsOfExperience()));
@@ -83,109 +101,89 @@ public class ProfessorEditDialog extends JDialog{
 		gb.anchor = GridBagConstraints.WEST;
 		
 		// ===== IME =====
-		gb.gridx = 0;
-		gb.gridy = 0;
-		p.add(new JLabel("Ime: "), gb);
+		p.add(new JLabel("Ime: "), setCooridnates(gb, 0, 0));
 		
-		gb.gridx = 1;
-		gb.gridy = 0;
 		firstName.getDocument().addDocumentListener(pdl);
-		p.add(firstName, gb);
+		p.add(firstName, setCooridnates(gb, 1, 0));
 		
 		// ===== PREZIME =====
-		gb.gridx = 0;
-		gb.gridy = 1;
-		p.add(new JLabel("Prezime: "), gb);
+		p.add(new JLabel("Prezime: "), setCooridnates(gb, 0, 1));
 		
-		gb.gridx = 1;
-		gb.gridy = 1;
 		lastName.getDocument().addDocumentListener(pdl);
-		p.add(lastName, gb);
+		p.add(lastName, setCooridnates(gb, 1, 1));
 		
 		// ===== DATUM RODJENJA =====
-		gb.gridx = 0;
-		gb.gridy = 2;
-		p.add(new JLabel("Datum rodjenja: "), gb);
+		p.add(new JLabel("Datum rodjenja: "), setCooridnates(gb, 0, 2));
 		
-		gb.gridx = 1;
-		gb.gridy = 2;
 		dateOfBirth.getDocument().addDocumentListener(pdl);
-		p.add(dateOfBirth, gb);
-		
+		p.add(dateOfBirth, setCooridnates(gb, 1, 2));
+		p.add(new JLabel("dd.MM.yyyy"), setCooridnates(gb, 2, 2));
 		// ===== KUCNA ADRESA =====
-		gb.gridx = 0;
-		gb.gridy = 3;
-		p.add(new JLabel("Kucna adresa: "), gb);
+		p.add(new JLabel("KUCNA ADRESA: "), setCooridnates(gb, 0, 3));
 		
-		gb.gridx = 1;
-		gb.gridy = 3;
-		homeAddress.getDocument().addDocumentListener(pdl);
-		p.add(homeAddress, gb);
+		p.add(new JLabel("Ulica: "), setCooridnates(gb, 0, 4));
+		p.add(homeStreet, setCooridnates(gb, 1, 4));
+		p.add(new JLabel("Broj: "), setCooridnates(gb, 0, 5));
+		p.add(homeNumber, setCooridnates(gb, 1, 5));
+		p.add(new JLabel("Grad: "), setCooridnates(gb, 0, 6));
+		p.add(homeCity, setCooridnates(gb, 1, 6));
+		p.add(new JLabel("Drzava: "), setCooridnates(gb, 0, 7));
+		p.add(homeCountry, setCooridnates(gb, 1, 7));
 		
-		// ===== BROJ TELEFONA =====
-		gb.gridx = 0;
-		gb.gridy = 4;
-		p.add(new JLabel("Broj telefona: "), gb);
-		
-		gb.gridx = 1;
-		gb.gridy = 4;
-		phoneNumber.getDocument().addDocumentListener(pdl);
-		p.add(phoneNumber, gb);
-		
-		// ==== EMAIL =====
-		gb.gridx = 0;
-		gb.gridy = 5;
-		p.add(new JLabel("E-mail: "), gb);
-		
-		gb.gridx = 1;
-		gb.gridy = 5;
-		email.getDocument().addDocumentListener(pdl);
-		p.add(email, gb);
+		homeStreet.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
+		homeNumber.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
+		homeCity.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
+		homeCountry.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
 		
 		// ===== ADRESA KANCELARIJE =====
-		gb.gridx = 0;
-		gb.gridy = 6;
-		p.add(new JLabel("Adresa kancelarije: "), gb);
+		p.add(new JLabel("ADRESA KANCELARIJE: "), setCooridnates(gb, 0, 8));
 		
-		gb.gridx = 1;
-		gb.gridy = 6;
-		officeAddress.getDocument().addDocumentListener(pdl);
-		p.add(officeAddress, gb);
+		p.add(new JLabel("Ulica: "), setCooridnates(gb, 0, 9));
+		p.add(officeStreet, setCooridnates(gb, 1, 9));
+		p.add(new JLabel("Broj: "), setCooridnates(gb, 0, 10));
+		p.add(officeNumber, setCooridnates(gb, 1, 10));
+		p.add(new JLabel("Grad: "), setCooridnates(gb, 0, 11));
+		p.add(officeCity, setCooridnates(gb, 1, 11));
+		p.add(new JLabel("Drzava: "), setCooridnates(gb, 0, 12));
+		p.add(officeCountry, setCooridnates(gb, 1, 12));
+		
+		officeStreet.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
+		officeNumber.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
+		officeCity.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
+		officeCountry.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
+		
+		// ===== BROJ TELEFONA =====
+		p.add(new JLabel("Broj telefona: "), setCooridnates(gb, 0, 13));
+		
+		phoneNumber.getDocument().addDocumentListener(pdl);
+		p.add(phoneNumber, setCooridnates(gb, 1, 13));
+		
+		// ==== EMAIL =====
+		p.add(new JLabel("E-mail: "), setCooridnates(gb, 0, 14));
+		
+		email.getDocument().addDocumentListener(pdl);
+		p.add(email, setCooridnates(gb, 1, 14));
 		
 		// ===== BROJ LICNE KARTE =====
-		gb.gridx = 0;
-		gb.gridy = 7;
-		p.add(new JLabel("Broj licne karte: "), gb);
+		p.add(new JLabel("Broj licne karte: "), setCooridnates(gb, 0, 15));
 		
-		gb.gridx = 1;
-		gb.gridy = 7;
 		idNumber.getDocument().addDocumentListener(pdl);
-		p.add(idNumber, gb);
+		p.add(idNumber, setCooridnates(gb, 1, 15));
 		
 		// ===== ZVANJE =====
-		gb.gridx = 0;
-		gb.gridy = 8;
-		p.add(new JLabel("Zvanje: "), gb);
+		p.add(new JLabel("Zvanje: "), setCooridnates(gb, 0, 17));
 		
 		title = new JComboBox<>();
 		title.setModel(new DefaultComboBoxModel<>(Professor.Title.values()));
-		gb.gridx = 1;
-		gb.gridy = 8;
-		p.add(title, gb);
+		p.add(title, setCooridnates(gb, 1, 17));
 		
 		// ===== GODINE STAZA =====
-		gb.gridx = 0;
-		gb.gridy = 9;
-		p.add(new JLabel("Godine staza: "), gb);
+		p.add(new JLabel("Godine staza: "), setCooridnates(gb, 0, 18));
 		
-		gb.gridx = 1;
-		gb.gridy = 9;
 		yearsOfExperience.getDocument().addDocumentListener(pdl);
-		p.add(yearsOfExperience, gb);
+		p.add(yearsOfExperience, setCooridnates(gb, 1, 18));
 		
 		// BUTTONS
-		gb.gridx = 0;
-		gb.gridy = 10;
 		confirm = new JButton("Potvrdi");
 		confirm.setEnabled(true);	// retrived data from the database SHOULD be correct
 		confirm.addActionListener(new ActionListener() {
@@ -195,14 +193,19 @@ public class ProfessorEditDialog extends JDialog{
 				Professor p = new Professor();
 				p.setFirstName(firstName.getText());
 				p.setLastName(lastName.getText());
-				p.setDateOfBirth(LocalDate.parse(dateOfBirth.getText()));
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				p.setDateOfBirth(LocalDate.parse(dateOfBirth.getText(), formatter));
 				p.setEmail(email.getText());
-				String[] hAddrArr = homeAddress.getText().split(",");
-				Address hAddress = new Address(hAddrArr[0], Integer.parseInt(hAddrArr[1]), hAddrArr[2], hAddrArr[3]);
-				p.setHomeAddress(hAddress);
-				String[] oAddrArr = officeAddress.getText().split(",");
-				Address oAddress = new Address(oAddrArr[0], Integer.parseInt(oAddrArr[1]), oAddrArr[2], oAddrArr[3]);
-				p.setOfficeAddress(oAddress);
+				Address homeAddress = new Address(homeStreet.getText(), 
+						Integer.parseInt(homeNumber.getText()),//TODO: change street number to string
+						homeCity.getText(),
+						homeCountry.getText());
+				p.setHomeAddress(homeAddress);
+				Address officeAddress = new Address(officeStreet.getText(), 
+						Integer.parseInt(officeNumber.getText()),	//TODO: change street number to string
+						officeCity.getText(),
+						officeCountry.getText());
+				p.setOfficeAddress(officeAddress);
 				p.setPhoneNumber(phoneNumber.getText());
 				p.setIdNumber(idNumber.getText());
 				p.setTitle((Title)title.getSelectedItem());
@@ -214,16 +217,14 @@ public class ProfessorEditDialog extends JDialog{
 					e.printStackTrace();
 				}
 				
-				if(ProfessorDataBase.getInstance().editProfessor(p)) {
+				if(ProfessorController.getInstance().editProfessor(p)) {
 					ProfessorTable.getInstance().update();
 					dispose();
 				}
 			}
 		});
-		p.add(confirm, gb);
+		p.add(confirm, setCooridnates(gb, 0, 19));
 		
-		gb.gridx = 1;
-		gb.gridy = 10;
 		cancel = new JButton("Otkaži");
 		cancel.addActionListener(new ActionListener() {
 			
@@ -232,11 +233,17 @@ public class ProfessorEditDialog extends JDialog{
 				dispose();
 			}
 		});
-		p.add(cancel, gb);
+		p.add(cancel, setCooridnates(gb, 1, 19));
 		
 		
 		add(p);
 		setResizable(false);
 		setVisible(true);
+	}
+	
+	public GridBagConstraints setCooridnates(GridBagConstraints gb, int x, int y) {
+		gb.gridx = x;
+		gb.gridy = y;
+		return gb;
 	}
 }

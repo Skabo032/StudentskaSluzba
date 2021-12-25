@@ -9,7 +9,11 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+
+import model.ProfessorDataBase;
+
 
 public class MenuBar extends JMenuBar {
 	/**
@@ -78,9 +82,11 @@ public class MenuBar extends JMenuBar {
 		eEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.CTRL_MASK));
 		eEdit.addActionListener(aEdit);
 		eEdit.setIcon(editIco);
+		ActionListener aDelete = new DeleteBtnActionListener();
 		JMenuItem eDelete = new JMenuItem("Delete");
 		eDelete.setMnemonic(KeyEvent.VK_D);
 		eDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));
+		eDelete.addActionListener(aDelete);
 		eDelete.setIcon(deleteIco);
 		edit.add(eEdit);
 		edit.add(eDelete);
@@ -134,6 +140,36 @@ public class MenuBar extends JMenuBar {
 				case 1:	// PROFFESOR
 					if(ProfessorTable.getInstance().getSelectedRow() != -1)
 						new ProfessorEditDialog();
+					break;
+				case 2:	// COURSE
+					/* skip */
+					break;
+				default:
+					/* skip */
+				}
+			}
+		}
+		class DeleteBtnActionListener implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
+				case 0:	// STUDENT
+					
+					break;
+				case 1:	// PROFFESOR
+					Object[] options = {"DA", "Ne"};
+					int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+															"Da li stvarno zelite da obrisete odabranog profesora?", 
+															"Brisanje profesora", 
+															JOptionPane.YES_NO_OPTION, 
+															JOptionPane.QUESTION_MESSAGE, 
+															null, 
+															options, 
+															options[0]);
+	
+					if(answer == JOptionPane.YES_OPTION)
+						ProfessorDataBase.getInstance().removeProfessorByRowNum(ProfessorTable.getInstance().getSelectedRow());
+					ProfessorTable.getInstance().update();
 					break;
 				case 2:	// COURSE
 					/* skip */
