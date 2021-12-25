@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import model.ProfessorDataBase;
+import model.StudentDataBase;
 
 
 public class MenuBar extends JMenuBar {
@@ -154,6 +155,18 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent arg0) {
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
 				case 0:	// STUDENT
+					Object[] options1 = {"DA", "Ne"};
+					int answer1 = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+															"Da li stvarno zelite da obrisete odabranog studenta?", 
+															"Brisanje studenta", 
+															JOptionPane.YES_NO_OPTION, 
+															JOptionPane.QUESTION_MESSAGE, 
+															null, 
+															options1, 
+															options1[0]);
+					if(answer1 == JOptionPane.YES_OPTION)
+						StudentDataBase.getInstance().removeStudentByRowNum(StudentTable.getInstance().getSelectedRow());
+					StudentTable.getInstance().update();
 					
 					break;
 				case 1:	// PROFFESOR
