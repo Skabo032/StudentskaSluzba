@@ -14,6 +14,7 @@ public class ProfessorAddInputVerifier {
 			checkDate() && 
 			checkIdNumber() &&
 			checkYearsOfExperience() &&
+			checkAddressNumber() &&
 			checkPhoneNumber() 
 			) {
 			/*System.out.println(checkEmpty());
@@ -68,11 +69,15 @@ public class ProfessorAddInputVerifier {
 		}
 		
 	}
-	private static boolean checkAddress(String address) {
-													//street,number,city,country
-		Pattern addressPattern = Pattern.compile("[a-zA-ZšđčćžŠĐČĆŽ]+,[0-9]*,[a-zA-ZšđčćžŠĐČĆŽ]+,[a-zA-ZšđčćžŠĐČĆŽ]+");
-		Matcher matcher = addressPattern.matcher(address);
-		return matcher.matches();
+	private static boolean checkAddressNumber() {
+		try {
+			Integer.parseInt(ProfessorAddDialog.homeNumber.getText());
+			Integer.parseInt(ProfessorAddDialog.officeNumber.getText());
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		
 	}
 	private static boolean checkIdNumber() {
 													//only numbers allowed

@@ -14,7 +14,8 @@ public class ProfessorEditInputVerifier {
 			checkDate() && 
 			checkIdNumber() &&
 			checkYearsOfExperience() &&
-			checkPhoneNumber() 
+			checkPhoneNumber() &&
+			checkAddressNumber()
 			//&& checkEmail()
 			) {
 			ProfessorEditDialog.confirm.setEnabled(true);
@@ -59,6 +60,16 @@ public class ProfessorEditInputVerifier {
 		} catch (DateTimeParseException e) {
 			return false;
 		}
+	}
+	private static boolean checkAddressNumber() {
+		try {
+			Integer.parseInt(ProfessorEditDialog.homeNumber.getText());
+			Integer.parseInt(ProfessorEditDialog.officeNumber.getText());
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		
 	}
 	private static boolean checkIdNumber() {
 													//only numbers allowed
