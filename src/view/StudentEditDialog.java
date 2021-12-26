@@ -51,7 +51,7 @@ public class StudentEditDialog extends JDialog {
 		int mfW = MainFrame.getInstance().getSize().width;
 		int mfH = MainFrame.getInstance().getSize().height;
 		
-		int sizeX = 400;
+		int sizeX = 500;
 		int sizeY = 600;
 		setSize(sizeX,sizeY);    
 		setLocation(mfLocX + (mfW-sizeX)/2, mfLocY + (mfH - sizeY)/2);
