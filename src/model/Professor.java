@@ -3,6 +3,8 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
+
+
 public class Professor {
 	private String lastName;
 	private String firstName;
@@ -11,17 +13,23 @@ public class Professor {
 	private String phoneNumber;
 	private String email;
 	private Address officeAddress;
-	private String idNumber;
-	private String title;
+	private String idNumber; // professor id number can start with 00...
+	private Title title;
 	private int yearsOfExperience;
 	private List<Course> courses;
 	
+	public enum Title{
+		PROFESSOR,
+		DOCENT,
+		ASSISTANT,
+		INSTRUCTOR
+	}
 	
 	public Professor() {
 		super();
 	}
 	public Professor(String lastName, String firstName, LocalDate dateOfBirth, Address homeAddress, String phoneNumber,
-			String email, Address officeAddress, String idNumber, String title, int yearsOfExperience,
+			String email, Address officeAddress, String idNumber, Title title, int yearsOfExperience,
 			List<Course> courses) {
 		super();
 		this.lastName = lastName;
@@ -85,17 +93,20 @@ public class Professor {
 	public void setIdNumber(String idNumber) {
 		this.idNumber = idNumber;
 	}
-	public String getTitle() {
+	public Title getTitle() {
 		return title;
 	}
-	public void setTitle(String title) {
+	public void setTitle(Title title) {
 		this.title = title;
 	}
 	public int getYearsOfExperience() {
 		return yearsOfExperience;
 	}
-	public void setYearsOfExperience(int yearsOfExperience) {
-		this.yearsOfExperience = yearsOfExperience;
+	public void setYearsOfExperience(int yearsOfExperience) throws Exception{
+		if(yearsOfExperience >= 0)
+			this.yearsOfExperience = yearsOfExperience;
+		else
+			throw new Exception("Invalid value for professor years of experience, cannot be less than 0!");
 	}
 	public List<Course> getCourses() {
 		return courses;

@@ -3,16 +3,12 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
-enum Status{
-	B, //budzet
-	S  //sammofinansiranje
-}
 
 public class Student {
 	private String lastName;
 	private String firstName;
 	private LocalDate dateOfBirth;
-	private String adress;
+	private Address address;
 	private String phoneNumber;
 	private String email;
 	private String indexNumber;
@@ -22,16 +18,22 @@ public class Student {
 	private double avgGrade;
 	private List<Grade> passedExams;
 	private List<Grade> unfinishedExams;
+	
+	public enum Status{
+		B, //budzet
+		S  //sammofinansiranje
+	}
+
 
 	
-	public Student(String lastName, String firstName, LocalDate dateOfBirth, String adress, String phoneNumber,
+	public Student(String lastName, String firstName, LocalDate dateOfBirth, Address address, String phoneNumber,
 			String email, String indexNumber, int yearOfEnrolment, int currentYearOfStudies, Status status,
 			double avgGrade, List<Grade> passedExams, List<Grade> unfinishedExams) {
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.dateOfBirth = dateOfBirth;
-		this.adress = adress;
+		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.indexNumber = indexNumber;
@@ -67,11 +69,11 @@ public class Student {
 	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	public String getAdress() {
-		return adress;
+	public Address getAddress() {
+		return address;
 	}
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	public String getPhoneNumber() {
 		return phoneNumber;

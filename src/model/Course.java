@@ -2,14 +2,10 @@ package model;
 
 import java.util.List;
 
-enum Semester{
-	SUMMER,
-	WINTER
-}
 
 public class Course {
 	private int courseID;
-	private int courseName;
+	private String courseName;
 	private Semester semester;
 	private int yearOfStudy;
 	private Professor courseProffesor;
@@ -17,11 +13,21 @@ public class Course {
 	private List<Student> studentsPassed;
 	private List<Student> studentsFailed;
 	
+	public enum Semester{
+		SUMMER,
+		WINTER
+	}
+	
 	
 	public Course() {
 		super();
+		this.courseID = 1;
+		this.courseName = "oisisi";
+		this.semester = Semester.WINTER;
+		this.yearOfStudy = 3;
+		this.ectsPoints = 5;
 	}
-	public Course(int courseID, int courseName, Semester semester, int yearOfStudy, Professor courseProffesor,
+	public Course(int courseID, String courseName, Semester semester, int yearOfStudy, Professor courseProffesor,
 			int ectsPoints, List<Student> studentsPassed, List<Student> studentsFailed) {
 		super();
 		this.courseID = courseID;
@@ -37,13 +43,16 @@ public class Course {
 	public int getCourseID() {
 		return courseID;
 	}
-	public void setCourseID(int courseID) {
-		this.courseID = courseID;
+	public void setCourseID(int courseID) throws Exception{
+		if (courseID >= 0)
+			this.courseID = courseID;
+		else 
+			throw new Exception("Invalid value for course ID, cannot be less than zero!");
 	}
-	public int getCourseName() {
+	public String getCourseName() {
 		return courseName;
 	}
-	public void setCourseName(int courseName) {
+	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
 	public Semester getSemester() {
@@ -55,8 +64,11 @@ public class Course {
 	public int getYearOfStudy() {
 		return yearOfStudy;
 	}
-	public void setYearOfStudy(int yearOfStudy) {
-		this.yearOfStudy = yearOfStudy;
+	public void setYearOfStudy(int yearOfStudy) throws Exception {
+		if (yearOfStudy >= 0)
+			this.yearOfStudy = yearOfStudy;
+		else 
+			throw new Exception("Invalid value for course year of study, cannot be less than zero!");
 	}
 	public Professor getCourseProffesor() {
 		return courseProffesor;
@@ -67,8 +79,11 @@ public class Course {
 	public int getEctsPoints() {
 		return ectsPoints;
 	}
-	public void setEctsPoints(int ectsPoints) {
-		this.ectsPoints = ectsPoints;
+	public void setEctsPoints(int ectsPoints) throws Exception {
+		if (ectsPoints >= 0)
+			this.ectsPoints = ectsPoints;
+		else 
+			throw new Exception("Invalid value for course ECTS points, cannot be less than zero!");
 	}
 	public List<Student> getStudentsPassed() {
 		return studentsPassed;

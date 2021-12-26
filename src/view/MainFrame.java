@@ -7,8 +7,19 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 public class MainFrame extends JFrame{
-	public MainFrame() {
-		super(); // passed no arguments to the parent class
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	// SINGLETON design pattern
+	private static MainFrame instance = null;
+	
+	private MainFrame() {
+		super();// passed no arguments to the parent class
+		initialise();
+	}
+	private void initialise() {
 		Toolkit tKit = Toolkit.getDefaultToolkit();
 		Dimension d = tKit.getScreenSize();
 		
@@ -28,7 +39,16 @@ public class MainFrame extends JFrame{
 		tb.setVisible(true);
 		add(tb, BorderLayout.NORTH);
 		
-		MainViewTabbedPane mvtp = new MainViewTabbedPane();
+		StatusBar sb = new StatusBar();
+		sb.setVisible(true);
+		add(sb, BorderLayout.SOUTH);
+		
+		MainViewTabbedPane mvtp = MainViewTabbedPane.getInstance();
 		add(mvtp, BorderLayout.CENTER);
+	}
+	public static MainFrame getInstance() {
+		if(instance == null)
+			instance = new MainFrame();
+		return instance;
 	}
 }
