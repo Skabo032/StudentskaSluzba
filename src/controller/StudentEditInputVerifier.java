@@ -19,8 +19,8 @@ public class StudentEditInputVerifier {
 				//checkIndexNumber() &&
 				checkYearOfEnrolment() &&
 				checkCurrentYearOfStudies() &&
-				checkPhoneNumber() && 
-				checkEmail()
+				checkPhoneNumber() 
+				//&& checkEmail()
 				) 
 			{
 				StudentEditDialog.confirm.setEnabled(true);
@@ -52,10 +52,6 @@ public class StudentEditInputVerifier {
 	}
 	
 	private static boolean checkDate() {
-		//YYYY-[M]M-[D]D
-		/*Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]");
-		Matcher matcher = datePattern.matcher(StudentEditDialog.dateOfBirth.getText());
-		return matcher.matches();*/
 		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 			LocalDate date = LocalDate.parse(StudentEditDialog.dateOfBirth.getText(), formatter);

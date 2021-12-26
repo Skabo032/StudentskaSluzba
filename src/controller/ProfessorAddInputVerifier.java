@@ -55,10 +55,6 @@ public class ProfessorAddInputVerifier {
 	}
 	
 	private static boolean checkDate() {
-												//YYYY-[M]M-[D]D
-		/*Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]");
-		Matcher matcher = datePattern.matcher(ProfessorAddDialog.dateOfBirth.getText());
-		return matcher.matches();*/
 		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 			LocalDate date = LocalDate.parse(ProfessorAddDialog.dateOfBirth.getText(), formatter);

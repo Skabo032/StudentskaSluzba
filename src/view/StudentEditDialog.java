@@ -240,9 +240,10 @@ public class StudentEditDialog extends JDialog {
 				s.setYearOfEnrolment(Integer.parseInt(yearOfEnrolment.getText()));
 				s.setCurrentYearOfStudies(Integer.parseInt(currentYearOfStudies.getText()));
 				
-				System.out.println(StudentDataBase.getInstance().editStudent(s));
-				StudentTable.getInstance().update();
-				dispose();
+				if(StudentDataBase.getInstance().editStudent(s)) {
+					StudentTable.getInstance().update();
+					dispose();
+				}
 			}
 		});
 		

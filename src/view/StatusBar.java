@@ -19,7 +19,6 @@ public class StatusBar extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	//Treba dodati ime otvorenog taba
 	public StatusBar() {
 		super();
 		setLayout(new BorderLayout());

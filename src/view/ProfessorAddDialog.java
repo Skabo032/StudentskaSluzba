@@ -27,7 +27,6 @@ public class ProfessorAddDialog extends JDialog{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	//public static ProfessorAddDialog instance = null;
 	
 	public static JTextField firstName;
 	public static JTextField lastName;
@@ -223,9 +222,4 @@ public class ProfessorAddDialog extends JDialog{
 		return gb;
 	}
 	
-	/*public static ProfessorAddDialog getInstance() {
-		if(instance == null)
-			instance = new ProfessorAddDialog();
-		return instance;
-	}*/
 }

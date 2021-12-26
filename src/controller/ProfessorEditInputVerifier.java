@@ -48,10 +48,6 @@ public class ProfessorEditInputVerifier {
 	}
 	
 	private static boolean checkDate() {
-												//YYYY-[M]M-[D]D
-		/*Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]");
-		Matcher matcher = datePattern.matcher(ProfessorEditDialog.dateOfBirth.getText());
-		return matcher.matches();*/
 		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 			LocalDate date = LocalDate.parse(ProfessorEditDialog.dateOfBirth.getText(), formatter);
