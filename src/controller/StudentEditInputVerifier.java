@@ -1,5 +1,8 @@
 package controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,9 +53,18 @@ public class StudentEditInputVerifier {
 	
 	private static boolean checkDate() {
 		//YYYY-[M]M-[D]D
-		Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]");
+		/*Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]");
 		Matcher matcher = datePattern.matcher(StudentEditDialog.dateOfBirth.getText());
-		return matcher.matches();
+		return matcher.matches();*/
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			LocalDate date = LocalDate.parse(StudentEditDialog.dateOfBirth.getText(), formatter);
+			return true;
+			
+		} catch (DateTimeParseException e) {
+			return false;
+		}
+		
 	}
 	
 

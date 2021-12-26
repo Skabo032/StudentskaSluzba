@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -221,7 +222,8 @@ public class StudentAddDialog extends JDialog {
 				Student s = new Student();
 				s.setFirstName(firstName.getText());
 				s.setLastName(lastName.getText());
-				s.setDateOfBirth(LocalDate.parse(dateOfBirth.getText()));
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				s.setDateOfBirth(LocalDate.parse(dateOfBirth.getText(), formatter));
 				s.setEmail(email.getText());
 				Address hAddress = new Address(addressStreet.getText(), Integer.parseInt(addressNumber.getText()), addressCity.getText(), addressCountry.getText());
 				s.setAddress(hAddress);
