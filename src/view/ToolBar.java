@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import model.CourseDataBase;
 import model.ProfessorDataBase;
 import model.StudentDataBase;
 
@@ -157,7 +158,21 @@ public class ToolBar extends JToolBar {
 					}
 					break;
 				case 2:	// COURSE
-					/* skip */
+					if(CourseTable.getInstance().getSelectedRow() != -1)
+					{
+						Object[] options = {"DA", "Ne"};
+						int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+																"Da li stvarno zelite da obrisete odabrani predmet?", 
+																"Brisanje predmeta", 
+																JOptionPane.YES_NO_OPTION, 
+																JOptionPane.QUESTION_MESSAGE, 
+																null, 
+																options, 
+																options[0]);
+						if(answer == JOptionPane.YES_OPTION)
+							CourseDataBase.getInstance().removeCourseByRowNum(CourseTable.getInstance().getSelectedRow());
+						CourseTable.getInstance().update();
+					}
 					break;
 				default:
 					/* skip */

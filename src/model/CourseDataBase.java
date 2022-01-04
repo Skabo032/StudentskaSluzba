@@ -72,6 +72,8 @@ public class CourseDataBase {
 		}
 		return this.courses.add(c);
 	}
-	// addCourse
-	// editCourse
+	
+	public boolean removeCourseByRowNum(int i) {
+		return courses.remove(i) != null;
+	}
 }
