@@ -88,16 +88,16 @@ public class ProfessorDataBase {
 		return professors.remove(i) != null;
 	}
 	
-	public boolean editProfessor(Professor p) {
-		int i = 0;
+	public boolean existsById(String idNumber) {
 		for (Professor prof : professors) {
-			
-			if(prof.getIdNumber().equals(p.getIdNumber())) {
-				professors.set(i, p);
+			if(prof.getIdNumber().equals(idNumber))
 				return true;
-			}
-			i++;
 		}
 		return false;
+	}
+	
+	public boolean editProfessor(Professor p, int index) {
+		return professors.set(index, p) != null;
+		
 	}
 }

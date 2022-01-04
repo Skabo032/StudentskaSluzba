@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -20,6 +21,7 @@ import controller.ProfessorController;
 import controller.ProfessorEditDocumentListener;
 import model.Address;
 import model.Professor;
+import model.ProfessorDataBase;
 import model.Professor.Title;
 
 public class ProfessorEditDialog extends JDialog{
@@ -65,11 +67,11 @@ public class ProfessorEditDialog extends JDialog{
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		
 		int selectedIndex = ProfessorTable.getInstance().getSelectedRow();
+		Professor selectedProf = ProfessorController.getInstance().getProfessor(selectedIndex);
 		if(selectedIndex == -1) {
 			dispose();
 		}else if(selectedIndex >= 0) {
 			
-			Professor selectedProf = ProfessorController.getInstance().getProfessor(selectedIndex);
 			firstName.setText(selectedProf.getFirstName());
 			lastName.setText(selectedProf.getLastName());
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -217,7 +219,9 @@ public class ProfessorEditDialog extends JDialog{
 					e.printStackTrace();
 				}
 				
-				if(ProfessorController.getInstance().editProfessor(p)) {
+				if(ProfessorController.getInstance().existsById(p.getIdNumber()) && !selectedProf.getIdNumber().equals(p.getIdNumber())) {
+					JOptionPane.showMessageDialog(getParent(), "Profesor sa datim brojem LK vec postoji!");
+				}else if(ProfessorDataBase.getInstance().editProfessor(p, ProfessorTable.getInstance().getSelectedRow())) {
 					ProfessorTable.getInstance().update();
 					dispose();
 				}

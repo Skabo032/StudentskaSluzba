@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -196,6 +197,8 @@ public class ProfessorAddDialog extends JDialog{
 				if(ProfessorDataBase.getInstance().addProfessor(p)) {
 					ProfessorTable.getInstance().update();
 					dispose();
+				}else {
+					JOptionPane.showMessageDialog(getParent(), "Profesor sa datim brojem LK vec postoji!");
 				}
 			}
 		});

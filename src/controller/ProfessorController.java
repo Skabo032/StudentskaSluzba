@@ -17,6 +17,9 @@ public class ProfessorController {
 	public boolean addProfessor(Professor p) {
 		return ProfessorDataBase.getInstance().addProfessor(p);
 	}
+	public boolean existsById(String idNumber) {
+		return ProfessorDataBase.getInstance().existsById(idNumber);
+	}
 	
 	public boolean removeProfessorByRowNum(int id) {
 		return ProfessorDataBase.getInstance().removeProfessorByRowNum(id);
@@ -24,10 +27,11 @@ public class ProfessorController {
 	public void removeProfessorById(String idNumber) {
 		ProfessorDataBase.getInstance().removeProfessorById(idNumber);
 	}
-	public boolean editProfessor(Professor p) {
-		return ProfessorDataBase.getInstance().editProfessor(p);
+	public boolean editProfessor(Professor p, int index) {
+		return ProfessorDataBase.getInstance().editProfessor(p, index);
 	}
 	public Professor getProfessor(int i) {
 		return ProfessorDataBase.getInstance().getProfessor(i);
 	}
+	
 }
