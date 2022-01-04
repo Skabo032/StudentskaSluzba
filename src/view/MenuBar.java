@@ -12,6 +12,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import model.CourseDataBase;
 import model.ProfessorDataBase;
 import model.StudentDataBase;
 
@@ -153,39 +154,57 @@ public class MenuBar extends JMenuBar {
 		class DeleteBtnActionListener implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				Object[] options = {"DA", "Ne"};
+				int answer;
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
 				case 0:	// STUDENT
-					Object[] options1 = {"DA", "Ne"};
-					int answer1 = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
-															"Da li stvarno zelite da obrisete odabranog studenta?", 
-															"Brisanje studenta", 
-															JOptionPane.YES_NO_OPTION, 
-															JOptionPane.QUESTION_MESSAGE, 
-															null, 
-															options1, 
-															options1[0]);
-					if(answer1 == JOptionPane.YES_OPTION)
-						StudentDataBase.getInstance().removeStudentByRowNum(StudentTable.getInstance().getSelectedRow());
-					StudentTable.getInstance().update();
-					
+					if(StudentTable.getInstance().getSelectedRow() != -1)
+					{
+						
+						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+																"Da li stvarno zelite da obrisete odabranog studenta?", 
+																"Brisanje studenta", 
+																JOptionPane.YES_NO_OPTION, 
+																JOptionPane.QUESTION_MESSAGE, 
+																null, 
+																options, 
+																options[0]);
+						if(answer == JOptionPane.YES_OPTION)
+							StudentDataBase.getInstance().removeStudentByRowNum(StudentTable.getInstance().getSelectedRow());
+						StudentTable.getInstance().update();
+					}
 					break;
 				case 1:	// PROFFESOR
-					Object[] options = {"DA", "Ne"};
-					int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
-															"Da li stvarno zelite da obrisete odabranog profesora?", 
-															"Brisanje profesora", 
-															JOptionPane.YES_NO_OPTION, 
-															JOptionPane.QUESTION_MESSAGE, 
-															null, 
-															options, 
-															options[0]);
-	
-					if(answer == JOptionPane.YES_OPTION)
-						ProfessorDataBase.getInstance().removeProfessorByRowNum(ProfessorTable.getInstance().getSelectedRow());
-					ProfessorTable.getInstance().update();
+					if(ProfessorTable.getInstance().getSelectedRow() != -1) {
+						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+																"Da li stvarno zelite da obrisete odabranog profesora?", 
+																"Brisanje profesora", 
+																JOptionPane.YES_NO_OPTION, 
+																JOptionPane.QUESTION_MESSAGE, 
+																null, 
+																options, 
+																options[0]);
+		
+						if(answer == JOptionPane.YES_OPTION)
+							ProfessorDataBase.getInstance().removeProfessorByRowNum(ProfessorTable.getInstance().getSelectedRow());
+						ProfessorTable.getInstance().update();
+					}
 					break;
 				case 2:	// COURSE
-					/* skip */
+					if(CourseTable.getInstance().getSelectedRow() != -1)
+					{
+						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+																"Da li stvarno zelite da obrisete odabrani predmet?", 
+																"Brisanje predmeta", 
+																JOptionPane.YES_NO_OPTION, 
+																JOptionPane.QUESTION_MESSAGE, 
+																null, 
+																options, 
+																options[0]);
+						if(answer == JOptionPane.YES_OPTION)
+							CourseDataBase.getInstance().removeCourseByRowNum(CourseTable.getInstance().getSelectedRow());
+						CourseTable.getInstance().update();
+					}
 					break;
 				default:
 					/* skip */
