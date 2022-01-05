@@ -28,7 +28,7 @@ public class ProfessorDataBase {
 		this.columnNames.add("E-mail");
 		
 		this.professors = new ArrayList<Professor>();
-		Address a1 = new Address("abc", 5, "abv", "ab");
+		Address a1 = new Address("abc", "5", "abv", "ab");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 		LocalDate date = LocalDate.parse("11.11.2020", formatter);
 		Professor p1 = new Professor("Peric", "Pera", date, a1, "123", "email@asd.ac", a1, "22222", Title.PROFESSOR, 5, null);

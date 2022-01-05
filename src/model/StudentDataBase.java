@@ -29,7 +29,7 @@ public class StudentDataBase {
 		
 		this.students = new ArrayList<Student>();
 		List<Grade> ispiti1 = new ArrayList<Grade>();
-		Address a1 = new Address("fafs", 5, "sds", "fsaf");
+		Address a1 = new Address("fafs", "5", "sds", "fsaf");
 		Student s1 = new Student("Najjaci", "Lik", LocalDate.now(), a1, "06633333", "bezveze@gmail.com", "RA 420/2019", 3, 3, Status.B, 9.12, ispiti1, ispiti1);
 		this.students.add(s1);
 	}

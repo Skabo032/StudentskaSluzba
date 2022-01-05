@@ -13,7 +13,7 @@ public class StudentAddInputVerifier {
 		if(!checkEmpty() && 
 				checkDate() && 
 				checkAddressStreet() &&
-				checkAddressNumber() &&
+				//checkAddressNumber() &&
 				checkAddressCity() &&
 				checkAddressCountry() &&
 				//checkIndexNumber() &&

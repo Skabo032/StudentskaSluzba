@@ -14,8 +14,8 @@ public class ProfessorInputVerifier {
 			checkDate() && 
 			checkIdNumber() &&
 			checkYearsOfExperience() &&
-			checkPhoneNumber() &&
-			checkAddressNumber()
+			checkPhoneNumber() 
+			//&& checkAddressNumber()
 			//&& checkEmail()
 			) {
 			ProfessorDialog.confirm.setEnabled(true);

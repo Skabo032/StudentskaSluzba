@@ -96,12 +96,12 @@ public class ProfessorDialog extends JDialog{
 				dateOfBirth.setText(selectedProf.getDateOfBirth().format(formatter));
 
 				homeStreet.setText(selectedProf.getHomeAddress().getStreet());
-				homeNumber.setText(Integer.toString(selectedProf.getHomeAddress().getNumber()));
+				homeNumber.setText(selectedProf.getHomeAddress().getNumber());
 				homeCity.setText(selectedProf.getHomeAddress().getCity());
 				homeCountry.setText(selectedProf.getHomeAddress().getCountry());
 				
 				officeStreet.setText(selectedProf.getOfficeAddress().getStreet());
-				officeNumber.setText(Integer.toString(selectedProf.getOfficeAddress().getNumber()));
+				officeNumber.setText(selectedProf.getOfficeAddress().getNumber());
 				officeCity.setText(selectedProf.getOfficeAddress().getCity());
 				officeCountry.setText(selectedProf.getOfficeAddress().getCountry());
 				
@@ -224,12 +224,12 @@ public class ProfessorDialog extends JDialog{
 				p.setDateOfBirth(LocalDate.parse(dateOfBirth.getText(), formatter));
 				p.setEmail(email.getText());
 				Address homeAddress = new Address(homeStreet.getText(), 
-						Integer.parseInt(homeNumber.getText()),//TODO: change street number to string
+						homeNumber.getText(),
 						homeCity.getText(),
 						homeCountry.getText());
 				p.setHomeAddress(homeAddress);
 				Address officeAddress = new Address(officeStreet.getText(), 
-						Integer.parseInt(officeNumber.getText()),	//TODO: change street number to string
+						officeNumber.getText(),	
 						officeCity.getText(),
 						officeCountry.getText());
 				p.setOfficeAddress(officeAddress);

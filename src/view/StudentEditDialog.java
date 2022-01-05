@@ -70,7 +70,7 @@ public class StudentEditDialog extends JDialog {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 			dateOfBirth.setText(selectedStud.getDateOfBirth().format(formatter));
 			addressStreet.setText(selectedStud.getAddress().getStreet());
-			addressNumber.setText(Integer.toString(selectedStud.getAddress().getNumber()));
+			addressNumber.setText(selectedStud.getAddress().getNumber());
 			addressCity.setText(selectedStud.getAddress().getCity());
 			addressCountry.setText(selectedStud.getAddress().getCountry());
 			phoneNumber.setText(selectedStud.getPhoneNumber());
@@ -232,7 +232,7 @@ public class StudentEditDialog extends JDialog {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 				s.setDateOfBirth(LocalDate.parse(dateOfBirth.getText(), formatter));
 				s.setEmail(email.getText());
-				Address hAddress = new Address(addressStreet.getText(), Integer.parseInt(addressNumber.getText()), addressCity.getText(), addressCountry.getText());
+				Address hAddress = new Address(addressStreet.getText(), addressNumber.getText(), addressCity.getText(), addressCountry.getText());
 				s.setAddress(hAddress);
 
 				s.setPhoneNumber(phoneNumber.getText());
