@@ -80,15 +80,14 @@ public class StudentDataBase {
 		}
 	}
 	
-	public boolean editStudent(Student s) {
-		int i = 0;
+	public boolean editStudent(int rowNum, Student s) {
+		return students.set(rowNum, s) != null;
+	}
+	
+	public boolean existsById(String indexNumber) {
 		for (Student stud : students) {
-			
-			if(stud.getIndexNumber().equals(s.getIndexNumber())) {
-				students.set(i, s);
+			if(stud.getIndexNumber().equals(indexNumber))
 				return true;
-			}
-			i++;
 		}
 		return false;
 	}

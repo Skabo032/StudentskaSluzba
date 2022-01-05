@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -237,6 +238,8 @@ public class StudentAddDialog extends JDialog {
 				if(StudentDataBase.getInstance().addStudent(s)) {
 					StudentTable.getInstance().update();
 					dispose();
+				}else {
+					JOptionPane.showMessageDialog(getParent(), "Student sa datim brojem indeksa vec postoji!");
 				}
 			}
 		});

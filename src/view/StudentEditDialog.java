@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -240,7 +241,12 @@ public class StudentEditDialog extends JDialog {
 				s.setYearOfEnrolment(Integer.parseInt(yearOfEnrolment.getText()));
 				s.setCurrentYearOfStudies(Integer.parseInt(currentYearOfStudies.getText()));
 				
-				if(StudentDataBase.getInstance().editStudent(s)) {
+				int selectedIndex = StudentTable.getInstance().getSelectedRow();
+				Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
+				if(StudentDataBase.getInstance().existsById(s.getIndexNumber()) && !selectedStud.getIndexNumber().equals(s.getIndexNumber())) {
+					JOptionPane.showMessageDialog(getParent(), "Student sa datim brojem indeksa vec postoji!");
+				}else {
+					StudentDataBase.getInstance().editStudent(StudentTable.getInstance().getSelectedRow(), s);
 					StudentTable.getInstance().update();
 					dispose();
 				}
