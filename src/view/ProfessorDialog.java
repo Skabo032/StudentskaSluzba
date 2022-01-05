@@ -18,86 +18,105 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.ProfessorController;
-import controller.ProfessorEditDocumentListener;
+import controller.ProfessorDocumentListener;
 import model.Address;
 import model.Professor;
 import model.ProfessorDataBase;
 import model.Professor.Title;
 
-public class ProfessorEditDialog extends JDialog{
-	
-
+public class ProfessorDialog extends JDialog{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
-	public static JTextField firstName = new JTextField(20);
-	public static JTextField lastName = new JTextField(20);
-	public static JTextField dateOfBirth = new JTextField(20);
-	public static JTextField homeStreet = new JTextField(20);
-	public static JTextField homeNumber = new JTextField(5);
-	public static JTextField homeCity = new JTextField(20);
-	public static JTextField homeCountry = new JTextField(20);
-	public static JTextField phoneNumber = new JTextField(20);
-	public static JTextField email = new JTextField(20);
-	public static JTextField officeStreet = new JTextField(20);
-	public static JTextField officeNumber = new JTextField(5);
-	public static JTextField officeCity = new JTextField(20);
-	public static JTextField officeCountry = new JTextField(20);
-	public static JTextField idNumber = new JTextField(20);
-	public static JComboBox<Professor.Title> title = new JComboBox<Professor.Title>();
-	public static JTextField yearsOfExperience = new JTextField(5);
+	public static JTextField firstName;
+	public static JTextField lastName;
+	public static JTextField dateOfBirth;
+	public static JTextField homeStreet;
+	public static JTextField homeNumber;
+	public static JTextField homeCity;
+	public static JTextField homeCountry;
+	public static JTextField phoneNumber;
+	public static JTextField email;
+	public static JTextField officeStreet;
+	public static JTextField officeNumber;
+	public static JTextField officeCity;
+	public static JTextField officeCountry;
+	public static JTextField idNumber;
+	public static JComboBox<Professor.Title> title;
+	public static JTextField yearsOfExperience;
 	public static JButton confirm;
 	public static JButton cancel;
 	
-	public ProfessorEditDialog() {
-		super(MainFrame.getInstance(), "Izmeni profesora", true); 
+	public ProfessorDialog(boolean isAdd) {
+		super(MainFrame.getInstance(), isAdd ? "Dodaj profesora" : "Izmeni profesora", true);
 		
+		int sizeX = 500;
+		int sizeY = 700;
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
 		int mfLocY = (int)MainFrame.getInstance().getLocation().getY();
 		int mfW = MainFrame.getInstance().getSize().width;
 		int mfH = MainFrame.getInstance().getSize().height;
-		
-		int sizeX = 500;
-		int sizeY = 700;
 		setSize(sizeX,sizeY);    
 		setLocation(mfLocX + (mfW-sizeX)/2, mfLocY + (mfH - sizeY)/2);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		
-		int selectedIndex = ProfessorTable.getInstance().getSelectedRow();
-		Professor selectedProf = ProfessorController.getInstance().getProfessor(selectedIndex);
-		if(selectedIndex == -1) {
-			dispose();
-		}else if(selectedIndex >= 0) {
-			
-			firstName.setText(selectedProf.getFirstName());
-			lastName.setText(selectedProf.getLastName());
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-			dateOfBirth.setText(selectedProf.getDateOfBirth().format(formatter));
+		// constructors for fields need to be called in class constructor because otherwise 
+		// text stays in the fields even if the dialog is closed
+		firstName = new JTextField(20);
+		lastName = new JTextField(20);
+		dateOfBirth = new JTextField(20);
+		homeStreet = new JTextField(20);
+		homeNumber = new JTextField(5);
+		homeCity = new JTextField(20);
+		homeCountry = new JTextField(20);
+		phoneNumber = new JTextField(20);
+		email = new JTextField(20);
+		officeStreet = new JTextField(20);
+		officeNumber = new JTextField(5);
+		officeCity = new JTextField(20);
+		officeCountry = new JTextField(20);
+		idNumber = new JTextField(20);
+		title = new JComboBox<Professor.Title>();
+		yearsOfExperience = new JTextField(5);
+		confirm = new JButton("Potvrdi");
+		cancel = new JButton("Otkaži");
+		
+		if(!isAdd) {
+			int selectedIndex = ProfessorTable.getInstance().getSelectedRow();
+			Professor selectedProf = ProfessorController.getInstance().getProfessor(selectedIndex);
+			if(selectedIndex == -1) {
+				dispose();
+			}else if(selectedIndex >= 0) {
+				
+				firstName.setText(selectedProf.getFirstName());
+				lastName.setText(selectedProf.getLastName());
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				dateOfBirth.setText(selectedProf.getDateOfBirth().format(formatter));
 
-			homeStreet.setText(selectedProf.getHomeAddress().getStreet());
-			homeNumber.setText(Integer.toString(selectedProf.getHomeAddress().getNumber()));
-			homeCity.setText(selectedProf.getHomeAddress().getCity());
-			homeCountry.setText(selectedProf.getHomeAddress().getCountry());
-			
-			officeStreet.setText(selectedProf.getOfficeAddress().getStreet());
-			officeNumber.setText(Integer.toString(selectedProf.getOfficeAddress().getNumber()));
-			officeCity.setText(selectedProf.getOfficeAddress().getCity());
-			officeCountry.setText(selectedProf.getOfficeAddress().getCountry());
-			
-			phoneNumber.setText(selectedProf.getPhoneNumber());
-			email.setText(selectedProf.getEmail());
-			idNumber.setText(selectedProf.getIdNumber());
-			title.getModel().setSelectedItem(selectedProf.getTitle());
-			yearsOfExperience.setText(Integer.toString(selectedProf.getYearsOfExperience()));
+				homeStreet.setText(selectedProf.getHomeAddress().getStreet());
+				homeNumber.setText(Integer.toString(selectedProf.getHomeAddress().getNumber()));
+				homeCity.setText(selectedProf.getHomeAddress().getCity());
+				homeCountry.setText(selectedProf.getHomeAddress().getCountry());
+				
+				officeStreet.setText(selectedProf.getOfficeAddress().getStreet());
+				officeNumber.setText(Integer.toString(selectedProf.getOfficeAddress().getNumber()));
+				officeCity.setText(selectedProf.getOfficeAddress().getCity());
+				officeCountry.setText(selectedProf.getOfficeAddress().getCountry());
+				
+				phoneNumber.setText(selectedProf.getPhoneNumber());
+				email.setText(selectedProf.getEmail());
+				idNumber.setText(selectedProf.getIdNumber());
+				title.getModel().setSelectedItem(selectedProf.getTitle());
+				yearsOfExperience.setText(Integer.toString(selectedProf.getYearsOfExperience()));
+			}
 		}
 		
 		GridBagLayout gbl = new GridBagLayout();
 		JPanel p = new JPanel(gbl);
 		GridBagConstraints gb = new GridBagConstraints();
-		ProfessorEditDocumentListener pdl = new ProfessorEditDocumentListener();
+		ProfessorDocumentListener pdl = new ProfessorDocumentListener();
 		
 		gb.insets = new Insets(0,0,10,0);	// sets bottom padding to 10px for every component
 		gb.anchor = GridBagConstraints.WEST;
@@ -132,10 +151,10 @@ public class ProfessorEditDialog extends JDialog{
 		p.add(new JLabel("Drzava: "), setCooridnates(gb, 0, 7));
 		p.add(homeCountry, setCooridnates(gb, 1, 7));
 		
-		homeStreet.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
-		homeNumber.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
-		homeCity.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
-		homeCountry.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
+		homeStreet.getDocument().addDocumentListener(pdl);
+		homeNumber.getDocument().addDocumentListener(pdl);
+		homeCity.getDocument().addDocumentListener(pdl);
+		homeCountry.getDocument().addDocumentListener(pdl);
 		
 		// ===== ADRESA KANCELARIJE =====
 		p.add(new JLabel("ADRESA KANCELARIJE: "), setCooridnates(gb, 0, 8));
@@ -149,10 +168,10 @@ public class ProfessorEditDialog extends JDialog{
 		p.add(new JLabel("Drzava: "), setCooridnates(gb, 0, 12));
 		p.add(officeCountry, setCooridnates(gb, 1, 12));
 		
-		officeStreet.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
-		officeNumber.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
-		officeCity.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
-		officeCountry.getDocument().addDocumentListener(new ProfessorEditDocumentListener());
+		officeStreet.getDocument().addDocumentListener(pdl);
+		officeNumber.getDocument().addDocumentListener(pdl);
+		officeCity.getDocument().addDocumentListener(pdl);
+		officeCountry.getDocument().addDocumentListener(pdl);
 		
 		// ===== BROJ TELEFONA =====
 		p.add(new JLabel("Broj telefona: "), setCooridnates(gb, 0, 13));
@@ -186,8 +205,14 @@ public class ProfessorEditDialog extends JDialog{
 		p.add(yearsOfExperience, setCooridnates(gb, 1, 18));
 		
 		// BUTTONS
-		confirm = new JButton("Potvrdi");
-		confirm.setEnabled(true);	// retrived data from the database SHOULD be correct
+		
+		
+		if(isAdd)
+			confirm.setEnabled(false);
+		else 
+			confirm.setEnabled(true);
+		
+		
 		confirm.addActionListener(new ActionListener() {
 			
 			@Override
@@ -219,19 +244,33 @@ public class ProfessorEditDialog extends JDialog{
 					e.printStackTrace();
 				}
 				
-				if(ProfessorController.getInstance().existsById(p.getIdNumber()) && !selectedProf.getIdNumber().equals(p.getIdNumber())) {
-					JOptionPane.showMessageDialog(getParent(), "Profesor sa datim brojem LK vec postoji!");
-				}else if(ProfessorDataBase.getInstance().editProfessor(p, ProfessorTable.getInstance().getSelectedRow())) {
-					ProfessorTable.getInstance().update();
-					dispose();
+				
+				if(!isAdd) {
+					int selectedIndex = ProfessorTable.getInstance().getSelectedRow();
+					Professor selectedProf = ProfessorController.getInstance().getProfessor(selectedIndex);
+					System.out.println(selectedIndex);
+					System.out.println(selectedProf);
+					if(ProfessorController.getInstance().existsById(p.getIdNumber()) && !selectedProf.getIdNumber().equals(p.getIdNumber())) {
+						JOptionPane.showMessageDialog(getParent(), "Profesor sa datim brojem LK vec postoji!");
+					}else if(ProfessorDataBase.getInstance().editProfessor(p, ProfessorTable.getInstance().getSelectedRow())) {
+						ProfessorTable.getInstance().update();
+						dispose();
+					}
+				}else {
+					if(ProfessorDataBase.getInstance().addProfessor(p)) {
+						ProfessorTable.getInstance().update();
+						dispose();
+					}else {
+						JOptionPane.showMessageDialog(getParent(), "Profesor sa datim brojem LK vec postoji!");
+					}
 				}
+				//dispose();
 			}
 		});
 		p.add(confirm, setCooridnates(gb, 0, 19));
 		
-		cancel = new JButton("Otkaži");
+		
 		cancel.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -243,8 +282,8 @@ public class ProfessorEditDialog extends JDialog{
 		add(p);
 		setResizable(false);
 		setVisible(true);
+		
 	}
-	
 	public GridBagConstraints setCooridnates(GridBagConstraints gb, int x, int y) {
 		gb.gridx = x;
 		gb.gridy = y;

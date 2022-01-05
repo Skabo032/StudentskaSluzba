@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.print.attribute.standard.PDLOverrideSupported;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +16,7 @@ import javax.swing.SwingConstants;
 import model.CourseDataBase;
 import model.ProfessorDataBase;
 import model.StudentDataBase;
+import view.ProfessorDialog;
 
 public class ToolBar extends JToolBar {
 	/**
@@ -73,8 +75,7 @@ public class ToolBar extends JToolBar {
 					new StudentAddDialog();
 					break;
 				case 1:	// PROFFESOR
-					//ProfessorAddDialog.getInstance();
-					new ProfessorAddDialog();
+					ProfessorDialog pd = new ProfessorDialog(true);
 					break;
 				case 2:	// COURSE
 					new CourseAddDialog();
@@ -102,8 +103,9 @@ public class ToolBar extends JToolBar {
 						new StudentEditDialog();
 					break;
 				case 1:	// PROFFESOR
-					if(ProfessorTable.getInstance().getSelectedRow() != -1)
-						new ProfessorEditDialog();
+					if(ProfessorTable.getInstance().getSelectedRow() != -1) {
+						ProfessorDialog pd2 = new ProfessorDialog(false);
+					}
 					break;
 				case 2:	// COURSE
 					/* skip */
