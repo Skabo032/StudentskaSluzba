@@ -248,8 +248,6 @@ public class ProfessorDialog extends JDialog{
 				if(!isAdd) {
 					int selectedIndex = ProfessorTable.getInstance().getSelectedRow();
 					Professor selectedProf = ProfessorController.getInstance().getProfessor(selectedIndex);
-					System.out.println(selectedIndex);
-					System.out.println(selectedProf);
 					if(ProfessorController.getInstance().existsById(p.getIdNumber()) && !selectedProf.getIdNumber().equals(p.getIdNumber())) {
 						JOptionPane.showMessageDialog(getParent(), "Profesor sa datim brojem LK vec postoji!");
 					}else if(ProfessorDataBase.getInstance().editProfessor(p, ProfessorTable.getInstance().getSelectedRow())) {
@@ -264,7 +262,6 @@ public class ProfessorDialog extends JDialog{
 						JOptionPane.showMessageDialog(getParent(), "Profesor sa datim brojem LK vec postoji!");
 					}
 				}
-				//dispose();
 			}
 		});
 		p.add(confirm, setCooridnates(gb, 0, 19));

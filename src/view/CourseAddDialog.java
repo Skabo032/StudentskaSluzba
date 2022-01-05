@@ -144,7 +144,7 @@ public class CourseAddDialog extends JDialog {
 					Professor p = ProfessorDataBase.getInstance().getProfessor(profId);
 					c.setEctsPoints(Integer.parseInt(ectsPoints.getText()));
 					
-					System.out.println(CourseDataBase.getInstance().addCourse(c));
+					CourseDataBase.getInstance().addCourse(c);
 					CourseTable.getInstance().update();
 					dispose();
 				}

@@ -119,7 +119,6 @@ public class MenuBar extends JMenuBar {
 					
 					break;
 				case 1:	// PROFFESOR
-					//new ProfessorAddDialog();
 					new ProfessorDialog(true);
 					break;
 				case 2:	// COURSE
