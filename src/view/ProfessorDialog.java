@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import controller.ProfessorController;
@@ -114,7 +115,7 @@ public class ProfessorDialog extends JDialog{
 		}
 		
 		GridBagLayout gbl = new GridBagLayout();
-		JPanel p = new JPanel(gbl);
+		JPanel pInfo = new JPanel(gbl);
 		GridBagConstraints gb = new GridBagConstraints();
 		ProfessorDocumentListener pdl = new ProfessorDocumentListener();
 		
@@ -122,34 +123,34 @@ public class ProfessorDialog extends JDialog{
 		gb.anchor = GridBagConstraints.WEST;
 		
 		// ===== IME =====
-		p.add(new JLabel("Ime: "), setCooridnates(gb, 0, 0));
+		pInfo.add(new JLabel("Ime: "), setCooridnates(gb, 0, 0));
 		
 		firstName.getDocument().addDocumentListener(pdl);
-		p.add(firstName, setCooridnates(gb, 1, 0));
+		pInfo.add(firstName, setCooridnates(gb, 1, 0));
 		
 		// ===== PREZIME =====
-		p.add(new JLabel("Prezime: "), setCooridnates(gb, 0, 1));
+		pInfo.add(new JLabel("Prezime: "), setCooridnates(gb, 0, 1));
 		
 		lastName.getDocument().addDocumentListener(pdl);
-		p.add(lastName, setCooridnates(gb, 1, 1));
+		pInfo.add(lastName, setCooridnates(gb, 1, 1));
 		
 		// ===== DATUM RODJENJA =====
-		p.add(new JLabel("Datum rodjenja: "), setCooridnates(gb, 0, 2));
+		pInfo.add(new JLabel("Datum rodjenja: "), setCooridnates(gb, 0, 2));
 		
 		dateOfBirth.getDocument().addDocumentListener(pdl);
-		p.add(dateOfBirth, setCooridnates(gb, 1, 2));
-		p.add(new JLabel("dd.MM.yyyy"), setCooridnates(gb, 2, 2));
+		pInfo.add(dateOfBirth, setCooridnates(gb, 1, 2));
+		pInfo.add(new JLabel("dd.MM.yyyy"), setCooridnates(gb, 2, 2));
 		// ===== KUCNA ADRESA =====
-		p.add(new JLabel("KUCNA ADRESA: "), setCooridnates(gb, 0, 3));
+		pInfo.add(new JLabel("KUCNA ADRESA: "), setCooridnates(gb, 0, 3));
 		
-		p.add(new JLabel("Ulica: "), setCooridnates(gb, 0, 4));
-		p.add(homeStreet, setCooridnates(gb, 1, 4));
-		p.add(new JLabel("Broj: "), setCooridnates(gb, 0, 5));
-		p.add(homeNumber, setCooridnates(gb, 1, 5));
-		p.add(new JLabel("Grad: "), setCooridnates(gb, 0, 6));
-		p.add(homeCity, setCooridnates(gb, 1, 6));
-		p.add(new JLabel("Drzava: "), setCooridnates(gb, 0, 7));
-		p.add(homeCountry, setCooridnates(gb, 1, 7));
+		pInfo.add(new JLabel("Ulica: "), setCooridnates(gb, 0, 4));
+		pInfo.add(homeStreet, setCooridnates(gb, 1, 4));
+		pInfo.add(new JLabel("Broj: "), setCooridnates(gb, 0, 5));
+		pInfo.add(homeNumber, setCooridnates(gb, 1, 5));
+		pInfo.add(new JLabel("Grad: "), setCooridnates(gb, 0, 6));
+		pInfo.add(homeCity, setCooridnates(gb, 1, 6));
+		pInfo.add(new JLabel("Drzava: "), setCooridnates(gb, 0, 7));
+		pInfo.add(homeCountry, setCooridnates(gb, 1, 7));
 		
 		homeStreet.getDocument().addDocumentListener(pdl);
 		homeNumber.getDocument().addDocumentListener(pdl);
@@ -157,16 +158,16 @@ public class ProfessorDialog extends JDialog{
 		homeCountry.getDocument().addDocumentListener(pdl);
 		
 		// ===== ADRESA KANCELARIJE =====
-		p.add(new JLabel("ADRESA KANCELARIJE: "), setCooridnates(gb, 0, 8));
+		pInfo.add(new JLabel("ADRESA KANCELARIJE: "), setCooridnates(gb, 0, 8));
 		
-		p.add(new JLabel("Ulica: "), setCooridnates(gb, 0, 9));
-		p.add(officeStreet, setCooridnates(gb, 1, 9));
-		p.add(new JLabel("Broj: "), setCooridnates(gb, 0, 10));
-		p.add(officeNumber, setCooridnates(gb, 1, 10));
-		p.add(new JLabel("Grad: "), setCooridnates(gb, 0, 11));
-		p.add(officeCity, setCooridnates(gb, 1, 11));
-		p.add(new JLabel("Drzava: "), setCooridnates(gb, 0, 12));
-		p.add(officeCountry, setCooridnates(gb, 1, 12));
+		pInfo.add(new JLabel("Ulica: "), setCooridnates(gb, 0, 9));
+		pInfo.add(officeStreet, setCooridnates(gb, 1, 9));
+		pInfo.add(new JLabel("Broj: "), setCooridnates(gb, 0, 10));
+		pInfo.add(officeNumber, setCooridnates(gb, 1, 10));
+		pInfo.add(new JLabel("Grad: "), setCooridnates(gb, 0, 11));
+		pInfo.add(officeCity, setCooridnates(gb, 1, 11));
+		pInfo.add(new JLabel("Drzava: "), setCooridnates(gb, 0, 12));
+		pInfo.add(officeCountry, setCooridnates(gb, 1, 12));
 		
 		officeStreet.getDocument().addDocumentListener(pdl);
 		officeNumber.getDocument().addDocumentListener(pdl);
@@ -174,35 +175,35 @@ public class ProfessorDialog extends JDialog{
 		officeCountry.getDocument().addDocumentListener(pdl);
 		
 		// ===== BROJ TELEFONA =====
-		p.add(new JLabel("Broj telefona: "), setCooridnates(gb, 0, 13));
+		pInfo.add(new JLabel("Broj telefona: "), setCooridnates(gb, 0, 13));
 		
 		phoneNumber.getDocument().addDocumentListener(pdl);
-		p.add(phoneNumber, setCooridnates(gb, 1, 13));
+		pInfo.add(phoneNumber, setCooridnates(gb, 1, 13));
 		
 		// ==== EMAIL =====
-		p.add(new JLabel("E-mail: "), setCooridnates(gb, 0, 14));
+		pInfo.add(new JLabel("E-mail: "), setCooridnates(gb, 0, 14));
 		
 		email.getDocument().addDocumentListener(pdl);
-		p.add(email, setCooridnates(gb, 1, 14));
+		pInfo.add(email, setCooridnates(gb, 1, 14));
 		
 		// ===== BROJ LICNE KARTE =====
-		p.add(new JLabel("Broj licne karte: "), setCooridnates(gb, 0, 15));
+		pInfo.add(new JLabel("Broj licne karte: "), setCooridnates(gb, 0, 15));
 		
 		idNumber.getDocument().addDocumentListener(pdl);
-		p.add(idNumber, setCooridnates(gb, 1, 15));
+		pInfo.add(idNumber, setCooridnates(gb, 1, 15));
 		
 		// ===== ZVANJE =====
-		p.add(new JLabel("Zvanje: "), setCooridnates(gb, 0, 17));
+		pInfo.add(new JLabel("Zvanje: "), setCooridnates(gb, 0, 17));
 		
 		title = new JComboBox<>();
 		title.setModel(new DefaultComboBoxModel<>(Professor.Title.values()));
-		p.add(title, setCooridnates(gb, 1, 17));
+		pInfo.add(title, setCooridnates(gb, 1, 17));
 		
 		// ===== GODINE STAZA =====
-		p.add(new JLabel("Godine staza: "), setCooridnates(gb, 0, 18));
+		pInfo.add(new JLabel("Godine staza: "), setCooridnates(gb, 0, 18));
 		
 		yearsOfExperience.getDocument().addDocumentListener(pdl);
-		p.add(yearsOfExperience, setCooridnates(gb, 1, 18));
+		pInfo.add(yearsOfExperience, setCooridnates(gb, 1, 18));
 		
 		// BUTTONS
 		
@@ -264,7 +265,7 @@ public class ProfessorDialog extends JDialog{
 				}
 			}
 		});
-		p.add(confirm, setCooridnates(gb, 0, 19));
+		pInfo.add(confirm, setCooridnates(gb, 0, 19));
 		
 		
 		cancel.addActionListener(new ActionListener() {
@@ -273,10 +274,17 @@ public class ProfessorDialog extends JDialog{
 				dispose();
 			}
 		});
-		p.add(cancel, setCooridnates(gb, 1, 19));
+		pInfo.add(cancel, setCooridnates(gb, 1, 19));
 		
-		
-		add(p);
+		if(isAdd) {
+			add(pInfo);
+		}
+		else {
+			JTabbedPane editTabbedPane = new JTabbedPane();
+			editTabbedPane.addTab("Info", pInfo);
+			editTabbedPane.addTab("Predmeti", new JLabel("Predmeti"));
+			add(editTabbedPane);
+		}
 		setResizable(false);
 		setVisible(true);
 		
