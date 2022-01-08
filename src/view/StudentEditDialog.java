@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import controller.StudentEditDocumentListener;
@@ -81,7 +82,7 @@ public class StudentEditDialog extends JDialog {
 			status.getModel().setSelectedItem(selectedStud.getStatus());			
 		}
 		GridBagLayout gbl = new GridBagLayout();
-		JPanel p = new JPanel(gbl);
+		JPanel pInfo = new JPanel(gbl);
 		GridBagConstraints gb = new GridBagConstraints();
 		
 		gb.insets = new Insets(0,0,10,0);	// sets bottom padding to 10px for every component
@@ -90,132 +91,132 @@ public class StudentEditDialog extends JDialog {
 		// ===== PREZIME =====
 		gb.gridx = 0;
 		gb.gridy = 0;
-		p.add(new JLabel("Prezime: "), gb);
+		pInfo.add(new JLabel("Prezime: "), gb);
 				
 		gb.gridx = 1;
 		gb.gridy = 0;
 		lastName.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(lastName, gb);
+		pInfo.add(lastName, gb);
 		
 		// ===== IME =====
 		gb.gridx = 0;
 		gb.gridy = 1;
-		p.add(new JLabel("Ime: "), gb);
+		pInfo.add(new JLabel("Ime: "), gb);
 				
 		gb.gridx = 1;
 		gb.gridy = 1;
 		firstName.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(firstName, gb);
+		pInfo.add(firstName, gb);
 		
 		// ===== DATUM RODJENJA =====
 		gb.gridx = 0;
 		gb.gridy = 2;
-		p.add(new JLabel("Datum rodjenja: "), gb);
+		pInfo.add(new JLabel("Datum rodjenja: "), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 2;
 		dateOfBirth.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(dateOfBirth, gb);
+		pInfo.add(dateOfBirth, gb);
 		
 		// ===== KUCNA ADRESA - ulica =====
 		gb.gridx = 0;
 		gb.gridy = 3;
-		p.add(new JLabel("Ulica: "), gb);
+		pInfo.add(new JLabel("Ulica: "), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 3;
 		addressStreet.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(addressStreet, gb);
+		pInfo.add(addressStreet, gb);
 		
 		// ===== KUCNA ADRESA - broj =====
 		gb.gridx = 0;
 		gb.gridy = 4;
-		p.add(new JLabel("Broj: "), gb);
+		pInfo.add(new JLabel("Broj: "), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 4;
 		addressNumber.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(addressNumber, gb);
+		pInfo.add(addressNumber, gb);
 		
 		// ===== KUCNA ADRESA - grad =====
 		gb.gridx = 0;
 		gb.gridy = 5;
-		p.add(new JLabel("Grad: "), gb);
+		pInfo.add(new JLabel("Grad: "), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 5;
 		addressCity.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(addressCity, gb);
+		pInfo.add(addressCity, gb);
 		
 		// ===== KUCNA ADRESA - drzava =====
 		gb.gridx = 0;
 		gb.gridy = 6;
-		p.add(new JLabel("Drzava: "), gb);
+		pInfo.add(new JLabel("Drzava: "), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 6;
 		addressCountry.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(addressCountry, gb);
+		pInfo.add(addressCountry, gb);
 		
 		// ===== BROJ TELEFONA =====
 		gb.gridx = 0;
 		gb.gridy = 7;
-		p.add(new JLabel("Broj telefona: "), gb);
+		pInfo.add(new JLabel("Broj telefona: "), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 7;
 		phoneNumber.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(phoneNumber, gb);
+		pInfo.add(phoneNumber, gb);
 		
 		// ==== EMAIL =====
 		gb.gridx = 0;
 		gb.gridy = 8;
-		p.add(new JLabel("E-mail: "), gb);
+		pInfo.add(new JLabel("E-mail: "), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 8;
 		email.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(email, gb);
+		pInfo.add(email, gb);
 		
 		// ===== BROJ INDEXA =====
 		gb.gridx = 0;
 		gb.gridy = 9;
-		p.add(new JLabel("Broj indexa: "), gb);
+		pInfo.add(new JLabel("Broj indexa: "), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 9;
 		indexNumber.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(indexNumber, gb);
+		pInfo.add(indexNumber, gb);
 		
 		// ===== GODINA UPISA =====
 		gb.gridx = 0;
 		gb.gridy = 10;
-		p.add(new JLabel("Godina upisa: "), gb);
+		pInfo.add(new JLabel("Godina upisa: "), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 10;
 		yearOfEnrolment.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(yearOfEnrolment, gb);
+		pInfo.add(yearOfEnrolment, gb);
 		
 		// ===== TRENUTNA GODINA STUDIJA =====
 		gb.gridx = 0;
 		gb.gridy = 11;
-		p.add(new JLabel("Trenutna godina studija: "), gb);
+		pInfo.add(new JLabel("Trenutna godina studija: "), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 11;
 		currentYearOfStudies.getDocument().addDocumentListener(new StudentEditDocumentListener());
-		p.add(currentYearOfStudies, gb);
+		pInfo.add(currentYearOfStudies, gb);
 		
 		// ===== STATUS =====
 		gb.gridx = 0;
 		gb.gridy = 12;
-		p.add(new JLabel("Status: "), gb);
+		pInfo.add(new JLabel("Status: "), gb);
 		
 		status.setModel(new DefaultComboBoxModel<>(Student.Status.values()));
 		gb.gridx = 1;
 		gb.gridy = 12;
-		p.add(status, gb);
+		pInfo.add(status, gb);
 		
 		// DUGMAD
 		gb.gridx = 0;
@@ -253,7 +254,7 @@ public class StudentEditDialog extends JDialog {
 			}
 		});
 		
-		p.add(confirm, gb);
+		pInfo.add(confirm, gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 13;
@@ -265,9 +266,14 @@ public class StudentEditDialog extends JDialog {
 				dispose();
 			}
 		});
-		p.add(cancel, gb);
+		pInfo.add(cancel, gb);
 		
-		add(p);
+		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.addTab("Informacije", pInfo);
+		tabbedPane.addTab("Polozeni", new JLabel("Polozeni"));
+		tabbedPane.addTab("Nepolozeni", new JLabel("Neplozeni"));
+		
+		add(tabbedPane);
 		setResizable(false);
 		setVisible(true);
 		

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Course.Semester;
 import model.Student.Status;
 
 public class StudentDataBase {
@@ -28,9 +29,25 @@ public class StudentDataBase {
 		this.columnNames.add("Prosek");
 		
 		this.students = new ArrayList<Student>();
-		List<Grade> ispiti1 = new ArrayList<Grade>();
+		List<Grade> passedExams = new ArrayList<Grade>();
+		//passedExams.add(new Grade(student, course, grade, dateOfExam))
+		List<Grade> unfinishedExams = new ArrayList<Grade>();
 		Address a1 = new Address("fafs", "5", "sds", "fsaf");
-		Student s1 = new Student("Najjaci", "Lik", LocalDate.now(), a1, "06633333", "bezveze@gmail.com", "RA 420/2019", 3, 3, Status.B, 9.12, ispiti1, ispiti1);
+		//Student s1 = new Student("Najjaci", "Lik", LocalDate.now(), a1, "06633333", "bezveze@gmail.com", "RA 420/2019", 3, 3, Status.B, 9.12, passedExams, unfinishedExams);
+		Student s1 = new Student();
+		s1.setFirstName("Najjaci");
+		s1.setLastName("Lik");
+		s1.setDateOfBirth(LocalDate.now());
+		s1.setAddress(a1);
+		s1.setEmail("bezveze@gmail.com");
+		s1.setIndexNumber("RA 420/2019");
+		s1.setPhoneNumber("4234234234");
+		s1.setAvgGrade(9.12);
+		s1.setStatus(Status.B);
+		s1.setCurrentYearOfStudies(3);
+		s1.setYearOfEnrolment(2019);
+		//Course c1 = new Course(1, "OISISI", Semester.SUMMER, 3, new );
+		//passedExams.add(new Grade(s1, , 6, LocalDate.now()))
 		this.students.add(s1);
 	}
 	
