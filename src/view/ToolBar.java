@@ -74,7 +74,7 @@ public class ToolBar extends JToolBar {
 					
 					break;
 				case 1:	// PROFESSOR
-					TableRowSorter<AbstractTableModelProfessor> sorter = new TableRowSorter<AbstractTableModelProfessor>(new AbstractTableModelProfessor());
+					TableRowSorter<AbstractTableModelProfessor> sorterProf = new TableRowSorter<AbstractTableModelProfessor>(new AbstractTableModelProfessor());
 					if(!search.getText().isEmpty()) {
 						RowFilter<Object, Object> filter = new RowFilter<Object, Object>(){
 
@@ -90,15 +90,35 @@ public class ToolBar extends JToolBar {
 							
 						};
 						
-						sorter.setRowFilter(filter);
-						ProfessorTable.getInstance().setRowSorter(sorter);
+						sorterProf.setRowFilter(filter);
+						ProfessorTable.getInstance().setRowSorter(sorterProf);
 					} else {
-						sorter.setRowFilter(null);
-						ProfessorTable.getInstance().setRowSorter(sorter);
+						sorterProf.setRowFilter(null);
+						ProfessorTable.getInstance().setRowSorter(sorterProf);
 					}
 					break;
 				case 2:	// COURSE
-					
+					TableRowSorter<AbstractTableModelCourse> sorterCourse = new TableRowSorter<AbstractTableModelCourse>(new AbstractTableModelCourse());
+					if(!search.getText().isEmpty()) {
+						RowFilter<Object, Object> filter = new RowFilter<Object, Object>(){
+
+							@Override
+							public boolean include(Entry entry) {
+								String id = String.valueOf((int)entry.getValue(0));
+								String name = (String)entry.getValue(1);
+								Pattern pattern = Pattern.compile(".*" + search.getText().toLowerCase() + ".*");
+								Matcher matcher1 = pattern.matcher(id.toLowerCase() + " " + name.toLowerCase());
+								Matcher matcher2 = pattern.matcher(name.toLowerCase() + " " + id.toLowerCase());
+								return matcher1.matches() || matcher2.matches();
+							}
+							
+						};
+						sorterCourse.setRowFilter(filter);
+						CourseTable.getInstance().setRowSorter(sorterCourse);
+					} else {
+						sorterCourse.setRowFilter(null);
+						CourseTable.getInstance().setRowSorter(sorterCourse);
+					}
 					break;
 				default:
 					/* skip */
