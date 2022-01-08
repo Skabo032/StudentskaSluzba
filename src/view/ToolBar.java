@@ -10,7 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
+import javax.swing.table.TableRowSorter;
+
+import java.util.regex.*;
 
 import model.CourseDataBase;
 import model.ProfessorDataBase;
@@ -54,14 +58,62 @@ public class ToolBar extends JToolBar {
 		
 		add(Box.createHorizontalGlue());
 		
-		JTextField textField = new JTextField(20); // had to limit the minimum size of textfield ...
-		textField.setToolTipText("Search");
-		textField.setMaximumSize(new Dimension(200, 30)); // ... and the maximum size of textfield
-		add(textField);
+		JTextField search = new JTextField(20); // had to limit the minimum size of textfield ...
+		search.setToolTipText("Search");
+		search.setMaximumSize(new Dimension(200, 30)); // ... and the maximum size of textfield
+		add(search);
 		
 		JButton btnSearch = new JButton();
 		btnSearch.setToolTipText("Search");
 		btnSearch.setIcon(searchIco);
+		btnSearch.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
+				case 0:	// STUDENT
+					
+					break;
+				case 1:	// PROFESSOR
+					TableRowSorter<AbstractTableModelProfessor> sorter = new TableRowSorter<AbstractTableModelProfessor>(new AbstractTableModelProfessor());
+					if(!search.getText().isEmpty()) {
+						RowFilter<Object, Object> filter = new RowFilter<Object, Object>(){
+
+							@Override
+							public boolean include(Entry entry) {
+								String firstName = (String)entry.getValue(0);
+								String lastName = (String)entry.getValue(1);
+								Pattern pattern = Pattern.compile(".*" + search.getText().toLowerCase() + ".*");
+								Matcher matcher1 = pattern.matcher(firstName.toLowerCase() + " " + lastName.toLowerCase());
+								Matcher matcher2 = pattern.matcher(lastName.toLowerCase() + " " + firstName.toLowerCase());
+								return matcher1.matches() || matcher2.matches();
+							}
+							
+						};
+						
+						sorter.setRowFilter(filter);
+						ProfessorTable.getInstance().setRowSorter(sorter);
+					} else {
+						sorter.setRowFilter(null);
+						ProfessorTable.getInstance().setRowSorter(sorter);
+					}
+					break;
+				case 2:	// COURSE
+					
+					break;
+				default:
+					/* skip */
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {}
+			@Override
+			public void mouseExited(MouseEvent arg0) {}
+			@Override
+			public void mousePressed(MouseEvent arg0) {}
+			@Override
+			public void mouseReleased(MouseEvent arg0) {}
+			
+		});
 		add(btnSearch);
 		setFloatable(false);
 	}
@@ -78,7 +130,6 @@ public class ToolBar extends JToolBar {
 					break;
 				case 2:	// COURSE
 					new CourseAddDialog();
-					/* skip */
 					break;
 				default:
 					/* skip */
