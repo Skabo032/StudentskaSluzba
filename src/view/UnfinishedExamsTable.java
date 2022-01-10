@@ -25,7 +25,7 @@ public class UnfinishedExamsTable extends JTable{
 	}
 	
 	public void update() {
-		AbstractTableModelUnfinishedExams model = new AbstractTableModelUnfinishedExams();
+		AbstractTableModelUnfinishedExams model = (AbstractTableModelUnfinishedExams) instance.getModel();
 		model.fireTableDataChanged();
 		validate();
 	}	

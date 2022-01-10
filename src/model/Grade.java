@@ -38,7 +38,7 @@ public class Grade {
 		return grade;
 	}
 	public void setGrade(int grade) {
-		if(grade >= 6 && grade <= 10)
+		if(grade >= 5 && grade <= 10)
 			this.grade = grade;
 		else {
 			//throw exception

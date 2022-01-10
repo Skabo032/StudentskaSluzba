@@ -31,7 +31,7 @@ public class ProfessorTable extends JTable{
 	}
 	
 	public void update() {
-		AbstractTableModelProfessor modelProfessor = (AbstractTableModelProfessor)instance.getModel();
+		AbstractTableModelProfessor modelProfessor = (AbstractTableModelProfessor) instance.getModel();
 		modelProfessor.fireTableDataChanged();
 		validate();
 	}

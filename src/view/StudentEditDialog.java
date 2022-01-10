@@ -5,6 +5,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -12,6 +14,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -274,14 +277,25 @@ public class StudentEditDialog extends JDialog {
 		JButton btnAddUnfinished = new JButton("Dodaj");
 		JButton btnDeleteUnfinished = new JButton("Obrisi");
 		JButton btnFinishUnfinished = new JButton("Polaganje");
+		btnFinishUnfinished.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(UnfinishedExamsTable.getInstance().getSelectedRow() != -1)
+					new GradeEntryDialog();
+				
+			}
+		});
+		
 		pUnfinishedExams.add(btnAddUnfinished);
 		pUnfinishedExams.add(btnDeleteUnfinished);
 		pUnfinishedExams.add(btnFinishUnfinished);
 		
+		
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.addTab("Informacije", pInfo);
-		tabbedPane.addTab("Polozeni", pUnfinishedExams);
-		tabbedPane.addTab("Nepolozeni", new JLabel("Neplozeni"));
+		tabbedPane.addTab("Polozeni", new JLabel("Polozeni"));
+		tabbedPane.addTab("Nepolozeni", pUnfinishedExams);
 		
 		add(tabbedPane);
 		setResizable(false);
