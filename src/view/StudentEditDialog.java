@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
@@ -268,9 +269,18 @@ public class StudentEditDialog extends JDialog {
 		});
 		pInfo.add(cancel, gb);
 		
+		JPanel pUnfinishedExams = new JPanel();
+		pUnfinishedExams.add(new JScrollPane(UnfinishedExamsTable.getInstance()));
+		JButton btnAddUnfinished = new JButton("Dodaj");
+		JButton btnDeleteUnfinished = new JButton("Obrisi");
+		JButton btnFinishUnfinished = new JButton("Polaganje");
+		pUnfinishedExams.add(btnAddUnfinished);
+		pUnfinishedExams.add(btnDeleteUnfinished);
+		pUnfinishedExams.add(btnFinishUnfinished);
+		
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.addTab("Informacije", pInfo);
-		tabbedPane.addTab("Polozeni", new JLabel("Polozeni"));
+		tabbedPane.addTab("Polozeni", pUnfinishedExams);
 		tabbedPane.addTab("Nepolozeni", new JLabel("Neplozeni"));
 		
 		add(tabbedPane);

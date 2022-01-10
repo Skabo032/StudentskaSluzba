@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Course.Semester;
+import model.Professor.Title;
 import model.Student.Status;
 
 public class StudentDataBase {
@@ -46,8 +47,10 @@ public class StudentDataBase {
 		s1.setStatus(Status.B);
 		s1.setCurrentYearOfStudies(3);
 		s1.setYearOfEnrolment(2019);
-		//Course c1 = new Course(1, "OISISI", Semester.SUMMER, 3, new );
-		//passedExams.add(new Grade(s1, , 6, LocalDate.now()))
+		Professor p1 = new Professor("Peric", "Pera", LocalDate.now(), a1, "123", "email@asd.ac", a1, "22222", Title.PROFESSOR, 5, null);
+		Course c1 = new Course(1, "OISISI", Semester.SUMMER, 3, p1, 5, null, null );
+		unfinishedExams.add(new Grade(s1, c1, 7, LocalDate.now()));
+		s1.setUnfinishedExams(unfinishedExams);
 		this.students.add(s1);
 	}
 	
