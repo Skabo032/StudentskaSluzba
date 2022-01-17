@@ -1,7 +1,11 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Course.Semester;
+import model.Professor.Title;
 
 public class CourseDataBase {
 	
@@ -25,8 +29,11 @@ public class CourseDataBase {
 		this.columnNames.add("Semestar");
 		
 		this.courses = new ArrayList<Course>();
-		Course c1 = new Course();
+		Professor p1 = ProfessorDataBase.getInstance().getProfessor(0);
+		Course c1 = new Course(1, "OISISI", Semester.SUMMER, 3, p1, 5, null, null );
 		this.courses.add(c1);
+		
+		
 		
 	}
 
@@ -71,6 +78,27 @@ public class CourseDataBase {
 				return false;
 		}
 		return this.courses.add(c);
+	}
+	
+	public Course getCourse(int i) {
+		try {
+			return courses.get(i);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+	
+	public boolean existsById(int courseId) {
+		for (Course course : courses) {
+			//if(course.getCourseID().equals(courseId))
+			if(course.getCourseID() == courseId)
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean editCourse(int rowNum, Course c) {
+		return courses.set(rowNum, c) != null;
 	}
 	
 	public boolean removeCourseByRowNum(int i) {

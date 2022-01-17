@@ -143,7 +143,8 @@ public class MenuBar extends JMenuBar {
 						new ProfessorDialog(false);
 					break;
 				case 2:	// COURSE
-					/* skip */
+					if(CourseTable.getInstance().getSelectedRow() != -1)
+						new CourseEditDialog();
 					break;
 				default:
 					/* skip */
