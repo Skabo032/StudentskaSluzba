@@ -28,7 +28,25 @@ public class AbstractTableModelCourse extends AbstractTableModel{
 	
 	@Override
 	public String getColumnName(int column) {
-		return CourseDataBase.getInstance().getColumnName(column);
+		switch (column) {
+		case 0:
+			return MainFrame.getInstance().getResourceBundle().getString("courseId");
+			
+		case 1:
+			return MainFrame.getInstance().getResourceBundle().getString("courseName");
+			
+		case 2:
+			return MainFrame.getInstance().getResourceBundle().getString("espb");
+			
+		case 3:
+			return MainFrame.getInstance().getResourceBundle().getString("year");
+			
+		case 4:
+			return MainFrame.getInstance().getResourceBundle().getString("semester");
+		default:
+			return "";
+			
+		}
 	}
 	
 }

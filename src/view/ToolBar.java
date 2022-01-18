@@ -212,28 +212,31 @@ public class ToolBar extends JToolBar {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				Object[] options = {MainFrame.getInstance().getResourceBundle().getString("yes"), 
+						MainFrame.getInstance().getResourceBundle().getString("no")};
+				int answer;
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
 				case 0:	// STUDENT
-					Object[] options1 = {"DA", "Ne"};
-					int answer1 = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
-															"Da li stvarno zelite da obrisete odabranog studenta?", 
-															"Brisanje studenta", 
-															JOptionPane.YES_NO_OPTION, 
-															JOptionPane.QUESTION_MESSAGE, 
-															null, 
-															options1, 
-															options1[0]);
-					if(answer1 == JOptionPane.YES_OPTION)
-						StudentDataBase.getInstance().removeStudentByRowNum(StudentTable.getInstance().getSelectedRow());
-					StudentTable.getInstance().update();
+					if(StudentTable.getInstance().getSelectedRow() != -1) {
+						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+								MainFrame.getInstance().getResourceBundle().getString("deleteStudentQuestion"), 
+								MainFrame.getInstance().getResourceBundle().getString("deleteStudent"), 
+																JOptionPane.YES_NO_OPTION, 
+																JOptionPane.QUESTION_MESSAGE, 
+																null, 
+																options, 
+																options[0]);
+						if(answer == JOptionPane.YES_OPTION)
+							StudentDataBase.getInstance().removeStudentByRowNum(StudentTable.getInstance().getSelectedRow());
+						StudentTable.getInstance().update();
+					}
 					break;
 				case 1:	// PROFFESOR
 					if(ProfessorTable.getInstance().getSelectedRow() != -1)
 					{
-						Object[] options = {"DA", "Ne"};
-						int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
-																"Da li stvarno zelite da obrisete odabranog profesora?", 
-																"Brisanje profesora", 
+						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+								MainFrame.getInstance().getResourceBundle().getString("deleteProfessorQuestion"), 
+								MainFrame.getInstance().getResourceBundle().getString("deleteProfessor"), 
 																JOptionPane.YES_NO_OPTION, 
 																JOptionPane.QUESTION_MESSAGE, 
 																null, 
@@ -247,10 +250,10 @@ public class ToolBar extends JToolBar {
 				case 2:	// COURSE
 					if(CourseTable.getInstance().getSelectedRow() != -1)
 					{
-						Object[] options = {"DA", "Ne"};
-						int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
-																"Da li stvarno zelite da obrisete odabrani predmet?", 
-																"Brisanje predmeta", 
+						
+						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+								MainFrame.getInstance().getResourceBundle().getString("deleteCourseQuestion"), 
+								MainFrame.getInstance().getResourceBundle().getString("deleteCourse"), 
 																JOptionPane.YES_NO_OPTION, 
 																JOptionPane.QUESTION_MESSAGE, 
 																null, 

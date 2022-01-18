@@ -220,7 +220,8 @@ public class MenuBar extends JMenuBar {
 		class DeleteBtnActionListener implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Object[] options = {"DA", "Ne"};
+				Object[] options = {MainFrame.getInstance().getResourceBundle().getString("yes"), 
+						MainFrame.getInstance().getResourceBundle().getString("no")};
 				int answer;
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
 				case 0:	// STUDENT
@@ -228,8 +229,8 @@ public class MenuBar extends JMenuBar {
 					{
 						
 						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
-																"Da li stvarno zelite da obrisete odabranog studenta?", 
-																"Brisanje studenta", 
+								MainFrame.getInstance().getResourceBundle().getString("deleteStudentQuestion"), 
+								MainFrame.getInstance().getResourceBundle().getString("deleteStudent"), 
 																JOptionPane.YES_NO_OPTION, 
 																JOptionPane.QUESTION_MESSAGE, 
 																null, 
@@ -243,8 +244,8 @@ public class MenuBar extends JMenuBar {
 				case 1:	// PROFFESOR
 					if(ProfessorTable.getInstance().getSelectedRow() != -1) {
 						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
-																"Da li stvarno zelite da obrisete odabranog profesora?", 
-																"Brisanje profesora", 
+								MainFrame.getInstance().getResourceBundle().getString("deleteProfessorQuestion"), 
+								MainFrame.getInstance().getResourceBundle().getString("deleteProfessor"), 
 																JOptionPane.YES_NO_OPTION, 
 																JOptionPane.QUESTION_MESSAGE, 
 																null, 
@@ -260,8 +261,8 @@ public class MenuBar extends JMenuBar {
 					if(CourseTable.getInstance().getSelectedRow() != -1)
 					{
 						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
-																"Da li stvarno zelite da obrisete odabrani predmet?", 
-																"Brisanje predmeta", 
+								MainFrame.getInstance().getResourceBundle().getString("deleteCourseQuestion"), 
+								MainFrame.getInstance().getResourceBundle().getString("deleteCourse"), 
 																JOptionPane.YES_NO_OPTION, 
 																JOptionPane.QUESTION_MESSAGE, 
 																null, 

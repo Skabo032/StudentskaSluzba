@@ -27,6 +27,13 @@ public class CourseTable extends JTable{
 		modelCourse.fireTableDataChanged();
 		validate();
 	}
+	public void updateLanguage() {
+		getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("courseId"));
+		getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("courseName"));
+		getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("espb"));
+		getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("year"));
+		getColumnModel().getColumn(4).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("semester"));
+	}
 	
 	public CourseTable() {
 		this.setRowSelectionAllowed(true);

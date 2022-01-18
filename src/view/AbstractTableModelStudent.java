@@ -33,7 +33,30 @@ public class AbstractTableModelStudent extends AbstractTableModel{
 	
 	@Override
 	public String getColumnName(int column) {
-		return StudentDataBase.getInstance().getColumnName(column);
+		switch (column) {
+		case 0:
+			return MainFrame.getInstance().getResourceBundle().getString("index");
+			
+		case 1:
+			return MainFrame.getInstance().getResourceBundle().getString("firstName");
+			
+		case 2:
+			return MainFrame.getInstance().getResourceBundle().getString("lastName");
+			
+		case 3:
+			return MainFrame.getInstance().getResourceBundle().getString("yearOfStudies");
+			
+		case 4:
+			return MainFrame.getInstance().getResourceBundle().getString("status");
+			
+		case 5:
+			return MainFrame.getInstance().getResourceBundle().getString("gradeAverage");
+			
+
+		default:
+			return "";
+			
+		}
 	}
 
 }

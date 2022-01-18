@@ -41,7 +41,7 @@ public class CourseEditDialog extends JDialog  {
 	public static JButton cancel;
 	
 	public CourseEditDialog(){
-		super(MainFrame.getInstance(), "Dodaj predmet", true);
+		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("editCourse"), true);
 		
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
 		int mfLocY = (int)MainFrame.getInstance().getLocation().getY();
@@ -78,7 +78,7 @@ public class CourseEditDialog extends JDialog  {
 		// ===== ID PREDMETA =====
 		gb.gridx = 0;
 		gb.gridy = 0;
-		p.add(new JLabel("ID predmeta: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("courseId")), gb);
 				
 		gb.gridx = 1;
 		gb.gridy = 0;
@@ -88,7 +88,7 @@ public class CourseEditDialog extends JDialog  {
 		// ===== IME PREDMETA =====
 		gb.gridx = 0;
 		gb.gridy = 1;
-		p.add(new JLabel("Naziv predmeta: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("courseName")), gb);
 				
 		gb.gridx = 1;
 		gb.gridy = 1;
@@ -98,7 +98,7 @@ public class CourseEditDialog extends JDialog  {
 		// ===== SEMESTAR =====
 		gb.gridx = 0;
 		gb.gridy = 2;
-		p.add(new JLabel("Semestar: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("semester")), gb);
 		
 		semester.setModel(new DefaultComboBoxModel<>(Course.Semester.values()));
 		gb.gridx = 1;
@@ -108,7 +108,7 @@ public class CourseEditDialog extends JDialog  {
 		// ===== GODINA =====
 		gb.gridx = 0;
 		gb.gridy = 3;
-		p.add(new JLabel("Godina: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("year")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 3;
@@ -118,7 +118,7 @@ public class CourseEditDialog extends JDialog  {
 		// ===== ID PROFESORA =====
 		gb.gridx = 0;
 		gb.gridy = 4;
-		p.add(new JLabel("ID profesora: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("professorId")), gb);
 
 		gb.gridx = 1;
 		gb.gridy = 4;
@@ -128,7 +128,7 @@ public class CourseEditDialog extends JDialog  {
 		// ===== ESPB BODOVI =====
 		gb.gridx = 0;
 		gb.gridy = 5;
-		p.add(new JLabel("ESPB: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("espb")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 5;
@@ -139,7 +139,7 @@ public class CourseEditDialog extends JDialog  {
 		// DUGMAD
 		gb.gridx = 0;
 		gb.gridy = 6;
-		confirm = new JButton("Potvrdi");
+		confirm = new JButton(MainFrame.getInstance().getResourceBundle().getString("confirm"));
 		confirm.setEnabled(false);
 		confirm.addActionListener(new ActionListener() {
 			
@@ -159,7 +159,7 @@ public class CourseEditDialog extends JDialog  {
 					int selectedIndex = CourseTable.getInstance().getSelectedRow();
 					Course selectedCourse = CourseDataBase.getInstance().getCourse(selectedIndex);
 					if(CourseDataBase.getInstance().existsById(c.getCourseID()) && selectedCourse.getCourseID()!=c.getCourseID()) {
-						JOptionPane.showMessageDialog(getParent(), "Predmet sa tom sifrom vec postoji!");
+						JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("errCourseExists"));
 					}
 					else {
 						CourseDataBase.getInstance().editCourse(CourseTable.getInstance().getSelectedRow(), c);
@@ -179,7 +179,7 @@ public class CourseEditDialog extends JDialog  {
 		
 		gb.gridx = 1;
 		gb.gridy = 6;
-		cancel = new JButton("Otkaži");
+		cancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		cancel.addActionListener(new ActionListener() {
 			
 			@Override

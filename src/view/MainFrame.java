@@ -72,6 +72,9 @@ public class MainFrame extends JFrame{
 		tb.changeLanguage();
 		sb.changeLanguage();
 		mvtp.changeLanguage();
+		StudentTable.getInstance().updateLanguage();
+		ProfessorTable.getInstance().updateLanguage();
+		CourseTable.getInstance().updateLanguage();
 	}
 	
 	public ResourceBundle getResourceBundle() {
