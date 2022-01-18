@@ -75,13 +75,13 @@ public class MenuBar extends JMenuBar {
 			foStudenti.setMnemonic(KeyEvent.VK_S);
 			foStudenti.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,ActionEvent.CTRL_MASK));
 			foPredmeti = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("courses"));
-			foPredmeti.setMnemonic(KeyEvent.VK_P);
+			foPredmeti.setMnemonic(KeyEvent.VK_C);
 			foPredmeti.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,ActionEvent.CTRL_MASK));
 			foProfesori = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("professors"));
-			foProfesori.setMnemonic(KeyEvent.VK_R);
+			foProfesori.setMnemonic(KeyEvent.VK_P);
 			foProfesori.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,ActionEvent.CTRL_MASK));
 			foKatedre = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("departments"));
-			foKatedre.setMnemonic(KeyEvent.VK_K);
+			foKatedre.setMnemonic(KeyEvent.VK_D);
 			foKatedre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,ActionEvent.CTRL_MASK));
 			fOpen.add(foStudenti);
 			fOpen.add(foPredmeti);
@@ -123,6 +123,24 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent arg0) {
 				Locale.setDefault(new Locale("en", "US"));
 				MainFrame.getInstance().changeLanguage();
+				
+				
+				file.setMnemonic(KeyEvent.VK_F);
+				fNew.setMnemonic(KeyEvent.VK_N);
+				fSave.setMnemonic(KeyEvent.VK_S);
+				fOpen.setMnemonic(KeyEvent.VK_O);
+				foStudenti.setMnemonic(KeyEvent.VK_S);
+				foPredmeti.setMnemonic(KeyEvent.VK_C);
+				foProfesori.setMnemonic(KeyEvent.VK_P);
+				foKatedre.setMnemonic(KeyEvent.VK_D);
+				fClose.setMnemonic(KeyEvent.VK_C);
+				edit.setMnemonic(KeyEvent.VK_E);
+				eEdit.setMnemonic(KeyEvent.VK_E);
+				eDelete.setMnemonic(KeyEvent.VK_D);
+				help.setMnemonic(KeyEvent.VK_H);
+				hHelp.setMnemonic(KeyEvent.VK_H);
+				hAbout.setMnemonic(KeyEvent.VK_A);
+				
 			}
 		});
 		english.setSelected(true);
@@ -133,6 +151,21 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent arg0) {
 				Locale.setDefault(new Locale("sr", "RS"));
 				MainFrame.getInstance().changeLanguage();
+				file.setMnemonic(KeyEvent.VK_D);
+				fNew.setMnemonic(KeyEvent.VK_N);
+				fSave.setMnemonic(KeyEvent.VK_S);
+				fOpen.setMnemonic(KeyEvent.VK_O);
+				foStudenti.setMnemonic(KeyEvent.VK_S);
+				foPredmeti.setMnemonic(KeyEvent.VK_P);
+				foProfesori.setMnemonic(KeyEvent.VK_R);
+				foKatedre.setMnemonic(KeyEvent.VK_K);
+				fClose.setMnemonic(KeyEvent.VK_Z);
+				edit.setMnemonic(KeyEvent.VK_I);
+				eEdit.setMnemonic(KeyEvent.VK_I);
+				eDelete.setMnemonic(KeyEvent.VK_O);
+				help.setMnemonic(KeyEvent.VK_P);
+				hHelp.setMnemonic(KeyEvent.VK_P);
+				hAbout.setMnemonic(KeyEvent.VK_I);
 			}
 		});
 		//srpski.setSelected(true);
