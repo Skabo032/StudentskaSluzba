@@ -2,11 +2,15 @@ package view;
 
 import javax.swing.JMenuBar;
 
+import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Locale;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -23,8 +27,25 @@ public class MenuBar extends JMenuBar {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JMenu file;
+	private JMenuItem fNew;
+	private JMenuItem eDelete;
+	private JMenu edit;
+	private JMenuItem eEdit;
+	private JMenuItem fClose;
+	private JMenuItem foKatedre;
+	private JMenuItem fOpen;
+	private JMenuItem foPredmeti;
+	private JMenuItem foProfesori;
+	private JMenuItem foStudenti;
+	private JMenuItem fSave;
+	private JMenuItem hAbout;
+	private JMenu help;
+	private JMenuItem hHelp;
+	
+	
 	public MenuBar() {
-		JMenu file = new JMenu("File");
+		file = new JMenu(MainFrame.getInstance().getResourceBundle().getString("file"));
 		file.setMnemonic(KeyEvent.VK_F);
 		
 		ImageIcon addIco = new ResizeIcon("images/add.png", 20, 20).getIcon();
@@ -37,36 +58,36 @@ public class MenuBar extends JMenuBar {
 		ImageIcon aboutIco = new ResizeIcon("images/about.png", 20, 20).getIcon();
 		
 		ActionListener aAdd = new AddBtnActionListener();
-		JMenuItem fNew = new JMenuItem("New");
+		fNew = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("new"));
 		fNew.setMnemonic(KeyEvent.VK_N);
 		fNew.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		fNew.addActionListener(aAdd);
 		fNew.setIcon(addIco);
 		
-		JMenuItem fSave = new JMenuItem("Save");
+		fSave = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("save"));
 		fSave.setMnemonic(KeyEvent.VK_S);
 		fSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
 		fSave.setIcon(saveIco);
-		JMenu fOpen = new JMenu("Open");
+		fOpen = new JMenu(MainFrame.getInstance().getResourceBundle().getString("open"));
 		fOpen.setMnemonic(KeyEvent.VK_O);
 		fOpen.setIcon(openIco);
-			JMenuItem foStudenti = new JMenuItem("Studenti");
+			foStudenti = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("students"));
 			foStudenti.setMnemonic(KeyEvent.VK_S);
 			foStudenti.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,ActionEvent.CTRL_MASK));
-			JMenuItem foPredmeti = new JMenuItem("Predmeti");
+			foPredmeti = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("courses"));
 			foPredmeti.setMnemonic(KeyEvent.VK_P);
 			foPredmeti.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,ActionEvent.CTRL_MASK));
-			JMenuItem foProfesori = new JMenuItem("Profesori");
+			foProfesori = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("professors"));
 			foProfesori.setMnemonic(KeyEvent.VK_R);
 			foProfesori.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,ActionEvent.CTRL_MASK));
-			JMenuItem foKatedre = new JMenuItem("Katedre");
+			foKatedre = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("departments"));
 			foKatedre.setMnemonic(KeyEvent.VK_K);
 			foKatedre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,ActionEvent.CTRL_MASK));
 			fOpen.add(foStudenti);
 			fOpen.add(foPredmeti);
 			fOpen.add(foKatedre);
 			fOpen.add(foProfesori);
-		JMenuItem fClose = new JMenuItem("Close");
+		fClose = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("close"));
 		fClose.setMnemonic(KeyEvent.VK_C);
 		fClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,ActionEvent.CTRL_MASK));
 		fClose.setIcon(closeIco);
@@ -75,17 +96,17 @@ public class MenuBar extends JMenuBar {
 		file.add(fOpen);
 		file.add(fClose);
 		
-		JMenu edit = new JMenu("Edit");
+		edit = new JMenu(MainFrame.getInstance().getResourceBundle().getString("edit"));
 		edit.setMnemonic(KeyEvent.VK_E);
 		//file.setAccelerator(KeyStroke.getKeyStroke(ActionEvent.CTRL_MASK, KeyEvent.VK_F));
 		ActionListener aEdit = new EditBtnActionListener();
-		JMenuItem eEdit = new JMenuItem("Edit");
+		eEdit = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("edit"));
 		eEdit.setMnemonic(KeyEvent.VK_E);
 		eEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.CTRL_MASK));
 		eEdit.addActionListener(aEdit);
 		eEdit.setIcon(editIco);
 		ActionListener aDelete = new DeleteBtnActionListener();
-		JMenuItem eDelete = new JMenuItem("Delete");
+		eDelete = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("delete"));
 		eDelete.setMnemonic(KeyEvent.VK_D);
 		eDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));
 		eDelete.addActionListener(aDelete);
@@ -93,22 +114,67 @@ public class MenuBar extends JMenuBar {
 		edit.add(eEdit);
 		edit.add(eDelete);
 		
-		JMenu help = new JMenu("Help");
+		help = new JMenu("Help");
 		help.setMnemonic(KeyEvent.VK_H);
-		JMenuItem hHelp = new JMenuItem("Help");
+		JMenuItem english = new JCheckBoxMenuItem("English");
+		english.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Locale.setDefault(new Locale("en", "US"));
+				MainFrame.getInstance().changeLanguage();
+			}
+		});
+		english.setSelected(true);
+		JMenuItem srpski = new JCheckBoxMenuItem("Srpski");
+		srpski.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Locale.setDefault(new Locale("sr", "RS"));
+				MainFrame.getInstance().changeLanguage();
+			}
+		});
+		//srpski.setSelected(true);
+		hHelp = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("help"));
 		hHelp.setMnemonic(KeyEvent.VK_H);
 		hHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,ActionEvent.CTRL_MASK));
 		hHelp.setIcon(helpIco);
-		JMenuItem hAbout = new JMenuItem("About");
+		hAbout = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("about"));
 		hAbout.setMnemonic(KeyEvent.VK_A);
 		hAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.CTRL_MASK));
 		hAbout.setIcon(aboutIco);
+		help.add(english);
+		help.add(srpski);
+		help.addSeparator();
 		help.add(hHelp);
 		help.add(hAbout);
 		
 		add(file);
 		add(edit);
 		add(help);
+		
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(english);
+		bg.add(srpski);
+	}
+	
+	public void changeLanguage() {
+		file.setText(MainFrame.getInstance().getResourceBundle().getString("file"));
+		fNew.setText(MainFrame.getInstance().getResourceBundle().getString("new"));
+		eDelete.setText(MainFrame.getInstance().getResourceBundle().getString("delete"));
+		eEdit.setText(MainFrame.getInstance().getResourceBundle().getString("edit"));
+		fClose.setText(MainFrame.getInstance().getResourceBundle().getString("close"));
+		foKatedre.setText(MainFrame.getInstance().getResourceBundle().getString("departments"));
+		fOpen.setText(MainFrame.getInstance().getResourceBundle().getString("open"));
+		foPredmeti.setText(MainFrame.getInstance().getResourceBundle().getString("courses"));
+		foProfesori.setText(MainFrame.getInstance().getResourceBundle().getString("professors"));
+		foStudenti.setText(MainFrame.getInstance().getResourceBundle().getString("students"));
+		fSave.setText(MainFrame.getInstance().getResourceBundle().getString("save"));
+		hAbout.setText(MainFrame.getInstance().getResourceBundle().getString("about"));
+		hHelp.setText(MainFrame.getInstance().getResourceBundle().getString("help"));
+		help.setText(MainFrame.getInstance().getResourceBundle().getString("help"));
+		edit.setText(MainFrame.getInstance().getResourceBundle().getString("edit"));
 	}
 		class AddBtnActionListener implements ActionListener{
 			@Override

@@ -26,6 +26,13 @@ public class ToolBar extends JToolBar {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	JButton btnAdd;
+	JButton btnEdit;
+	JButton btnDelete;
+	JTextField search;
+	JButton btnSearch;
+	
 	public ToolBar() {
 		super(SwingConstants.HORIZONTAL);
 		
@@ -36,35 +43,35 @@ public class ToolBar extends JToolBar {
 		ImageIcon searchIco = new ResizeIcon("images/search.png", 20, 20).getIcon();
 
 		MouseListener mAdd = new AddBtnMouseListener();
-		JButton btnAdd = new JButton();
-		btnAdd.setToolTipText("Add entity");
+		btnAdd = new JButton();
+		btnAdd.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("addEntity")); 
 		btnAdd.setIcon(addIco);
 		btnAdd.addMouseListener(mAdd);
 		add(btnAdd);
 		
 		MouseListener mEdit = new EditBtnMouseListener();
-		JButton btnEdit = new JButton();
-		btnEdit.setToolTipText("Edit entity");
+		btnEdit = new JButton();
+		btnEdit.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("editEntity")); 
 		btnEdit.setIcon(editIco);
 		btnEdit.addMouseListener(mEdit);
 		add(btnEdit);
 		
 		MouseListener mDelete = new DeleteBtnMouseListener();
-		JButton btnDelete = new JButton();
-		btnDelete.setToolTipText("Delete");
+		btnDelete = new JButton();
+		btnDelete.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("delete")); 
 		btnDelete.setIcon(deleteIco);
 		btnDelete.addMouseListener(mDelete);
 		add(btnDelete);
 		
 		add(Box.createHorizontalGlue());
 		
-		JTextField search = new JTextField(20); // had to limit the minimum size of textfield ...
-		search.setToolTipText("Search");
+		search = new JTextField(20); // had to limit the minimum size of textfield ...
+		search.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("search")); 
 		search.setMaximumSize(new Dimension(200, 30)); // ... and the maximum size of textfield
 		add(search);
 		
-		JButton btnSearch = new JButton();
-		btnSearch.setToolTipText("Search");
+		btnSearch = new JButton();
+		btnSearch.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("search")); 
 		btnSearch.setIcon(searchIco);
 		btnSearch.addMouseListener(new MouseListener() {
 			@Override
@@ -136,6 +143,14 @@ public class ToolBar extends JToolBar {
 		});
 		add(btnSearch);
 		setFloatable(false);
+	}
+	
+	public void changeLanguage() {
+		btnAdd.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("addEntity"));
+		btnEdit.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("editEntity"));
+		btnDelete.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("delete"));
+		search.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("search"));
+		btnSearch.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("search"));
 	}
 		
 		class AddBtnMouseListener implements MouseListener{
@@ -258,4 +273,5 @@ public class ToolBar extends JToolBar {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {}
 		}
+		
 }

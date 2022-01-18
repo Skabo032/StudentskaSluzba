@@ -51,7 +51,7 @@ public class StudentEditDialog extends JDialog {
 	public static JButton cancel;
 	
 	public StudentEditDialog() {
-		super(MainFrame.getInstance(), "Izmeni studenta", true);
+		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("editStudent"), true);
 		
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
 		int mfLocY = (int)MainFrame.getInstance().getLocation().getY();
@@ -95,7 +95,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== PREZIME =====
 		gb.gridx = 0;
 		gb.gridy = 0;
-		pInfo.add(new JLabel("Prezime: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("lastName")), gb);
 				
 		gb.gridx = 1;
 		gb.gridy = 0;
@@ -105,7 +105,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== IME =====
 		gb.gridx = 0;
 		gb.gridy = 1;
-		pInfo.add(new JLabel("Ime: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("firstName")), gb);
 				
 		gb.gridx = 1;
 		gb.gridy = 1;
@@ -115,7 +115,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== DATUM RODJENJA =====
 		gb.gridx = 0;
 		gb.gridy = 2;
-		pInfo.add(new JLabel("Datum rodjenja: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("dateOfBirth")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 2;
@@ -125,7 +125,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== KUCNA ADRESA - ulica =====
 		gb.gridx = 0;
 		gb.gridy = 3;
-		pInfo.add(new JLabel("Ulica: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("street")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 3;
@@ -135,7 +135,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== KUCNA ADRESA - broj =====
 		gb.gridx = 0;
 		gb.gridy = 4;
-		pInfo.add(new JLabel("Broj: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("number")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 4;
@@ -145,7 +145,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== KUCNA ADRESA - grad =====
 		gb.gridx = 0;
 		gb.gridy = 5;
-		pInfo.add(new JLabel("Grad: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("city")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 5;
@@ -155,7 +155,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== KUCNA ADRESA - drzava =====
 		gb.gridx = 0;
 		gb.gridy = 6;
-		pInfo.add(new JLabel("Drzava: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("country")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 6;
@@ -165,7 +165,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== BROJ TELEFONA =====
 		gb.gridx = 0;
 		gb.gridy = 7;
-		pInfo.add(new JLabel("Broj telefona: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("phoneNumber")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 7;
@@ -175,7 +175,7 @@ public class StudentEditDialog extends JDialog {
 		// ==== EMAIL =====
 		gb.gridx = 0;
 		gb.gridy = 8;
-		pInfo.add(new JLabel("E-mail: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("email")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 8;
@@ -185,7 +185,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== BROJ INDEXA =====
 		gb.gridx = 0;
 		gb.gridy = 9;
-		pInfo.add(new JLabel("Broj indexa: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("indexNumber")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 9;
@@ -195,7 +195,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== GODINA UPISA =====
 		gb.gridx = 0;
 		gb.gridy = 10;
-		pInfo.add(new JLabel("Godina upisa: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("yearOfEnrolment")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 10;
@@ -205,7 +205,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== TRENUTNA GODINA STUDIJA =====
 		gb.gridx = 0;
 		gb.gridy = 11;
-		pInfo.add(new JLabel("Trenutna godina studija: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("currentYearOfStudies")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 11;
@@ -215,7 +215,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== STATUS =====
 		gb.gridx = 0;
 		gb.gridy = 12;
-		pInfo.add(new JLabel("Status: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("status")), gb);
 		
 		status.setModel(new DefaultComboBoxModel<>(Student.Status.values()));
 		gb.gridx = 1;
@@ -225,7 +225,7 @@ public class StudentEditDialog extends JDialog {
 		// DUGMAD
 		gb.gridx = 0;
 		gb.gridy = 13;
-		confirm = new JButton("Potvrdi");
+		confirm = new JButton(MainFrame.getInstance().getResourceBundle().getString("confirm"));
 		confirm.setEnabled(false);
 		confirm.addActionListener(new ActionListener() {
 			
@@ -249,7 +249,7 @@ public class StudentEditDialog extends JDialog {
 				int selectedIndex = StudentTable.getInstance().getSelectedRow();
 				Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
 				if(StudentDataBase.getInstance().existsById(s.getIndexNumber()) && !selectedStud.getIndexNumber().equals(s.getIndexNumber())) {
-					JOptionPane.showMessageDialog(getParent(), "Student sa datim brojem indeksa vec postoji!");
+					JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("errStudentExists"));
 				}else {
 					StudentDataBase.getInstance().editStudent(StudentTable.getInstance().getSelectedRow(), s);
 					StudentTable.getInstance().update();
@@ -262,7 +262,7 @@ public class StudentEditDialog extends JDialog {
 		
 		gb.gridx = 1;
 		gb.gridy = 13;
-		cancel = new JButton("Otkaži");
+		cancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		cancel.addActionListener(new ActionListener() {
 			
 			@Override
@@ -274,9 +274,9 @@ public class StudentEditDialog extends JDialog {
 		
 		JPanel pUnfinishedExams = new JPanel();
 		pUnfinishedExams.add(new JScrollPane(UnfinishedExamsTable.getInstance()));
-		JButton btnAddUnfinished = new JButton("Dodaj");
-		JButton btnDeleteUnfinished = new JButton("Obrisi");
-		JButton btnFinishUnfinished = new JButton("Polaganje");
+		JButton btnAddUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("add"));
+		JButton btnDeleteUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("delete"));
+		JButton btnFinishUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("pass")); // Polaganje
 		btnFinishUnfinished.addActionListener(new ActionListener() {
 			
 			@Override
@@ -293,9 +293,9 @@ public class StudentEditDialog extends JDialog {
 		
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.addTab("Informacije", pInfo);
-		tabbedPane.addTab("Polozeni", new JLabel("Polozeni"));
-		tabbedPane.addTab("Nepolozeni", pUnfinishedExams);
+		tabbedPane.addTab("Info", pInfo);
+		tabbedPane.addTab(MainFrame.getInstance().getResourceBundle().getString("passed"), new JLabel(MainFrame.getInstance().getResourceBundle().getString("passed")));
+		tabbedPane.addTab(MainFrame.getInstance().getResourceBundle().getString("unpassed"), pUnfinishedExams);
 		
 		add(tabbedPane);
 		setResizable(false);

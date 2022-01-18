@@ -19,30 +19,33 @@ public class StatusBar extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	JLabel title;
+	JLabel currentTabName;
+	
 	public StatusBar() {
 		super();
 		setLayout(new BorderLayout());
 		this.setBackground(Color.LIGHT_GRAY);
 		
-		JLabel title = new JLabel("Studentska služba");
+		title = new JLabel(MainFrame.getInstance().getResourceBundle().getString("appName"));
 		this.add(title, BorderLayout.WEST);
 		
 		String defaultTab = "";
 		int currentTabIndex = MainViewTabbedPane.getInstance().getSelectedIndex();
 		switch(currentTabIndex) {
 			case 0 :
-				defaultTab = " - Studenti";
+				defaultTab = " - " + MainFrame.getInstance().getResourceBundle().getString("students");
 				break;
 			case 1 :
-				defaultTab = " - Profesori";
+				defaultTab = " - " + MainFrame.getInstance().getResourceBundle().getString("professors");
 				break;
 			case 2 :
-				defaultTab = " - Predmeti";
+				defaultTab = " - " + MainFrame.getInstance().getResourceBundle().getString("courses");
 				break;
 			default:
 				break;
 		}
-		JLabel currentTabName = new JLabel(defaultTab);
+		currentTabName = new JLabel(defaultTab);
 		add(currentTabName, BorderLayout.CENTER);
 				
 		MainViewTabbedPane.getInstance().addChangeListener(new ChangeListener() {
@@ -52,13 +55,13 @@ public class StatusBar extends JPanel{
 				int currentTabIndex = MainViewTabbedPane.getInstance().getSelectedIndex();
 				switch(currentTabIndex) {
 					case 0 :
-						currentTab = " - Studenti";
+						currentTab = " - " + MainFrame.getInstance().getResourceBundle().getString("students");
 						break;
 					case 1 :
-						currentTab = " - Profesori";
+						currentTab = " - " + MainFrame.getInstance().getResourceBundle().getString("professors");
 						break;
 					case 2 :
-						currentTab = " - Predmeti";
+						currentTab = " - " + MainFrame.getInstance().getResourceBundle().getString("courses");
 						break;
 					default:
 						break;
@@ -82,7 +85,25 @@ public class StatusBar extends JPanel{
 		});
 		timer.start();
 		
-		
-
+	}
+	
+	public void changeLanguage() {
+		title.setText(MainFrame.getInstance().getResourceBundle().getString("appName"));
+		int currentTabIndex = MainViewTabbedPane.getInstance().getSelectedIndex();
+		String currentTab = "";
+		switch(currentTabIndex) {
+			case 0 :
+				currentTab = " - " + MainFrame.getInstance().getResourceBundle().getString("students");
+				break;
+			case 1 :
+				currentTab = " - " + MainFrame.getInstance().getResourceBundle().getString("professors");
+				break;
+			case 2 :
+				currentTab = " - " + MainFrame.getInstance().getResourceBundle().getString("courses");
+				break;
+			default:
+				break;
+		}
+		currentTabName.setText(currentTab);
 	}
 }
