@@ -22,7 +22,6 @@ public class CourseEditInputVerifier {
 		if(CourseEditDialog.courseId.getText().isEmpty() ||
 				CourseEditDialog.courseName.getText().isEmpty() ||
 				CourseEditDialog.yearOfStudy.getText().isEmpty() ||
-				CourseEditDialog.professorId.getText().isEmpty() ||
 				CourseEditDialog.ectsPoints.getText().isEmpty()
 				) 
 			return true;

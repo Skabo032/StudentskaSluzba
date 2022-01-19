@@ -21,11 +21,6 @@ public class Course {
 	
 	public Course() {
 		super();
-//		this.courseID = 1;
-//		this.courseName = "oisisi";
-//		this.semester = Semester.WINTER;
-//		this.yearOfStudy = 3;
-//		this.ectsPoints = 5;
 	}
 	public Course(int courseID, String courseName, Semester semester, int yearOfStudy, Professor courseProffesor,
 			int ectsPoints, List<Student> studentsPassed, List<Student> studentsFailed) {

@@ -114,4 +114,7 @@ public class Professor {
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
+	public String getFirstLastName() {
+		return firstName + " " + lastName;
+	}
 }

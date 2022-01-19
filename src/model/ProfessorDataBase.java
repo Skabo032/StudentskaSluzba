@@ -32,8 +32,9 @@ public class ProfessorDataBase {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 		LocalDate date = LocalDate.parse("11.11.2020", formatter);
 		Professor p1 = new Professor("Peric", "Pera", date, a1, "123", "email@asd.ac", a1, "22222", Title.PROFESSOR, 5, null);
+		Professor p2 = new Professor("Ivanovic", "Ivan", date, a1, "123", "email@asd.ac", a1, "22222", Title.PROFESSOR, 5, null);
 		this.professors.add(p1);
-		
+		this.professors.add(p2);
 	}
 	
 	public int getColumnCount() {
@@ -68,6 +69,9 @@ public class ProfessorDataBase {
 		}
 	}
 	
+	public List<Professor> getProfessors(){
+		return professors;
+	}	
 	public Professor getProfessorById(String idNumber) {
 		for (Professor prof: professors) {
 			if(prof.getIdNumber().equals(idNumber)) {
