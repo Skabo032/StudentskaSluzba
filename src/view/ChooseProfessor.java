@@ -21,7 +21,7 @@ import model.ProfessorDataBase;
 public class ChooseProfessor extends JDialog{
 	
 	public ChooseProfessor(){
-		super(MainFrame.getInstance(), "Odaberi profesora", true);
+		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("chooseProfessor"), true);
 		
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
 		int mfLocY = (int)MainFrame.getInstance().getLocation().getY();
@@ -44,19 +44,21 @@ public class ChooseProfessor extends JDialog{
 		profList.setSize(290, 150);
 		p.add(profList);
 		
-		JButton confirm = new JButton("Potvrdi");
+		JButton confirm = new JButton(MainFrame.getInstance().getResourceBundle().getString("confirm"));
 		confirm.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int selectedProfIndex = profList.getSelectedIndex();
-				int selectedCourseIndex = CourseTable.getInstance().getSelectedRow();
-				Course selectedCourse = CourseDataBase.getInstance().getCourse(selectedCourseIndex);
-				selectedCourse.setCourseProffesor(ProfessorDataBase.getInstance().getProfessor(selectedProfIndex));
-				CourseDataBase.getInstance().editCourse(selectedCourseIndex, selectedCourse);
-				CourseEditDialog.courseProf.setText(ProfessorDataBase.getInstance().getProfessor(selectedProfIndex).getFirstLastName());
-				dispose();
-				
+				if(selectedProfIndex != -1) {
+					
+					int selectedCourseIndex = CourseTable.getInstance().getSelectedRow();
+					Course selectedCourse = CourseDataBase.getInstance().getCourse(selectedCourseIndex);
+					selectedCourse.setCourseProffesor(ProfessorDataBase.getInstance().getProfessor(selectedProfIndex));
+					CourseDataBase.getInstance().editCourse(selectedCourseIndex, selectedCourse);
+					CourseEditDialog.courseProf.setText(ProfessorDataBase.getInstance().getProfessor(selectedProfIndex).getFirstLastName());
+					dispose();
+				}
 			}
 		});
 		JButton cancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
