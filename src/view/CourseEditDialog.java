@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTree;
 
 import controller.CourseEditDocumentListener;
 import model.Course;
@@ -35,8 +36,8 @@ public class CourseEditDialog extends JDialog  {
 	public static JTextField courseName = new JTextField(20);
 	public static JComboBox<Course.Semester> semester = new JComboBox<>();
 	public static JTextField yearOfStudy = new JTextField(20);
-	public static JTextField professorId = new JTextField(10);
 	public static JTextField ectsPoints = new JTextField(5);
+	public static JTextField courseProf = new JTextField(15);
 	public static JButton confirm;
 	public static JButton cancel;
 	
@@ -48,7 +49,7 @@ public class CourseEditDialog extends JDialog  {
 		int mfW = MainFrame.getInstance().getSize().width;
 		int mfH = MainFrame.getInstance().getSize().height;
 		
-		int sizeX = 400;
+		int sizeX = 500;
 		int sizeY = 600;
 		setSize(sizeX,sizeY);    
 		setLocation(mfLocX + (mfW-sizeX)/2, mfLocY + (mfH - sizeY)/2);
@@ -64,8 +65,8 @@ public class CourseEditDialog extends JDialog  {
 			courseName.setText(selectedCourse.getCourseName());
 			semester.getModel().setSelectedItem(selectedCourse.getSemester());
 			yearOfStudy.setText(Integer.toString(selectedCourse.getYearOfStudy()));
-			professorId.setText(selectedCourse.getCourseProffesor().getIdNumber());
 			ectsPoints.setText(Integer.toString(selectedCourse.getEctsPoints()));
+			courseProf.setText(selectedCourse.getCourseProffesor() == null ? " " : selectedCourse.getCourseProffesor().getFirstLastName());
 		}
 		
 		GridBagLayout gbl = new GridBagLayout();
@@ -116,14 +117,14 @@ public class CourseEditDialog extends JDialog  {
 		p.add(yearOfStudy, gb);
 		
 		// ===== ID PROFESORA =====
-		gb.gridx = 0;
+		/*gb.gridx = 0;
 		gb.gridy = 4;
 		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("professorId")), gb);
 
 		gb.gridx = 1;
 		gb.gridy = 4;
 		professorId.getDocument().addDocumentListener(new CourseEditDocumentListener());
-		p.add(professorId, gb);
+		p.add(professorId, gb);*/
 		
 		// ===== ESPB BODOVI =====
 		gb.gridx = 0;
@@ -135,10 +136,45 @@ public class CourseEditDialog extends JDialog  {
 		ectsPoints.getDocument().addDocumentListener(new CourseEditDocumentListener());
 		p.add(ectsPoints, gb);
 	
+		//courseProf = new JTextField(15);
+		courseProf.setEditable(false);
+		
+		gb.gridx = 0;
+		gb.gridy = 6;
+		p.add(courseProf, gb);
+		
+		JButton addProf = new JButton("+");
+		addProf.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new ChooseProfessor();
+				
+			}
+		});
+		gb.gridx = 1;
+		gb.gridy = 6;
+		p.add(addProf, gb);
+		JButton removeProf = new JButton("-");
+		removeProf.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int selectedCourseIndex = CourseTable.getInstance().getSelectedRow();
+				Course selectedCourse = CourseDataBase.getInstance().getCourse(selectedCourseIndex);
+				selectedCourse.setCourseProffesor(null);
+				CourseDataBase.getInstance().editCourse(selectedCourseIndex, selectedCourse);
+				courseProf.setText("");
+			}
+		});
+		gb.gridx = 2;
+		gb.gridy = 6;
+		p.add(removeProf, gb);
+		
 		
 		// DUGMAD
 		gb.gridx = 0;
-		gb.gridy = 6;
+		gb.gridy = 7;
 		confirm = new JButton(MainFrame.getInstance().getResourceBundle().getString("confirm"));
 		confirm.setEnabled(false);
 		confirm.addActionListener(new ActionListener() {
@@ -151,9 +187,6 @@ public class CourseEditDialog extends JDialog  {
 					c.setCourseName(courseName.getText());
 					c.setSemester((Semester)semester.getSelectedItem());
 					c.setYearOfStudy(Integer.parseInt(yearOfStudy.getText()));
-					String profId = professorId.getText();
-					Professor p = ProfessorDataBase.getInstance().getProfessorById(profId);
-					c.setCourseProffesor(p);
 					c.setEctsPoints(Integer.parseInt(ectsPoints.getText()));
 					
 					int selectedIndex = CourseTable.getInstance().getSelectedRow();
@@ -178,7 +211,7 @@ public class CourseEditDialog extends JDialog  {
 		p.add(confirm, gb);
 		
 		gb.gridx = 1;
-		gb.gridy = 6;
+		gb.gridy = 7;
 		cancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		cancel.addActionListener(new ActionListener() {
 			
