@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -145,9 +146,15 @@ public class CourseAddDialog extends JDialog {
 					c.setCourseProffesor(p);
 					c.setEctsPoints(Integer.parseInt(ectsPoints.getText()));
 					
-					CourseDataBase.getInstance().addCourse(c);
-					CourseTable.getInstance().update();
-					dispose();
+					
+					if(CourseDataBase.getInstance().existsById(c.getCourseID())) {
+						JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("errCourseExists"));
+					}
+					else {
+						CourseDataBase.getInstance().addCourse(c);
+						CourseTable.getInstance().update();
+						dispose();
+					}
 				}
 				catch(Exception e)
 				{
