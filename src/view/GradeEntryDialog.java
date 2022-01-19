@@ -131,6 +131,7 @@ public class GradeEntryDialog extends JDialog{
 				selectedStudent.setUnfinishedExams(unfinishedGrades);
 				StudentDataBase.getInstance().editStudent(selectedStudIdx, selectedStudent);
 				UnfinishedExamsTable.getInstance().update();
+				PassedExamsTable.getInstance().update(); //da refreshuje polozene odma
 				dispose();
 			}
 		});

@@ -130,6 +130,24 @@ public class Student {
 		this.unfinishedExams = unfinishedExams;
 	}
 	
+	public double calcAvgGrade() {
+		double sum = 0;
+		for(Grade ocena : passedExams) {
+			sum += ocena.getGrade();
+		}
+		double avg = sum / passedExams.size();
+		return avg;
+	}
+	
+	public int calcEcts() {
+		int sum = 0;
+		for(Grade ocena : passedExams) {
+			sum += ocena.getCourse().getEctsPoints();
+		}
+		return sum;
+	}
+	
+	
 	
 
 }

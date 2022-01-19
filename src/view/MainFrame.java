@@ -75,7 +75,9 @@ public class MainFrame extends JFrame{
 		StudentTable.getInstance().updateLanguage();
 		ProfessorTable.getInstance().updateLanguage();
 		CourseTable.getInstance().updateLanguage();
-	}
+		UnfinishedExamsTable.getInstance().updateLanguage();
+		PassedExamsTable.getInstance().updateLanguage();
+		}
 	
 	public ResourceBundle getResourceBundle() {
 		return resourceBundle;

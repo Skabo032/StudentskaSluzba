@@ -1,5 +1,9 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -10,6 +14,8 @@ import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -277,6 +283,43 @@ public class StudentEditDialog extends JDialog {
 		JButton btnAddUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("add"));
 		JButton btnDeleteUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("delete"));
 		JButton btnFinishUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("pass")); // Polaganje
+		
+		
+		Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
+		
+		
+		JPanel pPassedExams = new JPanel();
+		//pPassedExams.setLayout(new BoxLayout(pPassedExams, BoxLayout.PAGE_AXIS));
+
+		
+
+		JButton btnCancelGrade = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancelGrade"));
+		pPassedExams.add(btnCancelGrade);
+		pPassedExams.add(new JScrollPane(PassedExamsTable.getInstance()));
+		
+		JPanel pPassedExamsInfo1 = new JPanel();
+		//pPassedExamsInfo1.setLayout(new BoxLayout(pPassedExamsInfo1, BoxLayout.LINE_AXIS));
+		JLabel lbAvgGradeTxt = new JLabel(MainFrame.getInstance().getResourceBundle().getString("avgGrade"));
+		pPassedExamsInfo1.add(lbAvgGradeTxt);
+		JLabel lbAvgGrade = new JLabel(Double.toString(selectedStud.calcAvgGrade()));
+		pPassedExamsInfo1.add(lbAvgGrade);
+		pPassedExams.add(pPassedExamsInfo1, BorderLayout.PAGE_END);
+		
+		pPassedExams.add(Box.createVerticalGlue());
+		
+		
+		JPanel pPassedExamsInfo2 = new JPanel();
+		//pPassedExamsInfo1.setLayout(new BoxLayout(pPassedExamsInfo2, BoxLayout.LINE_AXIS));
+		JLabel lbTotalPointsTxt = new JLabel(MainFrame.getInstance().getResourceBundle().getString("totalESPB"));
+		pPassedExamsInfo1.add(lbTotalPointsTxt);
+		JLabel lbTotalPoints = new JLabel(Integer.toString(selectedStud.calcEcts()));
+		pPassedExamsInfo1.add(lbTotalPoints);
+		pPassedExams.add(pPassedExamsInfo2, BorderLayout.PAGE_END);
+		
+		
+		
+		
+		
 		btnFinishUnfinished.addActionListener(new ActionListener() {
 			
 			@Override
@@ -294,11 +337,11 @@ public class StudentEditDialog extends JDialog {
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.addTab("Info", pInfo);
-		tabbedPane.addTab(MainFrame.getInstance().getResourceBundle().getString("passed"), new JLabel(MainFrame.getInstance().getResourceBundle().getString("passed")));
+		tabbedPane.addTab(MainFrame.getInstance().getResourceBundle().getString("passed"), pPassedExams);
 		tabbedPane.addTab(MainFrame.getInstance().getResourceBundle().getString("unpassed"), pUnfinishedExams);
 		
 		add(tabbedPane);
-		setResizable(false);
+		setResizable(true);
 		setVisible(true);
 		
 		

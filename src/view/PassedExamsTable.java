@@ -7,31 +7,30 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-public class UnfinishedExamsTable extends JTable{
-	
+public class PassedExamsTable extends JTable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static UnfinishedExamsTable instance = null;
+private static PassedExamsTable instance = null;
 	
-	public static UnfinishedExamsTable getInstance() {
+	public static PassedExamsTable getInstance() {
 		if (instance == null)
-			instance = new UnfinishedExamsTable();
+			instance = new PassedExamsTable();
 		return instance;
 	}
 	
-	
-	private UnfinishedExamsTable() {
+	private PassedExamsTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.setModel(new AbstractTableModelUnfinishedExams());
+		this.setModel(new AbstractTableModelPassedExams());
 	}
 	
 	public void update() {
-		AbstractTableModelUnfinishedExams model = (AbstractTableModelUnfinishedExams) instance.getModel();
+		AbstractTableModelPassedExams model = (AbstractTableModelPassedExams) instance.getModel();
 		model.fireTableDataChanged();
 		validate();
 	}	
@@ -49,7 +48,8 @@ public class UnfinishedExamsTable extends JTable{
 		getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("courseId"));
 		getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("courseName"));
 		getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("espb"));
-		getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("yearOfStudies"));
-		getColumnModel().getColumn(4).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("semester"));
+		getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("grade"));
+		getColumnModel().getColumn(4).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("date"));
 	}
+
 }
