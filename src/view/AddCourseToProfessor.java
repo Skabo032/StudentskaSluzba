@@ -14,19 +14,18 @@ import javax.swing.JScrollPane;
 
 import model.Course;
 import model.CourseDataBase;
+import model.Professor;
 import model.ProfessorDataBase;
-import model.Student;
-import model.StudentDataBase;
 
-public class AddCourseToStudent extends JDialog {
+public class AddCourseToProfessor extends JDialog {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public AddCourseToStudent() {
-		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("addCourseToStudent"), true);
+	public AddCourseToProfessor() {
+		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("addCourse"), true);
 		
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
 		int mfLocY = (int)MainFrame.getInstance().getLocation().getY();
@@ -42,13 +41,13 @@ public class AddCourseToStudent extends JDialog {
 		JPanel addCourse = new JPanel(new BorderLayout());
 		JPanel dugmad = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		
-		int selectedIndex = StudentTable.getInstance().getSelectedRow();
-		Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
+		int selectedIndex = ProfessorTable.getInstance().getSelectedRow();
+		Professor selectedProf = ProfessorDataBase.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(selectedIndex));
 		
 		DefaultListModel<String> listModel = new DefaultListModel<>();
 		for(int i = 0; i < CourseDataBase.getInstance().getRowCount(); i++) {
 			System.out.println();
-			if(!selectedStud.getUnfinishedCourses().contains(CourseDataBase.getInstance().getCourse(i)) && !selectedStud.getPassedCourses().contains(CourseDataBase.getInstance().getCourse(i)) && selectedStud.getCurrentYearOfStudies()>=CourseDataBase.getInstance().getCourse(i).getYearOfStudy())
+			if(!selectedProf.getCourses().contains(CourseDataBase.getInstance().getCourse(i)) )
 			{
 				Course courseToAdd = CourseDataBase.getInstance().getCourse(i);
 				listModel.addElement(courseToAdd.getCourseName());
@@ -69,13 +68,12 @@ public class AddCourseToStudent extends JDialog {
 					
 					
 					Course selectedCourse = CourseDataBase.getInstance().getCourseByName(courseList.getSelectedValue());
-					selectedStud.addUnfinishedExam(selectedCourse);
-					UnfinishedExamsTable.getInstance().update();
+					selectedProf.addCourse(selectedCourse);
+					ProfessorTeachingTable.getInstance().update();
 					dispose();
 				}
 			}
 		});
-		
 		JButton btnCancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		btnCancel.addActionListener(new ActionListener() {
 			
@@ -84,6 +82,7 @@ public class AddCourseToStudent extends JDialog {
 				dispose();
 			}
 		});
+		
 		dugmad.add(btnAdd);
 		dugmad.add(btnCancel);
 		
@@ -91,6 +90,7 @@ public class AddCourseToStudent extends JDialog {
 		
 		add(addCourse);
 		setVisible(true);
+		
 	}
 
 }
