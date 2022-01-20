@@ -290,7 +290,7 @@ public class StudentEditDialog extends JDialog {
 		Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
 		
 		
-		JPanel pPassedExams = new JPanel();
+		
 		//pPassedExams.setLayout(new BoxLayout(pPassedExams, BoxLayout.PAGE_AXIS));
 
 		
@@ -331,27 +331,24 @@ public class StudentEditDialog extends JDialog {
 				
 			}
 		});
-		pPassedExams.add(btnCancelGrade);
-		pPassedExams.add(new JScrollPane(PassedExamsTable.getInstance()));
+		JPanel pPassedExams = new JPanel(new BorderLayout());
+		pPassedExams.add(btnCancelGrade, BorderLayout.NORTH);
+		pPassedExams.add(new JScrollPane(PassedExamsTable.getInstance()), BorderLayout.CENTER);
 		
-		JPanel pPassedExamsInfo1 = new JPanel();
-		//pPassedExamsInfo1.setLayout(new BoxLayout(pPassedExamsInfo1, BoxLayout.LINE_AXIS));
-		JLabel lbAvgGradeTxt = new JLabel(MainFrame.getInstance().getResourceBundle().getString("avgGrade"));
+		JPanel ispis = new JPanel(new BorderLayout());
+		
+		JPanel pPassedExamsInfo1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JLabel lbAvgGradeTxt = new JLabel(MainFrame.getInstance().getResourceBundle().getString("avgGrade") + Double.toString(selectedStud.calcAvgGrade()));
 		pPassedExamsInfo1.add(lbAvgGradeTxt);
-		JLabel lbAvgGrade = new JLabel(Double.toString(selectedStud.calcAvgGrade()));
-		pPassedExamsInfo1.add(lbAvgGrade);
-		pPassedExams.add(pPassedExamsInfo1, BorderLayout.PAGE_END);
 		
-		pPassedExams.add(Box.createVerticalGlue());
+		JPanel pPassedExamsInfo2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JLabel lbTotalPointsTxt = new JLabel(MainFrame.getInstance().getResourceBundle().getString("totalESPB") + Integer.toString(selectedStud.calcEcts()));
+		pPassedExamsInfo2.add(lbTotalPointsTxt);
 		
-		
-		JPanel pPassedExamsInfo2 = new JPanel();
-		//pPassedExamsInfo1.setLayout(new BoxLayout(pPassedExamsInfo2, BoxLayout.LINE_AXIS));
-		JLabel lbTotalPointsTxt = new JLabel(MainFrame.getInstance().getResourceBundle().getString("totalESPB"));
-		pPassedExamsInfo1.add(lbTotalPointsTxt);
-		JLabel lbTotalPoints = new JLabel(Integer.toString(selectedStud.calcEcts()));
-		pPassedExamsInfo1.add(lbTotalPoints);
-		pPassedExams.add(pPassedExamsInfo2, BorderLayout.PAGE_END);
+		ispis.add(pPassedExamsInfo1, BorderLayout.NORTH);
+		ispis.add(pPassedExamsInfo2, BorderLayout.SOUTH);
+		pPassedExams.add(ispis, BorderLayout.SOUTH);
+	
 		
 		
 		
