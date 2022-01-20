@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -128,6 +129,24 @@ public class Student {
 	}
 	public void setUnfinishedExams(List<Grade> unfinishedExams) {
 		this.unfinishedExams = unfinishedExams;
+	}
+	
+	public ArrayList<Course> getUnfinishedCourses(){
+		ArrayList<Course> rezultat = new ArrayList<Course>();
+		for(Grade ocena : unfinishedExams) {
+			rezultat.add(ocena.getCourse());
+		}
+		return rezultat;
+	}
+	public void addUnfinishedExam(Course c) {
+		unfinishedExams.add(new Grade(this, c, 5, LocalDate.now()));
+	}
+	public ArrayList<Course> getPassedCourses(){
+		ArrayList<Course> rezultat = new ArrayList<Course>();
+		for(Grade ocena : passedExams) {
+			rezultat.add(ocena.getCourse());
+		}
+		return rezultat;
 	}
 	
 	public double calcAvgGrade() {

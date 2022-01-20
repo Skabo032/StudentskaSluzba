@@ -296,6 +296,7 @@ public class StudentEditDialog extends JDialog {
 		
 
 		JButton btnCancelGrade = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancelGrade"));
+		btnCancelGrade.setPreferredSize(new Dimension(50,24));
 		btnCancelGrade.addActionListener(new ActionListener() {
 			
 			@Override
@@ -359,6 +360,14 @@ public class StudentEditDialog extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				if(UnfinishedExamsTable.getInstance().getSelectedRow() != -1)
 					new GradeEntryDialog();
+				
+			}
+		});
+		btnAddUnfinished.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new AddCourseToStudent();
 				
 			}
 		});

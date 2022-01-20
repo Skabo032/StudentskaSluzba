@@ -48,10 +48,12 @@ public class StudentDataBase {
 		s1.setCurrentYearOfStudies(3);
 		s1.setYearOfEnrolment(2019);
 		Professor p1 = new Professor("Peric", "Pera", LocalDate.now(), a1, "123", "email@asd.ac", a1, "22222", Title.PROFESSOR, 5, null);
-		Course c1 = new Course(1, "OISISI", Semester.SUMMER, 3, p1, 5, null, null );
+		//Course c1 = new Course(1, "OISISI", Semester.SUMMER, 3, p1, 5, null, null );
+		Course c1 = CourseDataBase.getInstance().getCourse(0);
 		unfinishedExams.add(new Grade(s1, c1, 5, LocalDate.now()));
 		s1.setUnfinishedExams(unfinishedExams);
-		Course c2 = new Course(2, "NANS", Semester.SUMMER, 3, p1, 5, null, null );
+		//Course c2 = new Course(2, "NANS", Semester.SUMMER, 3, p1, 5, null, null );
+		Course c2 = CourseDataBase.getInstance().getCourse(1);
 		passedExams.add(new Grade(s1, c2, 7, LocalDate.now()));
 		s1.setPassedExams(passedExams);
 		this.students.add(s1);

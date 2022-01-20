@@ -31,7 +31,11 @@ public class CourseDataBase {
 		this.courses = new ArrayList<Course>();
 		Professor p1 = ProfessorDataBase.getInstance().getProfessor(0);
 		Course c1 = new Course(1, "OISISI", Semester.SUMMER, 3, p1, 5, null, null );
+		Course c2 = new Course(2, "NANS", Semester.SUMMER, 3, p1, 5, null, null );
+		Course c3 = new Course(3, "BAZE2 ", Semester.SUMMER, 3, p1, 5, null, null );
 		this.courses.add(c1);
+		this.courses.add(c2);
+		this.courses.add(c3);
 		
 		
 		
@@ -84,6 +88,19 @@ public class CourseDataBase {
 		try {
 			return courses.get(i);
 		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+	
+	public Course getCourseByName(String name) {
+		try {
+			for(Course kurs: courses)
+			{
+				if(kurs.getCourseName().equals(name))
+					return kurs;
+			}
+			return null;
+		}catch(Exception e) {
 			return null;
 		}
 	}
