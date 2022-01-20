@@ -19,18 +19,16 @@ public class Professor {
 	private List<Course> courses;
 	
 	public enum Title{
-		PROFESSOR,
-		DOCENT,
-		ASSISTANT,
-		INSTRUCTOR
+		REDOVNI_PROFESOR,
+		VANREDNI_PROFESOR,
+		DOCENT
 	}
 	
 	public Professor() {
 		super();
 	}
-	public Professor(String lastName, String firstName, LocalDate dateOfBirth, Address homeAddress, String phoneNumber,
-			String email, Address officeAddress, String idNumber, Title title, int yearsOfExperience,
-			List<Course> courses) {
+	public Professor(String idNumber, String firstName, String lastName, LocalDate dateOfBirth, Address homeAddress, String phoneNumber,
+			String email, Address officeAddress, int yearsOfExperience, Title title, List<Course> courses) {
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;

@@ -18,8 +18,8 @@ public class StudentEditInputVerifier {
 				checkAddressCountry() &&
 				//checkIndexNumber() &&
 				checkYearOfEnrolment() &&
-				checkCurrentYearOfStudies() &&
-				checkPhoneNumber() 
+				checkCurrentYearOfStudies() 
+				//&& checkPhoneNumber() 
 				//&& checkEmail()
 				) 
 			{

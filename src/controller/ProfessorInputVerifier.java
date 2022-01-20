@@ -13,8 +13,8 @@ public class ProfessorInputVerifier {
 		if(!checkEmpty() && 
 			checkDate() && 
 			checkIdNumber() &&
-			checkYearsOfExperience() &&
-			checkPhoneNumber() 
+			checkYearsOfExperience()// &&
+			//checkPhoneNumber() 
 			//&& checkAddressNumber()
 			//&& checkEmail()
 			) {

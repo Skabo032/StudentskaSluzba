@@ -61,7 +61,7 @@ public class CourseEditDialog extends JDialog  {
 		}
 		else if(selectedIndex >= 0) {
 			Course selectedCourse = CourseDataBase.getInstance().getCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex));
-			courseId.setText(Integer.toString(selectedCourse.getCourseID()));
+			courseId.setText(selectedCourse.getCourseID());
 			courseName.setText(selectedCourse.getCourseName());
 			semester.getModel().setSelectedItem(selectedCourse.getSemester());
 			yearOfStudy.setText(Integer.toString(selectedCourse.getYearOfStudy()));
@@ -182,14 +182,14 @@ public class CourseEditDialog extends JDialog  {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					Course c = new Course();
-					c.setCourseID(Integer.parseInt(courseId.getText()));
+					c.setCourseID(courseId.getText());
 					c.setCourseName(courseName.getText());
 					c.setSemester((Semester)semester.getSelectedItem());
 					c.setYearOfStudy(Integer.parseInt(yearOfStudy.getText()));
 					c.setEctsPoints(Integer.parseInt(ectsPoints.getText()));
 					
 					Course selectedCourse = CourseDataBase.getInstance().getCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex));
-					if(CourseDataBase.getInstance().existsById(c.getCourseID()) && selectedCourse.getCourseID()!=c.getCourseID()) {
+					if(CourseDataBase.getInstance().existsById(c.getCourseID()) && !selectedCourse.getCourseID().equals(c.getCourseID())) {
 						JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("errCourseExists"));
 					}
 					else {

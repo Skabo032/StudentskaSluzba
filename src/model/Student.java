@@ -27,9 +27,8 @@ public class Student {
 
 
 	
-	public Student(String lastName, String firstName, LocalDate dateOfBirth, Address address, String phoneNumber,
-			String email, String indexNumber, int yearOfEnrolment, int currentYearOfStudies, Status status,
-			double avgGrade, List<Grade> passedExams, List<Grade> unfinishedExams) {
+	public Student(String indexNumber, String firstName, String lastName, int currentYearOfStudies, LocalDate dateOfBirth, Address address, String phoneNumber,
+			String email, Status status, int yearOfEnrolment, List<Grade> passedExams, List<Grade> unfinishedExams) {
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -41,7 +40,7 @@ public class Student {
 		this.yearOfEnrolment = yearOfEnrolment;
 		this.currentYearOfStudies = currentYearOfStudies;
 		this.status = status;
-		this.avgGrade = avgGrade;
+		//this.avgGrade = avgGrade;
 		this.passedExams = passedExams;
 		this.unfinishedExams = unfinishedExams;
 	}

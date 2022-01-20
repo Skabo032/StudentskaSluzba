@@ -5,7 +5,7 @@ import view.CourseEditDialog;
 public class CourseEditInputVerifier {
 	public static void verify() {
 		if(!checkEmpty() && 
-				checkCourseId() &&
+				//checkCourseId() &&
 				checkYearOfStudy() &&
 				checkEctsPoints()
 				) 

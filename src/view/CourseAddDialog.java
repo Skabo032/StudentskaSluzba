@@ -137,7 +137,7 @@ public class CourseAddDialog extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					Course c = new Course();
-					c.setCourseID(Integer.parseInt(courseId.getText()));
+					c.setCourseID(courseId.getText());
 					c.setCourseName(courseName.getText());
 					c.setSemester((Semester)semester.getSelectedItem());
 					c.setYearOfStudy(Integer.parseInt(yearOfStudy.getText()));
