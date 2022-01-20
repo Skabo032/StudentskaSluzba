@@ -141,6 +141,9 @@ public class Student {
 	public void addUnfinishedExam(Course c) {
 		unfinishedExams.add(new Grade(this, c, 5, LocalDate.now()));
 	}
+	public void deleteUnfinishedExam(Course c) {	
+		unfinishedExams.removeIf(x ->(c.getCourseID()==x.getCourse().getCourseID()));
+	}
 	public ArrayList<Course> getPassedCourses(){
 		ArrayList<Course> rezultat = new ArrayList<Course>();
 		for(Grade ocena : passedExams) {

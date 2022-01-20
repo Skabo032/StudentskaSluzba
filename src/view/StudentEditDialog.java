@@ -31,6 +31,8 @@ import javax.swing.JTextField;
 
 import controller.StudentEditDocumentListener;
 import model.Address;
+import model.Course;
+import model.CourseDataBase;
 import model.Grade;
 import model.Student;
 import model.StudentDataBase;
@@ -284,6 +286,33 @@ public class StudentEditDialog extends JDialog {
 		pUnfinishedExams.add(new JScrollPane(UnfinishedExamsTable.getInstance()));
 		JButton btnAddUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("add"));
 		JButton btnDeleteUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("delete"));
+		btnDeleteUnfinished.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Object[] options = {MainFrame.getInstance().getResourceBundle().getString("yes"), 
+						MainFrame.getInstance().getResourceBundle().getString("no")};
+				int selectedExamId = UnfinishedExamsTable.getInstance().getSelectedRow();
+				if(UnfinishedExamsTable.getInstance().getSelectedRow() != -1) {
+					int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+							MainFrame.getInstance().getResourceBundle().getString("cancelUnfinishedExamQuestion"), 
+									MainFrame.getInstance().getResourceBundle().getString("cancelUnfinishedExam"), 
+															JOptionPane.YES_NO_OPTION, 
+															JOptionPane.QUESTION_MESSAGE, 
+															null, 
+															options, 
+															options[0]);
+					if(answer == JOptionPane.YES_OPTION){
+						Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
+						Course c = CourseDataBase.getInstance().getCourse(selectedIndex);
+						selectedStud.deleteUnfinishedExam(c);
+						
+						UnfinishedExamsTable.getInstance().update();
+					}
+				}
+				
+			}
+		});
 		JButton btnFinishUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("pass")); // Polaganje
 		
 		
