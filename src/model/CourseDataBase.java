@@ -31,8 +31,9 @@ public class CourseDataBase {
 		this.courses = new ArrayList<Course>();
 		Professor p1 = ProfessorDataBase.getInstance().getProfessor(0);
 		Course c1 = new Course(1, "OISISI", Semester.SUMMER, 3, p1, 5, null, null );
+		Course c2 = new Course(2, "Programiranje", Semester.SUMMER, 1, p1, 5, null, null );
 		this.courses.add(c1);
-		
+		this.courses.add(c2);
 		
 		
 	}

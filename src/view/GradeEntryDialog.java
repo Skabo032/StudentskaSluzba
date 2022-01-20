@@ -47,7 +47,7 @@ public class GradeEntryDialog extends JDialog{
 		JButton cancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		
 		int selectedStudIdx = StudentTable.getInstance().getSelectedRow();
-		Student selectedStudent = StudentDataBase.getInstance().getStudent(selectedStudIdx);
+		Student selectedStudent = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedStudIdx));
 		List<Grade> grades = selectedStudent.getUnfinishedExams();
 		int selectedGradeIdx = UnfinishedExamsTable.getInstance().getSelectedRow();
 		id.setText(String.valueOf(grades.get(selectedGradeIdx).getCourse().getCourseID()));
@@ -129,9 +129,9 @@ public class GradeEntryDialog extends JDialog{
 				
 				selectedStudent.setPassedExams(passedGrades);
 				selectedStudent.setUnfinishedExams(unfinishedGrades);
-				StudentDataBase.getInstance().editStudent(selectedStudIdx, selectedStudent);
+				StudentDataBase.getInstance().editStudent(StudentTable.getInstance().convertRowIndexToModel(selectedStudIdx), selectedStudent);
 				UnfinishedExamsTable.getInstance().update();
-				PassedExamsTable.getInstance().update(); //da refreshuje polozene odma
+				PassedExamsTable.getInstance().update(); //da refreshuje polozene odmah
 				dispose();
 			}
 		});

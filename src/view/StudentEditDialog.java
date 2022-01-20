@@ -77,7 +77,7 @@ public class StudentEditDialog extends JDialog {
 			dispose();
 		}
 		else if(selectedIndex >= 0) {
-			Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
+			Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
 			lastName.setText(selectedStud.getLastName());
 			firstName.setText(selectedStud.getFirstName());
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -255,11 +255,11 @@ public class StudentEditDialog extends JDialog {
 				s.setCurrentYearOfStudies(Integer.parseInt(currentYearOfStudies.getText()));
 				
 				int selectedIndex = StudentTable.getInstance().getSelectedRow();
-				Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
+				Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
 				if(StudentDataBase.getInstance().existsById(s.getIndexNumber()) && !selectedStud.getIndexNumber().equals(s.getIndexNumber())) {
 					JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("errStudentExists"));
 				}else {
-					StudentDataBase.getInstance().editStudent(StudentTable.getInstance().getSelectedRow(), s);
+					StudentDataBase.getInstance().editStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex), s);
 					StudentTable.getInstance().update();
 					dispose();
 				}
@@ -287,7 +287,7 @@ public class StudentEditDialog extends JDialog {
 		JButton btnFinishUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("pass")); // Polaganje
 		
 		
-		Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
+		Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
 		
 		
 		JPanel pPassedExams = new JPanel();
@@ -313,7 +313,7 @@ public class StudentEditDialog extends JDialog {
 															options, 
 															options[0]);
 					if(answer == JOptionPane.YES_OPTION){
-						Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
+						Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
 						List<Grade> passedGrades = selectedStud.getPassedExams();
 						List<Grade> unfinishedGrades = selectedStud.getUnfinishedExams();
 						Grade selectedGrade = passedGrades.get(selectedExamId);
@@ -323,6 +323,7 @@ public class StudentEditDialog extends JDialog {
 						passedGrades.remove(selectedExamId);
 						selectedStud.setPassedExams(passedGrades);
 						selectedStud.setUnfinishedExams(unfinishedGrades);
+						StudentDataBase.getInstance().editStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex), selectedStud);
 						PassedExamsTable.getInstance().update();
 						UnfinishedExamsTable.getInstance().update();
 					}

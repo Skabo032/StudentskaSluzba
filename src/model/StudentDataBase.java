@@ -30,9 +30,9 @@ public class StudentDataBase {
 		this.columnNames.add("Prosek");
 		
 		this.students = new ArrayList<Student>();
-		List<Grade> passedExams = new ArrayList<Grade>();
+		List<Grade> passedExams1 = new ArrayList<Grade>();
 		//passedExams.add(new Grade(student, course, grade, dateOfExam))
-		List<Grade> unfinishedExams = new ArrayList<Grade>();
+		List<Grade> unfinishedExams1 = new ArrayList<Grade>();
 		Address a1 = new Address("fafs", "5", "sds", "fsaf");
 		//Student s1 = new Student("Najjaci", "Lik", LocalDate.now(), a1, "06633333", "bezveze@gmail.com", "RA 420/2019", 3, 3, Status.B, 9.12, passedExams, unfinishedExams);
 		Student s1 = new Student();
@@ -49,12 +49,33 @@ public class StudentDataBase {
 		s1.setYearOfEnrolment(2019);
 		Professor p1 = new Professor("Peric", "Pera", LocalDate.now(), a1, "123", "email@asd.ac", a1, "22222", Title.PROFESSOR, 5, null);
 		Course c1 = new Course(1, "OISISI", Semester.SUMMER, 3, p1, 5, null, null );
-		unfinishedExams.add(new Grade(s1, c1, 5, LocalDate.now()));
-		s1.setUnfinishedExams(unfinishedExams);
+		unfinishedExams1.add(new Grade(s1, c1, 5, LocalDate.now()));
+		s1.setUnfinishedExams(unfinishedExams1);
 		Course c2 = new Course(2, "NANS", Semester.SUMMER, 3, p1, 5, null, null );
-		passedExams.add(new Grade(s1, c2, 7, LocalDate.now()));
-		s1.setPassedExams(passedExams);
+		passedExams1.add(new Grade(s1, c2, 7, LocalDate.now()));
+		s1.setPassedExams(passedExams1);
+		
+		
+		Student s2 = new Student();
+		s2.setFirstName("Matija");
+		s2.setLastName("Jovic");
+		s2.setDateOfBirth(LocalDate.now());
+		s2.setAddress(a1);
+		s2.setEmail("bezveze@gmail.com");
+		s2.setIndexNumber("RA 20/2019");
+		s2.setPhoneNumber("111");
+		s2.setAvgGrade(9.12);
+		s2.setStatus(Status.B);
+		s2.setCurrentYearOfStudies(3);
+		s2.setYearOfEnrolment(2019);
+		List<Grade> passedExams2 = new ArrayList<Grade>();
+		passedExams2.add(new Grade(s2, c1, 5, LocalDate.now()));
+		List<Grade> unfinishedExams2 = new ArrayList<Grade>();
+		unfinishedExams2.add(new Grade(s2, c2, 5, LocalDate.now()));
+		s2.setPassedExams(passedExams2);
+		s2.setUnfinishedExams(unfinishedExams2);
 		this.students.add(s1);
+		this.students.add(s2);
 	}
 	
 	public int getColumnCount() {
