@@ -35,9 +35,7 @@ public class CourseDataBase {
 		Course c3 = new Course(3, "BAZE2 ", Semester.SUMMER, 3, p1, 5, null, null );
 		this.courses.add(c1);
 		this.courses.add(c2);
-		this.courses.add(c3);
-		
-		
+		this.courses.add(c3);			
 		
 	}
 

@@ -23,7 +23,7 @@ public class UnfinishedExamsTable extends JTable{
 	}
 	
 	
-	private UnfinishedExamsTable() {
+	public UnfinishedExamsTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -35,6 +35,7 @@ public class UnfinishedExamsTable extends JTable{
 		model.fireTableDataChanged();
 		validate();
 	}	
+	
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);

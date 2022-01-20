@@ -88,7 +88,7 @@ public class ProfessorDialog extends JDialog{
 		
 		if(!isAdd) {
 			int selectedIndex = ProfessorTable.getInstance().getSelectedRow();
-			Professor selectedProf = ProfessorController.getInstance().getProfessor(selectedIndex);
+			Professor selectedProf = ProfessorController.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(selectedIndex));
 			if(selectedIndex == -1) {
 				dispose();
 			}else if(selectedIndex >= 0) {
@@ -250,10 +250,10 @@ public class ProfessorDialog extends JDialog{
 				
 				if(!isAdd) {
 					int selectedIndex = ProfessorTable.getInstance().getSelectedRow();
-					Professor selectedProf = ProfessorController.getInstance().getProfessor(selectedIndex);
+					Professor selectedProf = ProfessorController.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(selectedIndex));
 					if(ProfessorController.getInstance().existsById(p.getIdNumber()) && !selectedProf.getIdNumber().equals(p.getIdNumber())) {
 						JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("professorExists"));
-					}else if(ProfessorDataBase.getInstance().editProfessor(p, ProfessorTable.getInstance().getSelectedRow())) {
+					}else if(ProfessorDataBase.getInstance().editProfessor(p, ProfessorTable.getInstance().convertRowIndexToModel(selectedIndex))) {
 						ProfessorTable.getInstance().update();
 						dispose();
 					}

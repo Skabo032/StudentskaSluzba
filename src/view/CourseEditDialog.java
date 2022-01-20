@@ -60,7 +60,7 @@ public class CourseEditDialog extends JDialog  {
 			dispose();
 		}
 		else if(selectedIndex >= 0) {
-			Course selectedCourse = CourseDataBase.getInstance().getCourse(selectedIndex);
+			Course selectedCourse = CourseDataBase.getInstance().getCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex));
 			courseId.setText(Integer.toString(selectedCourse.getCourseID()));
 			courseName.setText(selectedCourse.getCourseName());
 			semester.getModel().setSelectedItem(selectedCourse.getSemester());
@@ -160,10 +160,9 @@ public class CourseEditDialog extends JDialog  {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int selectedCourseIndex = CourseTable.getInstance().getSelectedRow();
-				Course selectedCourse = CourseDataBase.getInstance().getCourse(selectedCourseIndex);
+				Course selectedCourse = CourseDataBase.getInstance().getCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex));
 				selectedCourse.setCourseProffesor(null);
-				CourseDataBase.getInstance().editCourse(selectedCourseIndex, selectedCourse);
+				CourseDataBase.getInstance().editCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex), selectedCourse);
 				courseProf.setText("");
 			}
 		});
@@ -189,13 +188,12 @@ public class CourseEditDialog extends JDialog  {
 					c.setYearOfStudy(Integer.parseInt(yearOfStudy.getText()));
 					c.setEctsPoints(Integer.parseInt(ectsPoints.getText()));
 					
-					int selectedIndex = CourseTable.getInstance().getSelectedRow();
-					Course selectedCourse = CourseDataBase.getInstance().getCourse(selectedIndex);
+					Course selectedCourse = CourseDataBase.getInstance().getCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex));
 					if(CourseDataBase.getInstance().existsById(c.getCourseID()) && selectedCourse.getCourseID()!=c.getCourseID()) {
 						JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("errCourseExists"));
 					}
 					else {
-						CourseDataBase.getInstance().editCourse(CourseTable.getInstance().getSelectedRow(), c);
+						CourseDataBase.getInstance().editCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex), c);
 						CourseTable.getInstance().update();
 						dispose();
 					}
