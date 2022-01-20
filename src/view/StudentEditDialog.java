@@ -303,9 +303,8 @@ public class StudentEditDialog extends JDialog {
 															options, 
 															options[0]);
 					if(answer == JOptionPane.YES_OPTION){
-						Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
-						Course c = CourseDataBase.getInstance().getCourse(selectedIndex);
-						selectedStud.deleteUnfinishedExam(c);
+						Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
+						selectedStud.getUnfinishedExams().remove(selectedExamId);
 						
 						UnfinishedExamsTable.getInstance().update();
 					}

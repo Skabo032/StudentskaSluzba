@@ -24,8 +24,12 @@ import javax.swing.JTextField;
 import controller.ProfessorController;
 import controller.ProfessorDocumentListener;
 import model.Address;
+import model.Course;
+import model.CourseDataBase;
 import model.Professor;
 import model.ProfessorDataBase;
+import model.Student;
+import model.StudentDataBase;
 import model.Professor.Title;
 
 public class ProfessorDialog extends JDialog{
@@ -285,14 +289,52 @@ public class ProfessorDialog extends JDialog{
 			add(pInfo);
 		}
 		else {
-			
+
 			
 			JPanel profTeaching = new JPanel(new BorderLayout());
 			JPanel dugmad = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			
 			profTeaching.add(new JScrollPane(ProfessorTeachingTable.getInstance()), BorderLayout.CENTER);
 			JButton btnAddCourse = new JButton(MainFrame.getInstance().getResourceBundle().getString("addCourse"));
+			btnAddCourse.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					if(ProfessorTable.getInstance().getSelectedRow() != -1)
+						new AddCourseToProfessor();
+					
+				}
+			});
 			JButton btnRemoveCourse = new JButton(MainFrame.getInstance().getResourceBundle().getString("removeCourse"));
+			btnRemoveCourse.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					Object[] options = {MainFrame.getInstance().getResourceBundle().getString("yes"), 
+							MainFrame.getInstance().getResourceBundle().getString("no")};
+					int selectedCourseId = ProfessorTeachingTable.getInstance().getSelectedRow();
+					if(selectedCourseId != -1) {
+						int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+								MainFrame.getInstance().getResourceBundle().getString("removeCourseQuestion"), 
+										MainFrame.getInstance().getResourceBundle().getString("removeCourse"), 
+																JOptionPane.YES_NO_OPTION, 
+																JOptionPane.QUESTION_MESSAGE, 
+																null, 
+																options, 
+																options[0]);
+						if(answer == JOptionPane.YES_OPTION){
+							int selectedProfIndex = ProfessorTable.getInstance().getSelectedRow();
+							Professor selectedProf = ProfessorController.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(selectedProfIndex));
+							//selectedProf.removeCourse();
+							selectedProf.getCourses().remove(selectedCourseId);
+							//Course c = CourseDataBase.getInstance().getCourseByName();
+//							selectedProf.removeCourse(c);
+//							
+							ProfessorTeachingTable.getInstance().update();
+						}
+					}
+					
+				}
+			});
 			dugmad.add(btnAddCourse);
 			dugmad.add(btnRemoveCourse);
 			profTeaching.add(dugmad, BorderLayout.NORTH);

@@ -117,4 +117,11 @@ public class Professor {
 	public String getFirstLastName() {
 		return firstName + " " + lastName;
 	}
+	
+	public void addCourse(Course c) {
+		courses.add(c);
+	}
+	public void removeCourse(Course c) {
+		courses.remove(c);
+	}
 }
