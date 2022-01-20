@@ -20,6 +20,11 @@ import model.ProfessorDataBase;
 
 public class ChooseProfessor extends JDialog{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ChooseProfessor(){
 		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("chooseProfessor"), true);
 		
