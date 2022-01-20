@@ -78,7 +78,51 @@ public class ToolBar extends JToolBar {
 			public void mouseClicked(MouseEvent arg0) {
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
 				case 0:	// STUDENT
-					
+					TableRowSorter<AbstractTableModelStudent> sorterStud = new TableRowSorter<AbstractTableModelStudent>(new AbstractTableModelStudent());
+					if(!search.getText().isEmpty()) {
+						RowFilter<Object, Object> filter = new RowFilter<Object, Object>(){
+
+							@Override
+							public boolean include(Entry entry) {
+								String words[] = search.getText().split(",");
+								if(words.length == 1) {
+									String lastName = (String)entry.getValue(2);
+									Pattern pattern = Pattern.compile(".*" + words[0].toLowerCase() + ".*");
+									Matcher matcher1 = pattern.matcher(lastName.toLowerCase());
+									return matcher1.matches();
+								}
+								else if(words.length == 2) {
+									String lastName = (String)entry.getValue(2);
+									String firstName = (String)entry.getValue(1);
+									Pattern pattern1 = Pattern.compile(".*" + words[0].toLowerCase() + ".*");
+									Pattern pattern2 = Pattern.compile(".*" + words[1].toLowerCase() + ".*");
+									Matcher matcher1 = pattern1.matcher(lastName.toLowerCase());
+									Matcher matcher2 = pattern2.matcher(firstName.toLowerCase());
+									return matcher1.matches() && matcher2.matches();
+								}
+								else if(words.length == 3) {
+									String lastName = (String)entry.getValue(2);
+									String firstName = (String)entry.getValue(1);
+									String index = (String)entry.getValue(0);
+									Pattern pattern1 = Pattern.compile(".*" + words[0].toLowerCase() + ".*");
+									Pattern pattern2 = Pattern.compile(".*" + words[1].toLowerCase() + ".*");
+									Pattern pattern3 = Pattern.compile(".*" + words[2].toLowerCase() + ".*");
+									Matcher matcher3 = pattern3.matcher(lastName.toLowerCase());
+									Matcher matcher2 = pattern2.matcher(firstName.toLowerCase());
+									Matcher matcher1 = pattern1.matcher(index.toLowerCase());
+									return matcher1.matches() && matcher2.matches() && matcher3.matches();
+								}
+								else
+									return false;
+							}	
+						};
+						
+					sorterStud.setRowFilter(filter);
+					StudentTable.getInstance().setRowSorter(sorterStud);
+					} else {
+						sorterStud.setRowFilter(null);
+						StudentTable.getInstance().setRowSorter(sorterStud);
+					}
 					break;
 				case 1:	// PROFESSOR
 					TableRowSorter<AbstractTableModelProfessor> sorterProf = new TableRowSorter<AbstractTableModelProfessor>(new AbstractTableModelProfessor());

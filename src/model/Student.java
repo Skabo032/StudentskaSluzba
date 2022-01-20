@@ -153,6 +153,8 @@ public class Student {
 	
 	public double calcAvgGrade() {
 		double sum = 0;
+		if(passedExams == null)
+			return 0;
 		if(passedExams.isEmpty())
 			return 0;
 		for(Grade ocena : passedExams) {
@@ -164,6 +166,8 @@ public class Student {
 	
 	public int calcEcts() {
 		int sum = 0;
+		if(passedExams == null)
+			return 0;
 		for(Grade ocena : passedExams) {
 			sum += ocena.getCourse().getEctsPoints();
 		}
