@@ -80,7 +80,7 @@ public class StudentEditDialog extends JDialog {
 			Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
 			lastName.setText(selectedStud.getLastName());
 			firstName.setText(selectedStud.getFirstName());
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 			dateOfBirth.setText(selectedStud.getDateOfBirth().format(formatter));
 			addressStreet.setText(selectedStud.getAddress().getStreet());
 			addressNumber.setText(selectedStud.getAddress().getNumber());
@@ -242,7 +242,7 @@ public class StudentEditDialog extends JDialog {
 				Student s = new Student();
 				s.setFirstName(firstName.getText());
 				s.setLastName(lastName.getText());
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 				s.setDateOfBirth(LocalDate.parse(dateOfBirth.getText(), formatter));
 				s.setEmail(email.getText());
 				Address hAddress = new Address(addressStreet.getText(), addressNumber.getText(), addressCity.getText(), addressCountry.getText());

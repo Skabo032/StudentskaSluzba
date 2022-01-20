@@ -95,7 +95,7 @@ public class ProfessorDialog extends JDialog{
 				
 				firstName.setText(selectedProf.getFirstName());
 				lastName.setText(selectedProf.getLastName());
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 				dateOfBirth.setText(selectedProf.getDateOfBirth().format(formatter));
 
 				homeStreet.setText(selectedProf.getHomeAddress().getStreet());
@@ -223,7 +223,7 @@ public class ProfessorDialog extends JDialog{
 				Professor p = new Professor();
 				p.setFirstName(firstName.getText());
 				p.setLastName(lastName.getText());
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 				p.setDateOfBirth(LocalDate.parse(dateOfBirth.getText(), formatter));
 				p.setEmail(email.getText());
 				Address homeAddress = new Address(homeStreet.getText(), 

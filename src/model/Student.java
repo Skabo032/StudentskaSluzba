@@ -132,6 +132,8 @@ public class Student {
 	
 	public double calcAvgGrade() {
 		double sum = 0;
+		if(passedExams.isEmpty())
+			return 0;
 		for(Grade ocena : passedExams) {
 			sum += ocena.getGrade();
 		}

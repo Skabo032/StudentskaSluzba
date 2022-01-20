@@ -49,7 +49,7 @@ public class ProfessorInputVerifier {
 	
 	private static boolean checkDate() {
 		try {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 			LocalDate date = LocalDate.parse(ProfessorDialog.dateOfBirth.getText(), formatter);
 			return true;
 			

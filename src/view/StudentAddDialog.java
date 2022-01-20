@@ -223,7 +223,7 @@ public class StudentAddDialog extends JDialog {
 				Student s = new Student();
 				s.setFirstName(firstName.getText());
 				s.setLastName(lastName.getText());
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 				s.setDateOfBirth(LocalDate.parse(dateOfBirth.getText(), formatter));
 				s.setEmail(email.getText());
 				Address hAddress = new Address(addressStreet.getText(), addressNumber.getText(), addressCity.getText(), addressCountry.getText());

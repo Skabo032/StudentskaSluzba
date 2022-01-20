@@ -83,7 +83,7 @@ public class GradeEntryDialog extends JDialog{
 			
 			public void verify() {
 				try {
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 					LocalDate localDate = LocalDate.parse(date.getText(), formatter);
 					confirm.setEnabled(true);
 					
@@ -114,7 +114,7 @@ public class GradeEntryDialog extends JDialog{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 				LocalDate dateOfExam = LocalDate.parse(date.getText(), formatter);
 				
 				Grade grade = grades.get(selectedGradeIdx);
