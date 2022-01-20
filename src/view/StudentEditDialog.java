@@ -378,6 +378,7 @@ public class StudentEditDialog extends JDialog {
 		ispis.add(pPassedExamsInfo1, BorderLayout.NORTH);
 		ispis.add(pPassedExamsInfo2, BorderLayout.SOUTH);
 		pPassedExams.add(ispis, BorderLayout.SOUTH);
+		
 	
 		
 		

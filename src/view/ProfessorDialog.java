@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -15,6 +17,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
@@ -282,9 +285,25 @@ public class ProfessorDialog extends JDialog{
 			add(pInfo);
 		}
 		else {
+			
+			
+			JPanel profTeaching = new JPanel(new BorderLayout());
+			JPanel dugmad = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			
+			profTeaching.add(new JScrollPane(ProfessorTeachingTable.getInstance()), BorderLayout.CENTER);
+			JButton btnAddCourse = new JButton(MainFrame.getInstance().getResourceBundle().getString("addCourse"));
+			JButton btnRemoveCourse = new JButton(MainFrame.getInstance().getResourceBundle().getString("removeCourse"));
+			dugmad.add(btnAddCourse);
+			dugmad.add(btnRemoveCourse);
+			profTeaching.add(dugmad, BorderLayout.NORTH);
+			
+			
+			
+			
 			JTabbedPane editTabbedPane = new JTabbedPane();
 			editTabbedPane.addTab("Info", pInfo);
-			editTabbedPane.addTab(MainFrame.getInstance().getResourceBundle().getString("courses"), new JLabel("Predmeti"));
+			editTabbedPane.addTab(MainFrame.getInstance().getResourceBundle().getString("courses"), profTeaching);
+			
 			add(editTabbedPane);
 		}
 		setResizable(false);

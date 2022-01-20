@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Course.Semester;
 import model.Professor.Title;
 
 public class ProfessorDataBase {
@@ -31,8 +32,28 @@ public class ProfessorDataBase {
 		Address a1 = new Address("abc", "5", "abv", "ab");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 		LocalDate date = LocalDate.parse("11.11.2020.", formatter);
-		Professor p1 = new Professor("Peric", "Pera", date, a1, "123", "email@asd.ac", a1, "22222", Title.PROFESSOR, 5, null);
+		
+		Professor p1 = new Professor("Peric", "Pera", date, a1, "123", "email@asd.ac", a1, "22221", Title.PROFESSOR, 5, null);
+
 		Professor p2 = new Professor("Ivanovic", "Ivan", date, a1, "123", "email@asd.ac", a1, "22222", Title.PROFESSOR, 5, null);
+		
+		ArrayList<Course> predaje1 = new ArrayList<Course>();
+		Course c1 = new Course(1, "OISISI", Semester.SUMMER, 3, p1, 5, null, null );
+		predaje1.add(c1);
+		p1.setCourses(predaje1);
+		
+		ArrayList<Course> predaje2 = new ArrayList<Course>();
+		p2.setCourses(predaje2);
+//		predaje1.add(c1);
+//		for(int i = 0; i< CourseDataBase.getInstance().getRowCount();i++)
+//		{
+//			if(CourseDataBase.getInstance().getCourse(i).getCourseProffesor().getIdNumber().equals("22221"))
+//			{
+//				predaje1.add(CourseDataBase.getInstance().getCourse(i));
+//			}
+//		}
+		//p1.setCourses(predaje1);
+		
 		this.professors.add(p1);
 		this.professors.add(p2);
 	}

@@ -1,11 +1,9 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Course.Semester;
-import model.Professor.Title;
 
 public class CourseDataBase {
 	
@@ -30,8 +28,9 @@ public class CourseDataBase {
 		
 		this.courses = new ArrayList<Course>();
 		Professor p1 = ProfessorDataBase.getInstance().getProfessor(0);
+		Professor p2 = ProfessorDataBase.getInstance().getProfessor(1);
 		Course c1 = new Course(1, "OISISI", Semester.SUMMER, 3, p1, 5, null, null );
-		Course c2 = new Course(2, "NANS", Semester.SUMMER, 3, p1, 5, null, null );
+		Course c2 = new Course(2, "NANS", Semester.SUMMER, 3, p2, 5, null, null );
 		Course c3 = new Course(3, "BAZE2 ", Semester.SUMMER, 3, p1, 5, null, null );
 		this.courses.add(c1);
 		this.courses.add(c2);
