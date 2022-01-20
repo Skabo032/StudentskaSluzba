@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -30,6 +31,7 @@ import javax.swing.JTextField;
 
 import controller.StudentEditDocumentListener;
 import model.Address;
+import model.Grade;
 import model.Student;
 import model.StudentDataBase;
 import model.Student.Status;
@@ -294,6 +296,40 @@ public class StudentEditDialog extends JDialog {
 		
 
 		JButton btnCancelGrade = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancelGrade"));
+		btnCancelGrade.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Object[] options = {MainFrame.getInstance().getResourceBundle().getString("yes"), 
+						MainFrame.getInstance().getResourceBundle().getString("no")};
+				int selectedExamId = PassedExamsTable.getInstance().getSelectedRow();
+				if(PassedExamsTable.getInstance().getSelectedRow() != -1) {
+					int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+							MainFrame.getInstance().getResourceBundle().getString("cancelGradeQuestion"), 
+									MainFrame.getInstance().getResourceBundle().getString("cancelGrade"), 
+															JOptionPane.YES_NO_OPTION, 
+															JOptionPane.QUESTION_MESSAGE, 
+															null, 
+															options, 
+															options[0]);
+					if(answer == JOptionPane.YES_OPTION){
+						Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
+						List<Grade> passedGrades = selectedStud.getPassedExams();
+						List<Grade> unfinishedGrades = selectedStud.getUnfinishedExams();
+						Grade selectedGrade = passedGrades.get(selectedExamId);
+						selectedGrade.setDateOfExam(null);
+						selectedGrade.setGrade(5);
+						unfinishedGrades.add(selectedGrade);
+						passedGrades.remove(selectedExamId);
+						selectedStud.setPassedExams(passedGrades);
+						selectedStud.setUnfinishedExams(unfinishedGrades);
+						PassedExamsTable.getInstance().update();
+						UnfinishedExamsTable.getInstance().update();
+					}
+				}
+				
+			}
+		});
 		pPassedExams.add(btnCancelGrade);
 		pPassedExams.add(new JScrollPane(PassedExamsTable.getInstance()));
 		
