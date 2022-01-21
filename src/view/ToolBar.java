@@ -320,9 +320,14 @@ public class ToolBar extends JToolBar {
 						if(answer == JOptionPane.YES_OPTION) {
 							
 							for(Student s : StudentDataBase.getInstance().getStudents()) {
-								for(Grade g : s.getUnfinishedExams()) {
-									if(g.getCourse().equals(CourseDataBase.getInstance().getCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex3))))
-										s.getUnfinishedExams().remove(g);
+								for(int i = 0; i < s.getUnfinishedExams().size(); i++)
+								{
+									if(s.getUnfinishedExams().get(i).getCourse().equals(CourseDataBase.getInstance().getCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex3))))
+									{
+										s.getUnfinishedExams().remove(s.getUnfinishedExams().get(i));
+										//s.deleteUnfinishedExam(g.getCourse());
+									}
+									
 								}
 							}
 							CourseDataBase.getInstance().removeCourseByRowNum(CourseTable.getInstance().convertRowIndexToModel(selectedIndex3));
