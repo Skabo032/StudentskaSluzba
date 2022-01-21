@@ -205,10 +205,27 @@ public class MenuBar extends JMenuBar {
 		hHelp.setMnemonic(KeyEvent.VK_H);
 		hHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,ActionEvent.CTRL_MASK));
 		hHelp.setIcon(helpIco);
+		hHelp.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new HelpDialog();
+			}
+		});
+		
 		hAbout = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("about"));
 		hAbout.setMnemonic(KeyEvent.VK_A);
 		hAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.CTRL_MASK));
 		hAbout.setIcon(aboutIco);
+		hAbout.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new AboutDialog();
+				
+			}
+		});
+		
 		help.add(english);
 		help.add(srpski);
 		help.addSeparator();
