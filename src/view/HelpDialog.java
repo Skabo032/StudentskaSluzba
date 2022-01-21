@@ -59,6 +59,14 @@ public class HelpDialog extends JDialog{
 		gb.gridy = 5;
 		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("help6")), gb);
 		
+		gb.gridx = 0;
+		gb.gridy = 6;
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("help7")), gb);
+		
+		gb.gridx = 0;
+		gb.gridy = 7;
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("help8")), gb);
+		
 		
 		add(p);
 		setVisible(true);
