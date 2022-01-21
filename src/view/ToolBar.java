@@ -3,6 +3,7 @@ package view;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -40,10 +41,10 @@ public class ToolBar extends JToolBar {
 		super(SwingConstants.HORIZONTAL);
 		
 		// all of the icon images are imported and resized
-		ImageIcon addIco = new ResizeIcon("images/add.png", 20, 20).getIcon();
-		ImageIcon editIco = new ResizeIcon("images/edit.png", 20, 20).getIcon();
-		ImageIcon deleteIco = new ResizeIcon("images/delete.png", 20, 20).getIcon();
-		ImageIcon searchIco = new ResizeIcon("images/search.png", 20, 20).getIcon();
+		ImageIcon addIco = new ResizeIcon("images" + File.separator + "add.png", 20, 20).getIcon();
+		ImageIcon editIco = new ResizeIcon("images" + File.separator + "edit.png", 20, 20).getIcon();
+		ImageIcon deleteIco = new ResizeIcon("images" + File.separator + "delete.png", 20, 20).getIcon();
+		ImageIcon searchIco = new ResizeIcon("images" + File.separator + "search.png", 20, 20).getIcon();
 
 		MouseListener mAdd = new AddBtnMouseListener();
 		btnAdd = new JButton();
