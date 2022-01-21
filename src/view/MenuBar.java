@@ -108,6 +108,13 @@ public class MenuBar extends JMenuBar {
 			foKatedre = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("departments"));
 			foKatedre.setMnemonic(KeyEvent.VK_D);
 			foKatedre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,ActionEvent.CTRL_MASK));
+			foKatedre.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					new DepartmentDialog();
+				}
+			});
 			fOpen.add(foStudenti);
 			fOpen.add(foPredmeti);
 			fOpen.add(foKatedre);
