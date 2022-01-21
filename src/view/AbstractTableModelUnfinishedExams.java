@@ -30,7 +30,7 @@ public class AbstractTableModelUnfinishedExams extends AbstractTableModel{
 	@Override
 	public Object getValueAt(int row, int column) {
 		int index = StudentTable.getInstance().getSelectedRow();
-		Student selectedStudent = StudentDataBase.getInstance().getStudent(index);
+		Student selectedStudent = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(index));
 		Grade grade = selectedStudent.getUnfinishedExams().get(row);
 		switch (column) {
 		case 0:
