@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -11,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListModel;
 
 import model.Course;
@@ -39,15 +42,17 @@ public class ChooseProfessor extends JDialog{
 		setLocation(mfLocX + (mfW-sizeX)/2, mfLocY + (mfH - sizeY)/2);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		
-		JPanel p = new JPanel();
+		JPanel list = new JPanel(new BorderLayout());
+		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		
 		DefaultListModel<String> listModel = new DefaultListModel<>();
 		for(int i = 0; i < ProfessorDataBase.getInstance().getRowCount(); i++) {
 			listModel.addElement(ProfessorDataBase.getInstance().getProfessor(i).getFirstLastName());
 		}
 		JList profList = new JList<String>(listModel);
+		
 		profList.setSize(290, 150);
-		p.add(profList);
+		list.add(new JScrollPane(profList));
 		
 		JButton confirm = new JButton(MainFrame.getInstance().getResourceBundle().getString("confirm"));
 		confirm.addActionListener(new ActionListener() {
@@ -75,12 +80,13 @@ public class ChooseProfessor extends JDialog{
 				dispose();
 			}
 		});
-		p.add(Box.createVerticalGlue());
-		p.add(confirm);
-		p.add(Box.createVerticalGlue());
-		p.add(cancel);
 		
-		add(p);
+		buttons.add(confirm);
+		buttons.add(cancel);
+		
+		list.add(buttons, BorderLayout.SOUTH);
+		
+		add(list);
 		setVisible(true);
 	}
 }
