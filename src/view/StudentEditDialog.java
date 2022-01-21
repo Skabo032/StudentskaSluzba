@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -9,19 +8,14 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,8 +25,6 @@ import javax.swing.JTextField;
 
 import controller.StudentEditDocumentListener;
 import model.Address;
-import model.Course;
-import model.CourseDataBase;
 import model.Grade;
 import model.Student;
 import model.StudentDataBase;

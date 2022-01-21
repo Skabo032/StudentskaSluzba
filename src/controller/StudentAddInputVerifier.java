@@ -54,7 +54,7 @@ public class StudentAddInputVerifier {
 	private static boolean checkDate() {
 		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
-			LocalDate date = LocalDate.parse(StudentAddDialog.dateOfBirth.getText(), formatter);
+			LocalDate.parse(StudentAddDialog.dateOfBirth.getText(), formatter);
 			return true;
 			
 		} catch (DateTimeParseException e) {
@@ -69,11 +69,11 @@ public class StudentAddInputVerifier {
 		Matcher matcher = streetPattern.matcher(StudentAddDialog.addressStreet.getText());
 		return matcher.matches();
 	}
-	private static boolean checkAddressNumber() {
-		Pattern numberPattern = Pattern.compile("[0-9]*");
-		Matcher matcher = numberPattern.matcher(StudentAddDialog.addressNumber.getText());
-		return matcher.matches();
-	}
+//	private static boolean checkAddressNumber() {
+//		Pattern numberPattern = Pattern.compile("[0-9]*");
+//		Matcher matcher = numberPattern.matcher(StudentAddDialog.addressNumber.getText());
+//		return matcher.matches();
+//	}
 	private static boolean checkAddressCity() {
 		Pattern cityPattern = Pattern.compile("[a-zA-ZšđčćžŠĐČĆŽ ]+");
 		Matcher matcher = cityPattern.matcher(StudentAddDialog.addressCity.getText());
@@ -85,13 +85,13 @@ public class StudentAddInputVerifier {
 		return matcher.matches();
 	}
 	
-	private static boolean checkIndexNumber() {
-		//proveri dal valja
-		Pattern indexNumberPattern = Pattern.compile("[A-Z]+ [0-9]+//[0-9]+");
-		Matcher matcher = indexNumberPattern.matcher(StudentAddDialog.indexNumber.getText());
-		return matcher.matches();
-	}
-	
+//	private static boolean checkIndexNumber() {
+//		//proveri dal valja
+//		Pattern indexNumberPattern = Pattern.compile("[A-Z]+ [0-9]+//[0-9]+");
+//		Matcher matcher = indexNumberPattern.matcher(StudentAddDialog.indexNumber.getText());
+//		return matcher.matches();
+//	}
+//	
 	private static boolean checkPhoneNumber() {
 		//[+]1234567890....
 		Pattern phoneNumberPattern = Pattern.compile("[+]?[0-9]+");
@@ -99,11 +99,11 @@ public class StudentAddInputVerifier {
 		return matcher.matches();
 	}
 	
-	private static boolean checkEmail() {
-		Pattern emailPattern = Pattern.compile("[a-zA-Z]+@[a-zA-Z]+[.][a-zA-Z]+");
-		Matcher matcher = emailPattern.matcher(StudentAddDialog.email.getText());
-		return matcher.matches();
-	}
+//	private static boolean checkEmail() {
+//		Pattern emailPattern = Pattern.compile("[a-zA-Z]+@[a-zA-Z]+[.][a-zA-Z]+");
+//		Matcher matcher = emailPattern.matcher(StudentAddDialog.email.getText());
+//		return matcher.matches();
+//	}
 	
 	private static boolean checkYearOfEnrolment() {
 		try{

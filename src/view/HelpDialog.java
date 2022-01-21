@@ -10,6 +10,11 @@ import javax.swing.JPanel;
 
 public class HelpDialog extends JDialog{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public HelpDialog() {
 		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("help"), true);
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();

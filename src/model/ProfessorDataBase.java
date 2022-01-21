@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Course.Semester;
 import model.Professor.Title;
 
 public class ProfessorDataBase {

@@ -24,12 +24,9 @@ import javax.swing.JTextField;
 import controller.ProfessorController;
 import controller.ProfessorDocumentListener;
 import model.Address;
-import model.Course;
 import model.CourseDataBase;
 import model.Professor;
 import model.ProfessorDataBase;
-import model.Student;
-import model.StudentDataBase;
 import model.Professor.Title;
 
 public class ProfessorDialog extends JDialog{

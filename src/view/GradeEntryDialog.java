@@ -25,6 +25,11 @@ import model.StudentDataBase;
 
 public class GradeEntryDialog extends JDialog{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public GradeEntryDialog() {
 		
 		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("enterGrade"), true);
@@ -84,7 +89,7 @@ public class GradeEntryDialog extends JDialog{
 			public void verify() {
 				try {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
-					LocalDate localDate = LocalDate.parse(date.getText(), formatter);
+					LocalDate.parse(date.getText(), formatter);
 					confirm.setEnabled(true);
 					
 				} catch (DateTimeParseException e) {

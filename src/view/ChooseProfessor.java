@@ -4,21 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
-import javax.swing.Box;
 import javax.swing.DefaultListModel;
-import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListModel;
 
 import model.Course;
 import model.CourseDataBase;
-import model.Professor;
 import model.ProfessorDataBase;
 
 public class ChooseProfessor extends JDialog{
@@ -49,7 +44,7 @@ public class ChooseProfessor extends JDialog{
 		for(int i = 0; i < ProfessorDataBase.getInstance().getRowCount(); i++) {
 			listModel.addElement(ProfessorDataBase.getInstance().getProfessor(i).getFirstLastName());
 		}
-		JList profList = new JList<String>(listModel);
+		JList<String> profList = new JList<String>(listModel);
 		
 		profList.setSize(290, 150);
 		list.add(new JScrollPane(profList));

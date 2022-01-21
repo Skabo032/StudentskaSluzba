@@ -3,7 +3,6 @@ package view;
 import javax.swing.table.AbstractTableModel;
 
 import model.Course;
-import model.CourseDataBase;
 import model.Professor;
 import model.ProfessorDataBase;
 
@@ -17,6 +16,8 @@ public class AbstractTableModelProfessorTeaching extends AbstractTableModel {
 	public int getRowCount() {
 		int index = ProfessorTable.getInstance().getSelectedRow();
 		Professor selectedProf = ProfessorDataBase.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(index));
+		if(selectedProf.getCourses() == null)
+			return 0;
 		return selectedProf.getCourses().size();
 	}
 

@@ -2,7 +2,6 @@ package view;
 
 import javax.swing.JMenuBar;
 
-import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
