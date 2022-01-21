@@ -14,7 +14,6 @@ import javax.swing.JScrollPane;
 
 import model.Course;
 import model.CourseDataBase;
-import model.ProfessorDataBase;
 import model.Student;
 import model.StudentDataBase;
 

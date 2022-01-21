@@ -54,7 +54,7 @@ public class StudentEditInputVerifier {
 	private static boolean checkDate() {
 		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
-			LocalDate date = LocalDate.parse(StudentEditDialog.dateOfBirth.getText(), formatter);
+			LocalDate.parse(StudentEditDialog.dateOfBirth.getText(), formatter);
 			return true;
 			
 		} catch (DateTimeParseException e) {
@@ -69,11 +69,11 @@ public class StudentEditInputVerifier {
 		Matcher matcher = streetPattern.matcher(StudentEditDialog.addressStreet.getText());
 		return matcher.matches();
 	}
-	private static boolean checkAddressNumber() {
-		Pattern numberPattern = Pattern.compile("[0-9]*");
-		Matcher matcher = numberPattern.matcher(StudentEditDialog.addressNumber.getText());
-		return matcher.matches();
-	}
+//	private static boolean checkAddressNumber() {
+//		Pattern numberPattern = Pattern.compile("[0-9]*");
+//		Matcher matcher = numberPattern.matcher(StudentEditDialog.addressNumber.getText());
+//		return matcher.matches();
+//	}
 	private static boolean checkAddressCity() {
 		Pattern cityPattern = Pattern.compile("[a-zA-ZšđčćžŠĐČĆŽ ]+");
 		Matcher matcher = cityPattern.matcher(StudentEditDialog.addressCity.getText());
@@ -85,25 +85,25 @@ public class StudentEditInputVerifier {
 		return matcher.matches();
 	}
 	
-	private static boolean checkIndexNumber() {
-		//proveri dal valja
-		Pattern indexNumberPattern = Pattern.compile("[A-Z]+ [0-9]+//[0-9]+");
-		Matcher matcher = indexNumberPattern.matcher(StudentEditDialog.indexNumber.getText());
-		return matcher.matches();
-	}
-	
-	private static boolean checkPhoneNumber() {
-		//[+]1234567890....
-		Pattern phoneNumberPattern = Pattern.compile("[+]?[0-9]+");
-		Matcher matcher = phoneNumberPattern.matcher(StudentEditDialog.phoneNumber.getText());
-		return matcher.matches();
-	}
-	
-	private static boolean checkEmail() {
-		Pattern emailPattern = Pattern.compile("[a-zA-Z]+@[a-zA-Z]+[.][a-zA-Z]+");
-		Matcher matcher = emailPattern.matcher(StudentEditDialog.email.getText());
-		return matcher.matches();
-	}
+//	private static boolean checkIndexNumber() {
+//		//proveri dal valja
+//		Pattern indexNumberPattern = Pattern.compile("[A-Z]+ [0-9]+//[0-9]+");
+//		Matcher matcher = indexNumberPattern.matcher(StudentEditDialog.indexNumber.getText());
+//		return matcher.matches();
+//	}
+//	
+//	private static boolean checkPhoneNumber() {
+//		//[+]1234567890....
+//		Pattern phoneNumberPattern = Pattern.compile("[+]?[0-9]+");
+//		Matcher matcher = phoneNumberPattern.matcher(StudentEditDialog.phoneNumber.getText());
+//		return matcher.matches();
+//	}
+//	
+//	private static boolean checkEmail() {
+//		Pattern emailPattern = Pattern.compile("[a-zA-Z]+@[a-zA-Z]+[.][a-zA-Z]+");
+//		Matcher matcher = emailPattern.matcher(StudentEditDialog.email.getText());
+//		return matcher.matches();
+//	}
 	
 	private static boolean checkYearOfEnrolment() {
 		try{

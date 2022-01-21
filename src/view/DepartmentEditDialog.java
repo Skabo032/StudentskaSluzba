@@ -12,8 +12,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import model.Course;
-import model.CourseDataBase;
 import model.Department;
 import model.ProfessorDataBase;
 import model.Professor.Title;

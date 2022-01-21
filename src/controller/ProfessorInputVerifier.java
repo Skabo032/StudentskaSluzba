@@ -13,8 +13,8 @@ public class ProfessorInputVerifier {
 		if(!checkEmpty() && 
 			checkDate() && 
 			checkIdNumber() &&
-			checkYearsOfExperience()// &&
-			//checkPhoneNumber() 
+			checkYearsOfExperience()
+			//&& checkPhoneNumber() 
 			//&& checkAddressNumber()
 			//&& checkEmail()
 			) {
@@ -50,23 +50,23 @@ public class ProfessorInputVerifier {
 	private static boolean checkDate() {
 		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
-			LocalDate date = LocalDate.parse(ProfessorDialog.dateOfBirth.getText(), formatter);
+			LocalDate.parse(ProfessorDialog.dateOfBirth.getText(), formatter);
 			return true;
 			
 		} catch (DateTimeParseException e) {
 			return false;
 		}
 	}
-	private static boolean checkAddressNumber() {
-		try {
-			Integer.parseInt(ProfessorDialog.homeNumber.getText());
-			Integer.parseInt(ProfessorDialog.officeNumber.getText());
-			return true;
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		
-	}
+//	private static boolean checkAddressNumber() {
+//		try {
+//			Integer.parseInt(ProfessorDialog.homeNumber.getText());
+//			Integer.parseInt(ProfessorDialog.officeNumber.getText());
+//			return true;
+//		} catch (NumberFormatException e) {
+//			return false;
+//		}
+//		
+//	}
 	private static boolean checkIdNumber() {
 													//only numbers allowed
 		Pattern idNumberPattern = Pattern.compile("[0-9]+");
@@ -84,15 +84,15 @@ public class ProfessorInputVerifier {
 		    return false;
 		}
 	}
-	private static boolean checkPhoneNumber() {
-													//[+]1234567890....
-		Pattern phoneNumberPattern = Pattern.compile("[+]?[0-9]+");
-		Matcher matcher = phoneNumberPattern.matcher(ProfessorDialog.phoneNumber.getText());
-		return matcher.matches();
-	}
-	private static boolean checkEmail() {
-		Pattern emailPattern = Pattern.compile("[a-zA-Z0-9\".\"_]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+");
-		Matcher matcher = emailPattern.matcher(ProfessorDialog.email.getText());
-		return matcher.matches();
-	}
+//	private static boolean checkPhoneNumber() {
+//													//[+]1234567890....
+//		Pattern phoneNumberPattern = Pattern.compile("[+]?[0-9]+");
+//		Matcher matcher = phoneNumberPattern.matcher(ProfessorDialog.phoneNumber.getText());
+//		return matcher.matches();
+//	}
+//	private static boolean checkEmail() {
+//		Pattern emailPattern = Pattern.compile("[a-zA-Z0-9\".\"_]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+");
+//		Matcher matcher = emailPattern.matcher(ProfessorDialog.email.getText());
+//		return matcher.matches();
+//	}
 }

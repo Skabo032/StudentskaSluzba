@@ -8,6 +8,11 @@ import javax.swing.JPanel;
 
 public class AboutDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public AboutDialog() {
 		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("about"), true);
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();

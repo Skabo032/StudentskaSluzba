@@ -31,17 +31,17 @@ public class CourseEditInputVerifier {
 	}
 	
 	
-	private static boolean checkCourseId() {
-		try{
-		    int id = Integer.parseInt(CourseEditDialog.courseId.getText());
-		    if(id >= 0)
-		    	return true;
-		    else
-		    	return false;
-		} catch(NumberFormatException exception) {
-		    return false;
-		}
-	}
+//	private static boolean checkCourseId() {
+//		try{
+//		    int id = Integer.parseInt(CourseEditDialog.courseId.getText());
+//		    if(id >= 0)
+//		    	return true;
+//		    else
+//		    	return false;
+//		} catch(NumberFormatException exception) {
+//		    return false;
+//		}
+//	}
 	
 	private static boolean checkYearOfStudy() {
 		try{
@@ -67,15 +67,15 @@ public class CourseEditInputVerifier {
 		}
 	}
 	
-	private static boolean checkProfessorId() {
-		try{
-		    int id = Integer.parseInt(CourseEditDialog.courseId.getText());
-		    if(id >= 0)
-		    	return true;
-		    else
-		    	return false;
-		} catch(NumberFormatException exception) {
-		    return false;
-		}
-	}
+//	private static boolean checkProfessorId() {
+//		try{
+//		    int id = Integer.parseInt(CourseEditDialog.courseId.getText());
+//		    if(id >= 0)
+//		    	return true;
+//		    else
+//		    	return false;
+//		} catch(NumberFormatException exception) {
+//		    return false;
+//		}
+//	}
 }

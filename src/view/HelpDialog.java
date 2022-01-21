@@ -10,6 +10,11 @@ import javax.swing.JPanel;
 
 public class HelpDialog extends JDialog{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public HelpDialog() {
 		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("help"), true);
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
@@ -53,6 +58,14 @@ public class HelpDialog extends JDialog{
 		gb.gridx = 0;
 		gb.gridy = 5;
 		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("help6")), gb);
+		
+		gb.gridx = 0;
+		gb.gridy = 6;
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("help7")), gb);
+		
+		gb.gridx = 0;
+		gb.gridy = 7;
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("help8")), gb);
 		
 		
 		add(p);
