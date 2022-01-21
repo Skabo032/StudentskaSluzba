@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -107,6 +108,8 @@ public class Professor {
 			throw new Exception("Invalid value for professor years of experience, cannot be less than 0!");
 	}
 	public List<Course> getCourses() {
+		if(courses == null)
+			courses = new ArrayList<Course>();
 		return courses;
 	}
 	public void setCourses(List<Course> courses) {
@@ -117,9 +120,13 @@ public class Professor {
 	}
 	
 	public void addCourse(Course c) {
+		if(courses == null)
+			courses = new ArrayList<Course>();
 		courses.add(c);
 	}
 	public void removeCourse(Course c) {
+		if(courses == null)
+			courses = new ArrayList<Course>();
 		courses.remove(c);
 	}
 }

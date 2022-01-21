@@ -122,12 +122,16 @@ public class Student {
 		this.avgGrade = avgGrade;
 	}
 	public List<Grade> getPassedExams() {
+		if(passedExams == null)
+			passedExams = new ArrayList<Grade>();
 		return passedExams;
 	}
 	public void setPassedExams(List<Grade> passedExams) {
 		this.passedExams = passedExams;
 	}
 	public List<Grade> getUnfinishedExams() {
+		if(unfinishedExams == null)
+			unfinishedExams = new ArrayList<Grade>();
 		return unfinishedExams;
 	}
 	public void setUnfinishedExams(List<Grade> unfinishedExams) {
@@ -136,19 +140,27 @@ public class Student {
 	
 	public ArrayList<Course> getUnfinishedCourses(){
 		ArrayList<Course> rezultat = new ArrayList<Course>();
+		if(unfinishedExams == null)
+			return new ArrayList<Course>();
 		for(Grade ocena : unfinishedExams) {
 			rezultat.add(ocena.getCourse());
 		}
 		return rezultat;
 	}
 	public void addUnfinishedExam(Course c) {
+		if(unfinishedExams == null)
+			unfinishedExams = new ArrayList<Grade>();
 		unfinishedExams.add(new Grade(this, c, 5, LocalDate.now()));
 	}
 	public void deleteUnfinishedExam(Course c) {	
+		if(unfinishedExams == null)
+			unfinishedExams = new ArrayList<Grade>();
 		unfinishedExams.removeIf(x ->(c.getCourseID()==x.getCourse().getCourseID()));
 	}
 	public ArrayList<Course> getPassedCourses(){
 		ArrayList<Course> rezultat = new ArrayList<Course>();
+		if(passedExams == null)
+			return new ArrayList<Course>();
 		for(Grade ocena : passedExams) {
 			rezultat.add(ocena.getCourse());
 		}

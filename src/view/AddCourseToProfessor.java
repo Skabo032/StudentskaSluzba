@@ -46,7 +46,7 @@ public class AddCourseToProfessor extends JDialog {
 		
 		DefaultListModel<String> listModel = new DefaultListModel<>();
 		for(int i = 0; i < CourseDataBase.getInstance().getRowCount(); i++) {
-			System.out.println();
+			
 			if(!selectedProf.getCourses().contains(CourseDataBase.getInstance().getCourse(i)) )
 			{
 				Course courseToAdd = CourseDataBase.getInstance().getCourse(i);

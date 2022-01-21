@@ -24,6 +24,8 @@ public class AbstractTableModelUnfinishedExams extends AbstractTableModel{
 	public int getRowCount() {
 		int index = StudentTable.getInstance().getSelectedRow();
 		Student selectedStudent = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(index));
+		if(selectedStudent.getUnfinishedExams() == null)
+			return 0;
 		return selectedStudent.getUnfinishedExams().size();
 	}
 
