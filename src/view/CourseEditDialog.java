@@ -161,6 +161,7 @@ public class CourseEditDialog extends JDialog  {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Course selectedCourse = CourseDataBase.getInstance().getCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex));
+				selectedCourse.getCourseProffesor().getCourses().remove(selectedCourse);
 				selectedCourse.setCourseProffesor(null);
 				CourseDataBase.getInstance().editCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex), selectedCourse);
 				courseProf.setText("");
@@ -195,6 +196,7 @@ public class CourseEditDialog extends JDialog  {
 					else {
 						CourseDataBase.getInstance().editCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex), c);
 						CourseTable.getInstance().update();
+						StudentTable.getInstance().update();
 						dispose();
 					}
 				}

@@ -16,8 +16,11 @@ import javax.swing.table.TableRowSorter;
 
 import java.util.regex.*;
 
+import model.Course;
 import model.CourseDataBase;
+import model.Grade;
 import model.ProfessorDataBase;
+import model.Student;
 import model.StudentDataBase;
 import view.ProfessorDialog;
 
@@ -217,7 +220,8 @@ public class ToolBar extends JToolBar {
 				int answer;
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
 				case 0:	// STUDENT
-					if(StudentTable.getInstance().getSelectedRow() != -1) {
+					int selectedIndex1 = StudentTable.getInstance().getSelectedRow();
+					if(selectedIndex1 != -1) {
 						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
 								MainFrame.getInstance().getResourceBundle().getString("deleteStudentQuestion"), 
 								MainFrame.getInstance().getResourceBundle().getString("deleteStudent"), 
@@ -227,13 +231,13 @@ public class ToolBar extends JToolBar {
 																options, 
 																options[0]);
 						if(answer == JOptionPane.YES_OPTION)
-							StudentDataBase.getInstance().removeStudentByRowNum(StudentTable.getInstance().getSelectedRow());
+							StudentDataBase.getInstance().removeStudentByRowNum(StudentTable.getInstance().convertRowIndexToModel(selectedIndex1));
 						StudentTable.getInstance().update();
 					}
 					break;
 				case 1:	// PROFFESOR
-					if(ProfessorTable.getInstance().getSelectedRow() != -1)
-					{
+					int selectedIndex2 = ProfessorTable.getInstance().getSelectedRow();
+					if(selectedIndex2 != -1) {
 						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
 								MainFrame.getInstance().getResourceBundle().getString("deleteProfessorQuestion"), 
 								MainFrame.getInstance().getResourceBundle().getString("deleteProfessor"), 
@@ -242,13 +246,22 @@ public class ToolBar extends JToolBar {
 																null, 
 																options, 
 																options[0]);
-						if(answer == JOptionPane.YES_OPTION)
-							ProfessorDataBase.getInstance().removeProfessorByRowNum(ProfessorTable.getInstance().getSelectedRow());
+		
+						if(answer == JOptionPane.YES_OPTION) {
+							for(Course c : CourseDataBase.getInstance().getCourses()) {
+								if(c.getCourseProffesor() != null && 
+										c.getCourseProffesor().getIdNumber().equals(ProfessorDataBase.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(selectedIndex2)).getIdNumber()))
+									c.setCourseProffesor(null);
+							}
+							ProfessorDataBase.getInstance().removeProfessorByRowNum(ProfessorTable.getInstance().convertRowIndexToModel(selectedIndex2));
+						}
+						CourseTable.getInstance().update();
 						ProfessorTable.getInstance().update();
 					}
 					break;
 				case 2:	// COURSE
-					if(CourseTable.getInstance().getSelectedRow() != -1)
+					int selectedIndex3 = CourseTable.getInstance().getSelectedRow();
+					if(selectedIndex3 != -1)
 					{
 						
 						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
@@ -259,8 +272,16 @@ public class ToolBar extends JToolBar {
 																null, 
 																options, 
 																options[0]);
-						if(answer == JOptionPane.YES_OPTION)
-							CourseDataBase.getInstance().removeCourseByRowNum(CourseTable.getInstance().getSelectedRow());
+						if(answer == JOptionPane.YES_OPTION) {
+							
+							for(Student s : StudentDataBase.getInstance().getStudents()) {
+								for(Grade g : s.getUnfinishedExams()) {
+									if(g.getCourse().equals(CourseDataBase.getInstance().getCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex3))))
+										s.getUnfinishedExams().remove(g);
+								}
+							}
+							CourseDataBase.getInstance().removeCourseByRowNum(CourseTable.getInstance().convertRowIndexToModel(selectedIndex3));
+						}
 						CourseTable.getInstance().update();
 					}
 					break;

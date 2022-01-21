@@ -16,8 +16,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import model.Course;
 import model.CourseDataBase;
+import model.Grade;
 import model.ProfessorDataBase;
+import model.Student;
 import model.StudentDataBase;
 
 
@@ -74,12 +77,33 @@ public class MenuBar extends JMenuBar {
 			foStudenti = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("students"));
 			foStudenti.setMnemonic(KeyEvent.VK_S);
 			foStudenti.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,ActionEvent.CTRL_MASK));
+			foStudenti.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					MainViewTabbedPane.getInstance().setSelectedIndex(0);
+				}
+			});
 			foPredmeti = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("courses"));
 			foPredmeti.setMnemonic(KeyEvent.VK_C);
 			foPredmeti.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,ActionEvent.CTRL_MASK));
+			foPredmeti.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					MainViewTabbedPane.getInstance().setSelectedIndex(2);					
+				}
+			});
 			foProfesori = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("professors"));
 			foProfesori.setMnemonic(KeyEvent.VK_P);
 			foProfesori.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,ActionEvent.CTRL_MASK));
+			foProfesori.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					MainViewTabbedPane.getInstance().setSelectedIndex(1);
+				}
+			});
 			foKatedre = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("departments"));
 			foKatedre.setMnemonic(KeyEvent.VK_D);
 			foKatedre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,ActionEvent.CTRL_MASK));
@@ -258,7 +282,8 @@ public class MenuBar extends JMenuBar {
 				int answer;
 				switch(MainViewTabbedPane.getInstance().getSelectedIndex()) {
 				case 0:	// STUDENT
-					if(StudentTable.getInstance().getSelectedRow() != -1)
+					int selectedIndex1 = StudentTable.getInstance().getSelectedRow();
+					if(selectedIndex1 != -1)
 					{
 						
 						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
@@ -270,12 +295,13 @@ public class MenuBar extends JMenuBar {
 																options, 
 																options[0]);
 						if(answer == JOptionPane.YES_OPTION)
-							StudentDataBase.getInstance().removeStudentByRowNum(StudentTable.getInstance().getSelectedRow());
+							StudentDataBase.getInstance().removeStudentByRowNum(StudentTable.getInstance().convertRowIndexToModel(selectedIndex1));
 						StudentTable.getInstance().update();
 					}
 					break;
 				case 1:	// PROFFESOR
-					if(ProfessorTable.getInstance().getSelectedRow() != -1) {
+					int selectedIndex2 = ProfessorTable.getInstance().getSelectedRow();
+					if(selectedIndex2 != -1) {
 						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
 								MainFrame.getInstance().getResourceBundle().getString("deleteProfessorQuestion"), 
 								MainFrame.getInstance().getResourceBundle().getString("deleteProfessor"), 
@@ -285,14 +311,23 @@ public class MenuBar extends JMenuBar {
 																options, 
 																options[0]);
 		
-						if(answer == JOptionPane.YES_OPTION)
-							ProfessorDataBase.getInstance().removeProfessorByRowNum(ProfessorTable.getInstance().getSelectedRow());
+						if(answer == JOptionPane.YES_OPTION) {
+							for(Course c : CourseDataBase.getInstance().getCourses()) {
+								if(c.getCourseProffesor() != null && 
+										c.getCourseProffesor().getIdNumber().equals(ProfessorDataBase.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(selectedIndex2)).getIdNumber()))
+									c.setCourseProffesor(null);
+							}
+							ProfessorDataBase.getInstance().removeProfessorByRowNum(ProfessorTable.getInstance().convertRowIndexToModel(selectedIndex2));
+						}
+						CourseTable.getInstance().update();
 						ProfessorTable.getInstance().update();
 					}
 					break;
 				case 2:	// COURSE
-					if(CourseTable.getInstance().getSelectedRow() != -1)
+					int selectedIndex3 = CourseTable.getInstance().getSelectedRow();
+					if(selectedIndex3 != -1)
 					{
+						
 						answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
 								MainFrame.getInstance().getResourceBundle().getString("deleteCourseQuestion"), 
 								MainFrame.getInstance().getResourceBundle().getString("deleteCourse"), 
@@ -301,8 +336,17 @@ public class MenuBar extends JMenuBar {
 																null, 
 																options, 
 																options[0]);
-						if(answer == JOptionPane.YES_OPTION)
-							CourseDataBase.getInstance().removeCourseByRowNum(CourseTable.getInstance().getSelectedRow());
+						if(answer == JOptionPane.YES_OPTION) {
+							// deletes selected exam from every students unpassed exam list
+							for(Student s : StudentDataBase.getInstance().getStudents()) {
+								for(Grade g : s.getUnfinishedExams()) {
+									if(g.getCourse().equals(CourseDataBase.getInstance().getCourse(CourseTable.getInstance().convertRowIndexToModel(selectedIndex3))))
+										s.getUnfinishedExams().remove(g);
+								}
+							}
+							
+							CourseDataBase.getInstance().removeCourseByRowNum(CourseTable.getInstance().convertRowIndexToModel(selectedIndex3));
+						}
 						CourseTable.getInstance().update();
 					}
 					break;

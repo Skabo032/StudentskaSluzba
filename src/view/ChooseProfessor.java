@@ -62,6 +62,7 @@ public class ChooseProfessor extends JDialog{
 					selectedCourse.setCourseProffesor(ProfessorDataBase.getInstance().getProfessor(selectedProfIndex));
 					CourseDataBase.getInstance().editCourse(selectedCourseIndex, selectedCourse);
 					CourseEditDialog.courseProf.setText(ProfessorDataBase.getInstance().getProfessor(selectedProfIndex).getFirstLastName());
+					ProfessorDataBase.getInstance().getProfessor(selectedProfIndex).getCourses().add(selectedCourse);
 					dispose();
 				}
 			}

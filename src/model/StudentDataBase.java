@@ -19,16 +19,8 @@ public class StudentDataBase {
 	}
 	
 	private List<Student> students;
-	private List<String> columnNames;
 	
 	private StudentDataBase() {
-		this.columnNames = new ArrayList<String>();
-		this.columnNames.add("Indeks");
-		this.columnNames.add("Ime");
-		this.columnNames.add("Prezime");
-		this.columnNames.add("Godina studija");
-		this.columnNames.add("Status");
-		this.columnNames.add("Prosek");
 		
 		this.students = new ArrayList<Student>();
 		Address l1 = new Address("Šafarikova","2","Novi Sad","Srbija");
@@ -178,10 +170,7 @@ public class StudentDataBase {
 	}
 	
 	public int getColumnCount() {
-		return columnNames.size();
-	}
-	public String getColumnName(int column) {
-		return columnNames.get(column);
+		return 6;
 	}
 	public int getRowCount() {
 		return students.size();
@@ -205,6 +194,10 @@ public class StudentDataBase {
 		default:
 			return null;
 		}
+	}
+	
+	public List<Student> getStudents(){
+		return this.students;
 	}
 	
 	public boolean addStudent(Student s) {

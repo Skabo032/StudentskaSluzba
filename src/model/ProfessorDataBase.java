@@ -18,15 +18,8 @@ public class ProfessorDataBase {
 	}
 	
 	private List<Professor> professors;
-	private List<String> columnNames;
 	
 	private ProfessorDataBase() {
-		
-		this.columnNames = new ArrayList<String>();
-		this.columnNames.add("Ime");
-		this.columnNames.add("Prezime");
-		this.columnNames.add("Zvanje");
-		this.columnNames.add("E-mail");
 		
 		List<Course> profCourses1 = new ArrayList<Course>();
 		profCourses1.add(CourseDataBase.getInstance().getCourse(0));
@@ -124,10 +117,7 @@ public class ProfessorDataBase {
 	}
 	
 	public int getColumnCount() {
-		return columnNames.size();
-	}
-	public String getColumnName(int column) {
-		return columnNames.get(column);
+		return 4;
 	}
 	public int getRowCount() {
 		return professors.size();

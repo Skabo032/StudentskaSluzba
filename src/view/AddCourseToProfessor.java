@@ -65,10 +65,9 @@ public class AddCourseToProfessor extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				int selectedCourseIndex = courseList.getSelectedIndex();
 				if(selectedCourseIndex != -1) {
-					
-					
 					Course selectedCourse = CourseDataBase.getInstance().getCourseByName(courseList.getSelectedValue());
 					selectedProf.addCourse(selectedCourse);
+					selectedCourse.setCourseProffesor(selectedProf);
 					ProfessorTeachingTable.getInstance().update();
 					dispose();
 				}

@@ -12,7 +12,6 @@ public class CourseDataBase {
 	
 	private static CourseDataBase instance = null;
 	private List<Course> courses;
-	private List<String> columnNames;
 	
 	public static CourseDataBase getInstance() {
 		if(instance == null)
@@ -21,13 +20,6 @@ public class CourseDataBase {
 	}
 	
 	private CourseDataBase() {
-		this.columnNames = new ArrayList<String>();
-		
-		this.columnNames.add("Sifra predmeta");
-		this.columnNames.add("Naziv predmeta");
-		this.columnNames.add("ESPB");
-		this.columnNames.add("Godina");
-		this.columnNames.add("Semestar");
 		
 		Address ak1 = new Address("Šafarikova","2","Novi Sad","Srbija");
 		Address ak2 = new Address("Nikole Tesle","56","Novi Sad","Srbija");
@@ -99,10 +91,7 @@ public class CourseDataBase {
 	}
 
 	public int getColumnCount() {
-		return columnNames.size();
-	}
-	public String getColumnName(int column) {
-		return columnNames.get(column);
+		return 5;
 	}
 	public int getRowCount() {
 		return courses.size();
@@ -124,6 +113,10 @@ public class CourseDataBase {
 			return null;
 		}
 	}
+	public List<Course> getCourses(){
+		return this.courses;
+	}
+	
 	public void removeCourse(String id) {
 		for(Course c : courses) {
 			if(c.getCourseID().equals(id)) {
