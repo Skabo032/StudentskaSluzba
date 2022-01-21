@@ -155,6 +155,19 @@ public class CourseDataBase {
 		}
 	}
 	
+	public Course getCourseById(String id) {
+		try {
+			for(Course kurs: courses)
+			{
+				if(kurs.getCourseID().equals(id))
+					return kurs;
+			}
+			return null;
+		}catch(Exception e) {
+			return null;
+		}
+	}
+	
 	public boolean existsById(String courseId) {
 		for (Course course : courses) {
 			//if(course.getCourseID().equals(courseId))

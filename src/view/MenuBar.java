@@ -6,6 +6,7 @@ import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.Locale;
 
 import javax.swing.ButtonGroup;
@@ -51,14 +52,14 @@ public class MenuBar extends JMenuBar {
 		file = new JMenu(MainFrame.getInstance().getResourceBundle().getString("file"));
 		file.setMnemonic(KeyEvent.VK_F);
 		
-		ImageIcon addIco = new ResizeIcon("images/add.png", 20, 20).getIcon();
-		ImageIcon editIco = new ResizeIcon("images/edit.png", 20, 20).getIcon();
-		ImageIcon deleteIco = new ResizeIcon("images/delete.png", 20, 20).getIcon();
-		ImageIcon saveIco = new ResizeIcon("images/save.png", 20, 20).getIcon();
-		ImageIcon openIco = new ResizeIcon("images/open.png", 20, 20).getIcon();
-		ImageIcon closeIco = new ResizeIcon("images/close.png", 20, 20).getIcon();
-		ImageIcon helpIco = new ResizeIcon("images/help.png", 20, 20).getIcon();
-		ImageIcon aboutIco = new ResizeIcon("images/about.png", 20, 20).getIcon();
+		ImageIcon addIco = new ResizeIcon("images" + File.separator + "add.png", 20, 20).getIcon();
+		ImageIcon editIco = new ResizeIcon("images"+ File.separator +"edit.png", 20, 20).getIcon();
+		ImageIcon deleteIco = new ResizeIcon("images"+ File.separator +"delete.png", 20, 20).getIcon();
+		ImageIcon saveIco = new ResizeIcon("images"+ File.separator +"save.png", 20, 20).getIcon();
+		ImageIcon openIco = new ResizeIcon("images"+ File.separator +"open.png", 20, 20).getIcon();
+		ImageIcon closeIco = new ResizeIcon("images"+ File.separator +"close.png", 20, 20).getIcon();
+		ImageIcon helpIco = new ResizeIcon("images"+ File.separator +"help.png", 20, 20).getIcon();
+		ImageIcon aboutIco = new ResizeIcon("images"+ File.separator +"about.png", 20, 20).getIcon();
 		
 		ActionListener aAdd = new AddBtnActionListener();
 		fNew = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("new"));

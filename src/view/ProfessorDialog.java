@@ -324,11 +324,9 @@ public class ProfessorDialog extends JDialog{
 						if(answer == JOptionPane.YES_OPTION){
 							int selectedProfIndex = ProfessorTable.getInstance().getSelectedRow();
 							Professor selectedProf = ProfessorController.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(selectedProfIndex));
-							//selectedProf.removeCourse();
+							String courseId = (String)ProfessorTeachingTable.getInstance().getValueAt(selectedCourseId, 0);
+							CourseDataBase.getInstance().getCourseById(courseId).setCourseProffesor(null);
 							selectedProf.getCourses().remove(selectedCourseId);
-							//Course c = CourseDataBase.getInstance().getCourseByName();
-//							selectedProf.removeCourse(c);
-//							
 							ProfessorTeachingTable.getInstance().update();
 						}
 					}
