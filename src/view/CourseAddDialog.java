@@ -141,8 +141,8 @@ public class CourseAddDialog extends JDialog {
 					c.setCourseName(courseName.getText());
 					c.setSemester((Semester)semester.getSelectedItem());
 					c.setYearOfStudy(Integer.parseInt(yearOfStudy.getText()));
-					int profId = Integer.parseInt(professorId.getText());
-					Professor p = ProfessorDataBase.getInstance().getProfessor(profId);
+					String profId = professorId.getText();
+					Professor p = ProfessorDataBase.getInstance().getProfessorById(profId);
 					c.setCourseProffesor(p);
 					c.setEctsPoints(Integer.parseInt(ectsPoints.getText()));
 					
@@ -151,9 +151,15 @@ public class CourseAddDialog extends JDialog {
 						JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("errCourseExists"));
 					}
 					else {
-						CourseDataBase.getInstance().addCourse(c);
-						CourseTable.getInstance().update();
-						dispose();
+						if(ProfessorDataBase.getInstance().existsById(profId)) {
+							CourseDataBase.getInstance().addCourse(c);
+							ProfessorDataBase.getInstance().getProfessorById(profId).getCourses().add(c);
+							CourseTable.getInstance().update();
+							dispose();
+						}else {
+							JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("errProfDoesntExist"));
+						}
+						
 					}
 				}
 				catch(Exception e)

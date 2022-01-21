@@ -7,7 +7,7 @@ import view.CourseAddDialog;
 public class CourseAddInputVerifier {
 	public static void verify() {
 		if(!checkEmpty() && 
-				checkCourseId() &&
+				//checkCourseId() &&
 				checkYearOfStudy() &&
 				checkEctsPoints()
 				) 
