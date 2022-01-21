@@ -7,31 +7,32 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-public class UnfinishedExamsTable extends JTable{
-	
+public class ProfessorTeachingTable extends JTable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static UnfinishedExamsTable instance = null;
+private static ProfessorTeachingTable instance = null;
 	
-	public static UnfinishedExamsTable getInstance() {
+	public static ProfessorTeachingTable getInstance() {
 		if (instance == null)
-			instance = new UnfinishedExamsTable();
+			instance = new ProfessorTeachingTable();
 		return instance;
 	}
 	
-	
-	public UnfinishedExamsTable() {
+	public ProfessorTeachingTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.setModel(new AbstractTableModelUnfinishedExams());
+		this.setModel(new AbstractTableModelProfessorTeaching());
+		
+		
 	}
 	
 	public void update() {
-		AbstractTableModelUnfinishedExams model = (AbstractTableModelUnfinishedExams) instance.getModel();
+		AbstractTableModelProfessorTeaching model = (AbstractTableModelProfessorTeaching) instance.getModel();
 		model.fireTableDataChanged();
 		validate();
 	}	
@@ -46,11 +47,12 @@ public class UnfinishedExamsTable extends JTable{
 		}
 		return c;
 	}
+	
 	public void updateLanguage() {
 		getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("courseId"));
 		getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("courseName"));
-		getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("espb"));
-		getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("yearOfStudies"));
-		getColumnModel().getColumn(4).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("semester"));
+		getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("yearOfStudies"));
+		getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("semester"));
 	}
+
 }

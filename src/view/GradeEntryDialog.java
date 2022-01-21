@@ -27,7 +27,7 @@ public class GradeEntryDialog extends JDialog{
 	
 	public GradeEntryDialog() {
 		
-		super(MainFrame.getInstance(), "Unesi ocenu", true);
+		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("enterGrade"), true);
 		
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
 		int mfLocY = (int)MainFrame.getInstance().getLocation().getY();
@@ -43,11 +43,11 @@ public class GradeEntryDialog extends JDialog{
 		JTextField id = new JTextField(10);
 		JTextField name = new JTextField(20);
 		JTextField date = new JTextField(15);
-		JButton confirm = new JButton("Potvrdi");
-		JButton cancel = new JButton("Otkazi");
+		JButton confirm = new JButton(MainFrame.getInstance().getResourceBundle().getString("confirm"));
+		JButton cancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		
 		int selectedStudIdx = StudentTable.getInstance().getSelectedRow();
-		Student selectedStudent = StudentDataBase.getInstance().getStudent(selectedStudIdx);
+		Student selectedStudent = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedStudIdx));
 		List<Grade> grades = selectedStudent.getUnfinishedExams();
 		int selectedGradeIdx = UnfinishedExamsTable.getInstance().getSelectedRow();
 		id.setText(String.valueOf(grades.get(selectedGradeIdx).getCourse().getCourseID()));
@@ -60,30 +60,30 @@ public class GradeEntryDialog extends JDialog{
 		gb.insets = new Insets(0,0,10,0);	// sets bottom padding to 10px for every component
 		gb.anchor = GridBagConstraints.WEST;
 		
-		p.add(new JLabel("Sifra: "), setCooridnates(gb, 0, 0));
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("courseId")), setCooridnates(gb, 0, 0));
 		
 		id.setEnabled(false);
 		p.add(id, setCooridnates(gb, 1, 0));
 		
-		p.add(new JLabel("Naziv: "), setCooridnates(gb, 0, 1));
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("name")), setCooridnates(gb, 0, 1));
 		
 		name.setEnabled(false);
 		p.add(name, setCooridnates(gb, 1, 1));
 		
-		p.add(new JLabel("Ocena: "), setCooridnates(gb, 0, 2));
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("grade")), setCooridnates(gb, 0, 2));
 		JComboBox<Integer> gradeValue = new JComboBox<Integer>(new Integer[] {6,7,8,9,10});
 		p.add(gradeValue, setCooridnates(gb, 1, 2));
 		
 		
 		confirm.setEnabled(false);
 		
-		p.add(new JLabel("Datum: "), setCooridnates(gb, 0, 3));
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("date")), setCooridnates(gb, 0, 3));
 		
 		date.getDocument().addDocumentListener(new DocumentListener() {
 			
 			public void verify() {
 				try {
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 					LocalDate localDate = LocalDate.parse(date.getText(), formatter);
 					confirm.setEnabled(true);
 					
@@ -114,7 +114,7 @@ public class GradeEntryDialog extends JDialog{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 				LocalDate dateOfExam = LocalDate.parse(date.getText(), formatter);
 				
 				Grade grade = grades.get(selectedGradeIdx);
@@ -129,8 +129,9 @@ public class GradeEntryDialog extends JDialog{
 				
 				selectedStudent.setPassedExams(passedGrades);
 				selectedStudent.setUnfinishedExams(unfinishedGrades);
-				StudentDataBase.getInstance().editStudent(selectedStudIdx, selectedStudent);
+				StudentDataBase.getInstance().editStudent(StudentTable.getInstance().convertRowIndexToModel(selectedStudIdx), selectedStudent);
 				UnfinishedExamsTable.getInstance().update();
+				PassedExamsTable.getInstance().update(); //da refreshuje polozene odmah
 				dispose();
 			}
 		});

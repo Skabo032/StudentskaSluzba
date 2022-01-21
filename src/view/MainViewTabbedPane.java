@@ -23,12 +23,17 @@ public class MainViewTabbedPane extends JTabbedPane
 		//CourseTable courseTable = new CourseTable();
 
 		
-		addTab("Studenti", new JScrollPane(StudentTable.getInstance()));
-		addTab("Profesori", new JScrollPane(ProfessorTable.getInstance()));
-		addTab("Predmeti", new JScrollPane(CourseTable.getInstance()));
+		addTab(MainFrame.getInstance().getResourceBundle().getString("students"), new JScrollPane(StudentTable.getInstance()));
+		addTab(MainFrame.getInstance().getResourceBundle().getString("professors"), new JScrollPane(ProfessorTable.getInstance()));
+		addTab(MainFrame.getInstance().getResourceBundle().getString("courses"), new JScrollPane(CourseTable.getInstance()));
 		
 	}
 	
+	public void changeLanguage() {
+		setTitleAt(0, MainFrame.getInstance().getResourceBundle().getString("students"));
+		setTitleAt(1, MainFrame.getInstance().getResourceBundle().getString("professors"));
+		setTitleAt(2, MainFrame.getInstance().getResourceBundle().getString("courses"));
+	}	
 	public static MainViewTabbedPane getInstance() {
 		if(instance == null)
 			instance = new MainViewTabbedPane();

@@ -30,7 +30,23 @@ public class AbstractTableModelProfessor extends AbstractTableModel{
 
 	@Override
 	public String getColumnName(int column) {
-		return ProfessorDataBase.getInstance().getColumnName(column);
+		switch (column) {
+		case 0:
+			return MainFrame.getInstance().getResourceBundle().getString("firstName");
+			
+		case 1:
+			return MainFrame.getInstance().getResourceBundle().getString("lastName");
+			
+		case 2:
+			return MainFrame.getInstance().getResourceBundle().getString("title");
+			
+		case 3:
+			return MainFrame.getInstance().getResourceBundle().getString("email");
+			
+		default:
+			return "";
+			
+		}
 	}
 	
 }

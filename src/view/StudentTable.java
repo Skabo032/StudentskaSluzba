@@ -28,11 +28,21 @@ public class StudentTable extends JTable{
 		validate();
 	}
 	
+	public void updateLanguage() {
+		getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("index"));
+		getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("firstName"));
+		getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("lastName"));
+		getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("yearOfStudies"));
+		getColumnModel().getColumn(4).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("status"));
+		getColumnModel().getColumn(5).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("gradeAverage"));
+	}
+	
 	private StudentTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelStudent());
+		this.setAutoCreateRowSorter(true);
 	}
 	
 	@Override

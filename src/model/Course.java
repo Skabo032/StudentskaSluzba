@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public class Course {
-	private int courseID;
+	private String courseID;
 	private String courseName;
 	private Semester semester;
 	private int yearOfStudy;
@@ -21,13 +21,21 @@ public class Course {
 	
 	public Course() {
 		super();
-//		this.courseID = 1;
-//		this.courseName = "oisisi";
-//		this.semester = Semester.WINTER;
-//		this.yearOfStudy = 3;
-//		this.ectsPoints = 5;
 	}
-	public Course(int courseID, String courseName, Semester semester, int yearOfStudy, Professor courseProffesor,
+	
+	
+	public Course(String courseID, String courseName, int yearOfStudy, int ectsPoints, Professor courseProffesor, Semester semester) {
+		super();
+		this.courseID = courseID;
+		this.courseName = courseName;
+		this.semester = semester;
+		this.yearOfStudy = yearOfStudy;
+		this.courseProffesor = courseProffesor;
+		this.ectsPoints = ectsPoints;
+	}
+
+
+	public Course(String courseID, String courseName, Semester semester, int yearOfStudy, Professor courseProffesor,
 			int ectsPoints, List<Student> studentsPassed, List<Student> studentsFailed) {
 		super();
 		this.courseID = courseID;
@@ -40,14 +48,13 @@ public class Course {
 		this.studentsFailed = studentsFailed;
 	}
 	
-	public int getCourseID() {
+	public String getCourseID() {
 		return courseID;
 	}
-	public void setCourseID(int courseID) throws Exception{
-		if (courseID >= 0)
+	public void setCourseID(String courseID) throws Exception{
+		
 			this.courseID = courseID;
-		else 
-			throw new Exception("Invalid value for course ID, cannot be less than zero!");
+		
 	}
 	public String getCourseName() {
 		return courseName;

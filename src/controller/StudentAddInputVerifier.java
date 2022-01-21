@@ -53,7 +53,7 @@ public class StudentAddInputVerifier {
 	
 	private static boolean checkDate() {
 		try {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 			LocalDate date = LocalDate.parse(StudentAddDialog.dateOfBirth.getText(), formatter);
 			return true;
 			

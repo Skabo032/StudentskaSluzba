@@ -1,5 +1,9 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -9,7 +13,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,6 +31,9 @@ import javax.swing.JTextField;
 
 import controller.StudentEditDocumentListener;
 import model.Address;
+import model.Course;
+import model.CourseDataBase;
+import model.Grade;
 import model.Student;
 import model.StudentDataBase;
 import model.Student.Status;
@@ -51,7 +61,7 @@ public class StudentEditDialog extends JDialog {
 	public static JButton cancel;
 	
 	public StudentEditDialog() {
-		super(MainFrame.getInstance(), "Izmeni studenta", true);
+		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("editStudent"), true);
 		
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
 		int mfLocY = (int)MainFrame.getInstance().getLocation().getY();
@@ -69,10 +79,10 @@ public class StudentEditDialog extends JDialog {
 			dispose();
 		}
 		else if(selectedIndex >= 0) {
-			Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
+			Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
 			lastName.setText(selectedStud.getLastName());
 			firstName.setText(selectedStud.getFirstName());
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 			dateOfBirth.setText(selectedStud.getDateOfBirth().format(formatter));
 			addressStreet.setText(selectedStud.getAddress().getStreet());
 			addressNumber.setText(selectedStud.getAddress().getNumber());
@@ -95,7 +105,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== PREZIME =====
 		gb.gridx = 0;
 		gb.gridy = 0;
-		pInfo.add(new JLabel("Prezime: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("lastName")), gb);
 				
 		gb.gridx = 1;
 		gb.gridy = 0;
@@ -105,7 +115,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== IME =====
 		gb.gridx = 0;
 		gb.gridy = 1;
-		pInfo.add(new JLabel("Ime: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("firstName")), gb);
 				
 		gb.gridx = 1;
 		gb.gridy = 1;
@@ -115,7 +125,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== DATUM RODJENJA =====
 		gb.gridx = 0;
 		gb.gridy = 2;
-		pInfo.add(new JLabel("Datum rodjenja: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("dateOfBirth")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 2;
@@ -125,7 +135,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== KUCNA ADRESA - ulica =====
 		gb.gridx = 0;
 		gb.gridy = 3;
-		pInfo.add(new JLabel("Ulica: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("street")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 3;
@@ -135,7 +145,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== KUCNA ADRESA - broj =====
 		gb.gridx = 0;
 		gb.gridy = 4;
-		pInfo.add(new JLabel("Broj: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("number")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 4;
@@ -145,7 +155,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== KUCNA ADRESA - grad =====
 		gb.gridx = 0;
 		gb.gridy = 5;
-		pInfo.add(new JLabel("Grad: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("city")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 5;
@@ -155,7 +165,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== KUCNA ADRESA - drzava =====
 		gb.gridx = 0;
 		gb.gridy = 6;
-		pInfo.add(new JLabel("Drzava: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("country")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 6;
@@ -165,7 +175,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== BROJ TELEFONA =====
 		gb.gridx = 0;
 		gb.gridy = 7;
-		pInfo.add(new JLabel("Broj telefona: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("phoneNumber")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 7;
@@ -175,7 +185,7 @@ public class StudentEditDialog extends JDialog {
 		// ==== EMAIL =====
 		gb.gridx = 0;
 		gb.gridy = 8;
-		pInfo.add(new JLabel("E-mail: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("email")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 8;
@@ -185,7 +195,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== BROJ INDEXA =====
 		gb.gridx = 0;
 		gb.gridy = 9;
-		pInfo.add(new JLabel("Broj indexa: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("indexNumber")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 9;
@@ -195,7 +205,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== GODINA UPISA =====
 		gb.gridx = 0;
 		gb.gridy = 10;
-		pInfo.add(new JLabel("Godina upisa: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("yearOfEnrolment")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 10;
@@ -205,7 +215,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== TRENUTNA GODINA STUDIJA =====
 		gb.gridx = 0;
 		gb.gridy = 11;
-		pInfo.add(new JLabel("Trenutna godina studija: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("currentYearOfStudies")), gb);
 		
 		gb.gridx = 1;
 		gb.gridy = 11;
@@ -215,7 +225,7 @@ public class StudentEditDialog extends JDialog {
 		// ===== STATUS =====
 		gb.gridx = 0;
 		gb.gridy = 12;
-		pInfo.add(new JLabel("Status: "), gb);
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("status")), gb);
 		
 		status.setModel(new DefaultComboBoxModel<>(Student.Status.values()));
 		gb.gridx = 1;
@@ -225,7 +235,7 @@ public class StudentEditDialog extends JDialog {
 		// DUGMAD
 		gb.gridx = 0;
 		gb.gridy = 13;
-		confirm = new JButton("Potvrdi");
+		confirm = new JButton(MainFrame.getInstance().getResourceBundle().getString("confirm"));
 		confirm.setEnabled(false);
 		confirm.addActionListener(new ActionListener() {
 			
@@ -234,7 +244,7 @@ public class StudentEditDialog extends JDialog {
 				Student s = new Student();
 				s.setFirstName(firstName.getText());
 				s.setLastName(lastName.getText());
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 				s.setDateOfBirth(LocalDate.parse(dateOfBirth.getText(), formatter));
 				s.setEmail(email.getText());
 				Address hAddress = new Address(addressStreet.getText(), addressNumber.getText(), addressCity.getText(), addressCountry.getText());
@@ -247,11 +257,11 @@ public class StudentEditDialog extends JDialog {
 				s.setCurrentYearOfStudies(Integer.parseInt(currentYearOfStudies.getText()));
 				
 				int selectedIndex = StudentTable.getInstance().getSelectedRow();
-				Student selectedStud = StudentDataBase.getInstance().getStudent(selectedIndex);
+				Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
 				if(StudentDataBase.getInstance().existsById(s.getIndexNumber()) && !selectedStud.getIndexNumber().equals(s.getIndexNumber())) {
-					JOptionPane.showMessageDialog(getParent(), "Student sa datim brojem indeksa vec postoji!");
+					JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("errStudentExists"));
 				}else {
-					StudentDataBase.getInstance().editStudent(StudentTable.getInstance().getSelectedRow(), s);
+					StudentDataBase.getInstance().editStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex), s);
 					StudentTable.getInstance().update();
 					dispose();
 				}
@@ -262,7 +272,7 @@ public class StudentEditDialog extends JDialog {
 		
 		gb.gridx = 1;
 		gb.gridy = 13;
-		cancel = new JButton("Otkaži");
+		cancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		cancel.addActionListener(new ActionListener() {
 			
 			@Override
@@ -274,15 +284,121 @@ public class StudentEditDialog extends JDialog {
 		
 		JPanel pUnfinishedExams = new JPanel();
 		pUnfinishedExams.add(new JScrollPane(UnfinishedExamsTable.getInstance()));
-		JButton btnAddUnfinished = new JButton("Dodaj");
-		JButton btnDeleteUnfinished = new JButton("Obrisi");
-		JButton btnFinishUnfinished = new JButton("Polaganje");
+		JButton btnAddUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("add"));
+		JButton btnDeleteUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("delete"));
+		btnDeleteUnfinished.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Object[] options = {MainFrame.getInstance().getResourceBundle().getString("yes"), 
+						MainFrame.getInstance().getResourceBundle().getString("no")};
+				int selectedExamId = UnfinishedExamsTable.getInstance().getSelectedRow();
+				if(UnfinishedExamsTable.getInstance().getSelectedRow() != -1) {
+					int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+							MainFrame.getInstance().getResourceBundle().getString("cancelUnfinishedExamQuestion"), 
+									MainFrame.getInstance().getResourceBundle().getString("cancelUnfinishedExam"), 
+															JOptionPane.YES_NO_OPTION, 
+															JOptionPane.QUESTION_MESSAGE, 
+															null, 
+															options, 
+															options[0]);
+					if(answer == JOptionPane.YES_OPTION){
+						Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
+						selectedStud.getUnfinishedExams().remove(selectedExamId);
+						
+						UnfinishedExamsTable.getInstance().update();
+					}
+				}
+				
+			}
+		});
+		JButton btnFinishUnfinished = new JButton(MainFrame.getInstance().getResourceBundle().getString("pass")); // Polaganje
+		
+		
+		Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
+		
+		
+		
+		//pPassedExams.setLayout(new BoxLayout(pPassedExams, BoxLayout.PAGE_AXIS));
+
+		
+
+		JButton btnCancelGrade = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancelGrade"));
+		btnCancelGrade.setPreferredSize(new Dimension(50,24));
+		btnCancelGrade.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Object[] options = {MainFrame.getInstance().getResourceBundle().getString("yes"), 
+						MainFrame.getInstance().getResourceBundle().getString("no")};
+				int selectedExamId = PassedExamsTable.getInstance().getSelectedRow();
+				if(PassedExamsTable.getInstance().getSelectedRow() != -1) {
+					int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+							MainFrame.getInstance().getResourceBundle().getString("cancelGradeQuestion"), 
+									MainFrame.getInstance().getResourceBundle().getString("cancelGrade"), 
+															JOptionPane.YES_NO_OPTION, 
+															JOptionPane.QUESTION_MESSAGE, 
+															null, 
+															options, 
+															options[0]);
+					if(answer == JOptionPane.YES_OPTION){
+						Student selectedStud = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex));
+						List<Grade> passedGrades = selectedStud.getPassedExams();
+						List<Grade> unfinishedGrades = selectedStud.getUnfinishedExams();
+						Grade selectedGrade = passedGrades.get(selectedExamId);
+						selectedGrade.setDateOfExam(null);
+						selectedGrade.setGrade(5);
+						unfinishedGrades.add(selectedGrade);
+						passedGrades.remove(selectedExamId);
+						selectedStud.setPassedExams(passedGrades);
+						selectedStud.setUnfinishedExams(unfinishedGrades);
+						StudentDataBase.getInstance().editStudent(StudentTable.getInstance().convertRowIndexToModel(selectedIndex), selectedStud);
+						PassedExamsTable.getInstance().update();
+						UnfinishedExamsTable.getInstance().update();
+					}
+				}
+				
+			}
+		});
+		JPanel pPassedExams = new JPanel(new BorderLayout());
+		pPassedExams.add(btnCancelGrade, BorderLayout.NORTH);
+		pPassedExams.add(new JScrollPane(PassedExamsTable.getInstance()), BorderLayout.CENTER);
+		
+		JPanel ispis = new JPanel(new BorderLayout());
+		
+		JPanel pPassedExamsInfo1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JLabel lbAvgGradeTxt = new JLabel(MainFrame.getInstance().getResourceBundle().getString("avgGrade") + Double.toString(selectedStud.calcAvgGrade()));
+		
+		pPassedExamsInfo1.add(lbAvgGradeTxt);
+		
+		JPanel pPassedExamsInfo2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JLabel lbTotalPointsTxt = new JLabel(MainFrame.getInstance().getResourceBundle().getString("totalESPB") + Integer.toString(selectedStud.calcEcts()));
+		pPassedExamsInfo2.add(lbTotalPointsTxt);
+		
+		ispis.add(pPassedExamsInfo1, BorderLayout.NORTH);
+		ispis.add(pPassedExamsInfo2, BorderLayout.SOUTH);
+		pPassedExams.add(ispis, BorderLayout.SOUTH);
+		
+	
+		
+		
+		
+		
+		
 		btnFinishUnfinished.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(UnfinishedExamsTable.getInstance().getSelectedRow() != -1)
 					new GradeEntryDialog();
+				
+			}
+		});
+		btnAddUnfinished.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new AddCourseToStudent();
 				
 			}
 		});
@@ -293,12 +409,12 @@ public class StudentEditDialog extends JDialog {
 		
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.addTab("Informacije", pInfo);
-		tabbedPane.addTab("Polozeni", new JLabel("Polozeni"));
-		tabbedPane.addTab("Nepolozeni", pUnfinishedExams);
+		tabbedPane.addTab("Info", pInfo);
+		tabbedPane.addTab(MainFrame.getInstance().getResourceBundle().getString("passed"), pPassedExams);
+		tabbedPane.addTab(MainFrame.getInstance().getResourceBundle().getString("unpassed"), pUnfinishedExams);
 		
 		add(tabbedPane);
-		setResizable(false);
+		setResizable(true);
 		setVisible(true);
 		
 		

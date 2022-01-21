@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -15,14 +17,19 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import controller.ProfessorController;
 import controller.ProfessorDocumentListener;
 import model.Address;
+import model.Course;
+import model.CourseDataBase;
 import model.Professor;
 import model.ProfessorDataBase;
+import model.Student;
+import model.StudentDataBase;
 import model.Professor.Title;
 
 public class ProfessorDialog extends JDialog{
@@ -51,7 +58,9 @@ public class ProfessorDialog extends JDialog{
 	public static JButton cancel;
 	
 	public ProfessorDialog(boolean isAdd) {
-		super(MainFrame.getInstance(), isAdd ? "Dodaj profesora" : "Izmeni profesora", true);
+		super(MainFrame.getInstance(), isAdd ? 
+				MainFrame.getInstance().getResourceBundle().getString("addProfessor") : 
+					MainFrame.getInstance().getResourceBundle().getString("editProfessor"), true);
 		
 		int sizeX = 500;
 		int sizeY = 700;
@@ -81,19 +90,19 @@ public class ProfessorDialog extends JDialog{
 		idNumber = new JTextField(20);
 		title = new JComboBox<Professor.Title>();
 		yearsOfExperience = new JTextField(5);
-		confirm = new JButton("Potvrdi");
-		cancel = new JButton("Otkaži");
+		confirm = new JButton(MainFrame.getInstance().getResourceBundle().getString("confirm"));
+		cancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		
 		if(!isAdd) {
 			int selectedIndex = ProfessorTable.getInstance().getSelectedRow();
-			Professor selectedProf = ProfessorController.getInstance().getProfessor(selectedIndex);
+			Professor selectedProf = ProfessorController.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(selectedIndex));
 			if(selectedIndex == -1) {
 				dispose();
 			}else if(selectedIndex >= 0) {
 				
 				firstName.setText(selectedProf.getFirstName());
 				lastName.setText(selectedProf.getLastName());
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 				dateOfBirth.setText(selectedProf.getDateOfBirth().format(formatter));
 
 				homeStreet.setText(selectedProf.getHomeAddress().getStreet());
@@ -123,33 +132,33 @@ public class ProfessorDialog extends JDialog{
 		gb.anchor = GridBagConstraints.WEST;
 		
 		// ===== IME =====
-		pInfo.add(new JLabel("Ime: "), setCooridnates(gb, 0, 0));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("firstName")), setCooridnates(gb, 0, 0));
 		
 		firstName.getDocument().addDocumentListener(pdl);
 		pInfo.add(firstName, setCooridnates(gb, 1, 0));
 		
 		// ===== PREZIME =====
-		pInfo.add(new JLabel("Prezime: "), setCooridnates(gb, 0, 1));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("lastName")), setCooridnates(gb, 0, 1));
 		
 		lastName.getDocument().addDocumentListener(pdl);
 		pInfo.add(lastName, setCooridnates(gb, 1, 1));
 		
 		// ===== DATUM RODJENJA =====
-		pInfo.add(new JLabel("Datum rodjenja: "), setCooridnates(gb, 0, 2));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("dateOfBirth")), setCooridnates(gb, 0, 2));
 		
 		dateOfBirth.getDocument().addDocumentListener(pdl);
 		pInfo.add(dateOfBirth, setCooridnates(gb, 1, 2));
 		pInfo.add(new JLabel("dd.MM.yyyy"), setCooridnates(gb, 2, 2));
 		// ===== KUCNA ADRESA =====
-		pInfo.add(new JLabel("KUCNA ADRESA: "), setCooridnates(gb, 0, 3));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("homeAddress")), setCooridnates(gb, 0, 3));
 		
-		pInfo.add(new JLabel("Ulica: "), setCooridnates(gb, 0, 4));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("street")), setCooridnates(gb, 0, 4));
 		pInfo.add(homeStreet, setCooridnates(gb, 1, 4));
-		pInfo.add(new JLabel("Broj: "), setCooridnates(gb, 0, 5));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("number")), setCooridnates(gb, 0, 5));
 		pInfo.add(homeNumber, setCooridnates(gb, 1, 5));
-		pInfo.add(new JLabel("Grad: "), setCooridnates(gb, 0, 6));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("city")), setCooridnates(gb, 0, 6));
 		pInfo.add(homeCity, setCooridnates(gb, 1, 6));
-		pInfo.add(new JLabel("Drzava: "), setCooridnates(gb, 0, 7));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("country")), setCooridnates(gb, 0, 7));
 		pInfo.add(homeCountry, setCooridnates(gb, 1, 7));
 		
 		homeStreet.getDocument().addDocumentListener(pdl);
@@ -158,15 +167,15 @@ public class ProfessorDialog extends JDialog{
 		homeCountry.getDocument().addDocumentListener(pdl);
 		
 		// ===== ADRESA KANCELARIJE =====
-		pInfo.add(new JLabel("ADRESA KANCELARIJE: "), setCooridnates(gb, 0, 8));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("officeAddress")), setCooridnates(gb, 0, 8));
 		
-		pInfo.add(new JLabel("Ulica: "), setCooridnates(gb, 0, 9));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("street")), setCooridnates(gb, 0, 9));
 		pInfo.add(officeStreet, setCooridnates(gb, 1, 9));
-		pInfo.add(new JLabel("Broj: "), setCooridnates(gb, 0, 10));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("number")), setCooridnates(gb, 0, 10));
 		pInfo.add(officeNumber, setCooridnates(gb, 1, 10));
-		pInfo.add(new JLabel("Grad: "), setCooridnates(gb, 0, 11));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("city")), setCooridnates(gb, 0, 11));
 		pInfo.add(officeCity, setCooridnates(gb, 1, 11));
-		pInfo.add(new JLabel("Drzava: "), setCooridnates(gb, 0, 12));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("country")), setCooridnates(gb, 0, 12));
 		pInfo.add(officeCountry, setCooridnates(gb, 1, 12));
 		
 		officeStreet.getDocument().addDocumentListener(pdl);
@@ -175,32 +184,32 @@ public class ProfessorDialog extends JDialog{
 		officeCountry.getDocument().addDocumentListener(pdl);
 		
 		// ===== BROJ TELEFONA =====
-		pInfo.add(new JLabel("Broj telefona: "), setCooridnates(gb, 0, 13));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("phoneNumber")), setCooridnates(gb, 0, 13));
 		
 		phoneNumber.getDocument().addDocumentListener(pdl);
 		pInfo.add(phoneNumber, setCooridnates(gb, 1, 13));
 		
 		// ==== EMAIL =====
-		pInfo.add(new JLabel("E-mail: "), setCooridnates(gb, 0, 14));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("email")), setCooridnates(gb, 0, 14));
 		
 		email.getDocument().addDocumentListener(pdl);
 		pInfo.add(email, setCooridnates(gb, 1, 14));
 		
 		// ===== BROJ LICNE KARTE =====
-		pInfo.add(new JLabel("Broj licne karte: "), setCooridnates(gb, 0, 15));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("idNumber")), setCooridnates(gb, 0, 15));
 		
 		idNumber.getDocument().addDocumentListener(pdl);
 		pInfo.add(idNumber, setCooridnates(gb, 1, 15));
 		
 		// ===== ZVANJE =====
-		pInfo.add(new JLabel("Zvanje: "), setCooridnates(gb, 0, 17));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("title")), setCooridnates(gb, 0, 17));
 		
 		title = new JComboBox<>();
 		title.setModel(new DefaultComboBoxModel<>(Professor.Title.values()));
 		pInfo.add(title, setCooridnates(gb, 1, 17));
 		
 		// ===== GODINE STAZA =====
-		pInfo.add(new JLabel("Godine staza: "), setCooridnates(gb, 0, 18));
+		pInfo.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("yearsOfExperience")), setCooridnates(gb, 0, 18));
 		
 		yearsOfExperience.getDocument().addDocumentListener(pdl);
 		pInfo.add(yearsOfExperience, setCooridnates(gb, 1, 18));
@@ -221,7 +230,7 @@ public class ProfessorDialog extends JDialog{
 				Professor p = new Professor();
 				p.setFirstName(firstName.getText());
 				p.setLastName(lastName.getText());
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 				p.setDateOfBirth(LocalDate.parse(dateOfBirth.getText(), formatter));
 				p.setEmail(email.getText());
 				Address homeAddress = new Address(homeStreet.getText(), 
@@ -248,10 +257,10 @@ public class ProfessorDialog extends JDialog{
 				
 				if(!isAdd) {
 					int selectedIndex = ProfessorTable.getInstance().getSelectedRow();
-					Professor selectedProf = ProfessorController.getInstance().getProfessor(selectedIndex);
+					Professor selectedProf = ProfessorController.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(selectedIndex));
 					if(ProfessorController.getInstance().existsById(p.getIdNumber()) && !selectedProf.getIdNumber().equals(p.getIdNumber())) {
-						JOptionPane.showMessageDialog(getParent(), "Profesor sa datim brojem LK vec postoji!");
-					}else if(ProfessorDataBase.getInstance().editProfessor(p, ProfessorTable.getInstance().getSelectedRow())) {
+						JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("professorExists"));
+					}else if(ProfessorDataBase.getInstance().editProfessor(p, ProfessorTable.getInstance().convertRowIndexToModel(selectedIndex))) {
 						ProfessorTable.getInstance().update();
 						dispose();
 					}
@@ -260,7 +269,7 @@ public class ProfessorDialog extends JDialog{
 						ProfessorTable.getInstance().update();
 						dispose();
 					}else {
-						JOptionPane.showMessageDialog(getParent(), "Profesor sa datim brojem LK vec postoji!");
+						JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("professorExists"));
 					}
 				}
 			}
@@ -280,9 +289,61 @@ public class ProfessorDialog extends JDialog{
 			add(pInfo);
 		}
 		else {
+
+			
+			JPanel profTeaching = new JPanel(new BorderLayout());
+			JPanel dugmad = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			
+			profTeaching.add(new JScrollPane(ProfessorTeachingTable.getInstance()), BorderLayout.CENTER);
+			JButton btnAddCourse = new JButton(MainFrame.getInstance().getResourceBundle().getString("addCourse"));
+			btnAddCourse.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					if(ProfessorTable.getInstance().getSelectedRow() != -1)
+						new AddCourseToProfessor();
+					
+				}
+			});
+			JButton btnRemoveCourse = new JButton(MainFrame.getInstance().getResourceBundle().getString("removeCourse"));
+			btnRemoveCourse.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					Object[] options = {MainFrame.getInstance().getResourceBundle().getString("yes"), 
+							MainFrame.getInstance().getResourceBundle().getString("no")};
+					int selectedCourseId = ProfessorTeachingTable.getInstance().getSelectedRow();
+					if(selectedCourseId != -1) {
+						int answer = JOptionPane.showOptionDialog(MainFrame.getInstance(), 
+								MainFrame.getInstance().getResourceBundle().getString("removeCourseQuestion"), 
+										MainFrame.getInstance().getResourceBundle().getString("removeCourse"), 
+																JOptionPane.YES_NO_OPTION, 
+																JOptionPane.QUESTION_MESSAGE, 
+																null, 
+																options, 
+																options[0]);
+						if(answer == JOptionPane.YES_OPTION){
+							int selectedProfIndex = ProfessorTable.getInstance().getSelectedRow();
+							Professor selectedProf = ProfessorController.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(selectedProfIndex));
+							String courseId = (String)ProfessorTeachingTable.getInstance().getValueAt(selectedCourseId, 0);
+							CourseDataBase.getInstance().getCourseById(courseId).setCourseProffesor(null);
+							selectedProf.getCourses().remove(selectedCourseId);
+							ProfessorTeachingTable.getInstance().update();
+						}
+					}
+					
+				}
+			});
+			dugmad.add(btnAddCourse);
+			dugmad.add(btnRemoveCourse);
+			profTeaching.add(dugmad, BorderLayout.NORTH);
+			
+			
+			
+			
 			JTabbedPane editTabbedPane = new JTabbedPane();
 			editTabbedPane.addTab("Info", pInfo);
-			editTabbedPane.addTab("Predmeti", new JLabel("Predmeti"));
+			editTabbedPane.addTab(MainFrame.getInstance().getResourceBundle().getString("courses"), profTeaching);
+			
 			add(editTabbedPane);
 		}
 		setResizable(false);

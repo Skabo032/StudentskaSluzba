@@ -48,7 +48,7 @@ public class StudentAddDialog extends JDialog {
 	public static JButton cancel;
 	
 	public StudentAddDialog() {
-		super(MainFrame.getInstance(), "Dodaj studenta", true);
+		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("addStudent"), true);
 		
 		int mfLocX = (int)MainFrame.getInstance().getLocation().getX();
 		int mfLocY = (int)MainFrame.getInstance().getLocation().getY();
@@ -71,7 +71,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== PREZIME =====
 		gb.gridx = 0;
 		gb.gridy = 0;
-		p.add(new JLabel("Prezime: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("lastName")), gb);
 				
 		lastName = new JTextField(20);
 		gb.gridx = 1;
@@ -82,7 +82,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== IME =====
 		gb.gridx = 0;
 		gb.gridy = 1;
-		p.add(new JLabel("Ime: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("firstName")), gb);
 				
 		firstName = new JTextField(20);
 		gb.gridx = 1;
@@ -93,7 +93,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== DATUM RODJENJA =====
 		gb.gridx = 0;
 		gb.gridy = 2;
-		p.add(new JLabel("Datum rodjenja: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("dateOfBirth")), gb);
 		
 		dateOfBirth = new JTextField(20);
 		gb.gridx = 1;
@@ -104,7 +104,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== KUCNA ADRESA - ulica =====
 		gb.gridx = 0;
 		gb.gridy = 3;
-		p.add(new JLabel("Ulica: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("street")), gb);
 		
 		addressStreet = new JTextField(20);
 		gb.gridx = 1;
@@ -115,7 +115,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== KUCNA ADRESA - broj =====
 		gb.gridx = 0;
 		gb.gridy = 4;
-		p.add(new JLabel("Broj: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("number")), gb);
 		
 		addressNumber = new JTextField(4);
 		gb.gridx = 1;
@@ -126,7 +126,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== KUCNA ADRESA - grad =====
 		gb.gridx = 0;
 		gb.gridy = 5;
-		p.add(new JLabel("Grad: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("city")), gb);
 		
 		addressCity = new JTextField(20);
 		gb.gridx = 1;
@@ -137,7 +137,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== KUCNA ADRESA - drzava =====
 		gb.gridx = 0;
 		gb.gridy = 6;
-		p.add(new JLabel("Drzava: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("country")), gb);
 		
 		addressCountry = new JTextField(20);
 		gb.gridx = 1;
@@ -148,7 +148,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== BROJ TELEFONA =====
 		gb.gridx = 0;
 		gb.gridy = 7;
-		p.add(new JLabel("Broj telefona: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("phoneNumber")), gb);
 		
 		phoneNumber = new JTextField(20);
 		gb.gridx = 1;
@@ -159,7 +159,7 @@ public class StudentAddDialog extends JDialog {
 		// ==== EMAIL =====
 		gb.gridx = 0;
 		gb.gridy = 8;
-		p.add(new JLabel("E-mail: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("email")), gb);
 		
 		email = new JTextField(20);
 		gb.gridx = 1;
@@ -170,7 +170,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== BROJ INDEXA =====
 		gb.gridx = 0;
 		gb.gridy = 9;
-		p.add(new JLabel("Broj indexa: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("indexNumber")), gb);
 		
 		indexNumber = new JTextField(20);
 		gb.gridx = 1;
@@ -181,7 +181,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== GODINA UPISA =====
 		gb.gridx = 0;
 		gb.gridy = 10;
-		p.add(new JLabel("Godina upisa: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("yearOfEnrolment")), gb);
 		
 		yearOfEnrolment = new JTextField(10);
 		gb.gridx = 1;
@@ -192,7 +192,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== TRENUTNA GODINA STUDIJA =====
 		gb.gridx = 0;
 		gb.gridy = 11;
-		p.add(new JLabel("Trenutna godina studija: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("currentYearOfStudies")), gb);
 		
 		currentYearOfStudies = new JTextField(5);
 		gb.gridx = 1;
@@ -203,7 +203,7 @@ public class StudentAddDialog extends JDialog {
 		// ===== STATUS =====
 		gb.gridx = 0;
 		gb.gridy = 12;
-		p.add(new JLabel("Status: "), gb);
+		p.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("status")), gb);
 		
 		status = new JComboBox<>();
 		status.setModel(new DefaultComboBoxModel<>(Student.Status.values()));
@@ -214,7 +214,7 @@ public class StudentAddDialog extends JDialog {
 		// DUGMAD
 		gb.gridx = 0;
 		gb.gridy = 13;
-		confirm = new JButton("Potvrdi");
+		confirm = new JButton(MainFrame.getInstance().getResourceBundle().getString("confirm"));
 		confirm.setEnabled(false);
 		confirm.addActionListener(new ActionListener() {
 			
@@ -223,7 +223,7 @@ public class StudentAddDialog extends JDialog {
 				Student s = new Student();
 				s.setFirstName(firstName.getText());
 				s.setLastName(lastName.getText());
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
 				s.setDateOfBirth(LocalDate.parse(dateOfBirth.getText(), formatter));
 				s.setEmail(email.getText());
 				Address hAddress = new Address(addressStreet.getText(), addressNumber.getText(), addressCity.getText(), addressCountry.getText());
@@ -239,7 +239,7 @@ public class StudentAddDialog extends JDialog {
 					StudentTable.getInstance().update();
 					dispose();
 				}else {
-					JOptionPane.showMessageDialog(getParent(), "Student sa datim brojem indeksa vec postoji!");
+					JOptionPane.showMessageDialog(getParent(), MainFrame.getInstance().getResourceBundle().getString("errStudentExists"));
 				}
 			}
 		});
@@ -248,7 +248,7 @@ public class StudentAddDialog extends JDialog {
 		
 		gb.gridx = 1;
 		gb.gridy = 13;
-		cancel = new JButton("Otkaži");
+		cancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		cancel.addActionListener(new ActionListener() {
 			
 			@Override

@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,9 +27,8 @@ public class Student {
 
 
 	
-	public Student(String lastName, String firstName, LocalDate dateOfBirth, Address address, String phoneNumber,
-			String email, String indexNumber, int yearOfEnrolment, int currentYearOfStudies, Status status,
-			double avgGrade, List<Grade> passedExams, List<Grade> unfinishedExams) {
+	public Student(String indexNumber, String firstName, String lastName, int currentYearOfStudies, LocalDate dateOfBirth, Address address, String phoneNumber,
+			String email, Status status, int yearOfEnrolment, List<Grade> passedExams, List<Grade> unfinishedExams) {
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -40,7 +40,7 @@ public class Student {
 		this.yearOfEnrolment = yearOfEnrolment;
 		this.currentYearOfStudies = currentYearOfStudies;
 		this.status = status;
-		this.avgGrade = avgGrade;
+		//this.avgGrade = avgGrade;
 		this.passedExams = passedExams;
 		this.unfinishedExams = unfinishedExams;
 	}
@@ -70,6 +70,10 @@ public class Student {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public Address getAddress() {
+		if(address == null)
+		{
+			return new Address("","","","");
+		}
 		return address;
 	}
 	public void setAddress(Address address) {
@@ -129,6 +133,51 @@ public class Student {
 	public void setUnfinishedExams(List<Grade> unfinishedExams) {
 		this.unfinishedExams = unfinishedExams;
 	}
+	
+	public ArrayList<Course> getUnfinishedCourses(){
+		ArrayList<Course> rezultat = new ArrayList<Course>();
+		for(Grade ocena : unfinishedExams) {
+			rezultat.add(ocena.getCourse());
+		}
+		return rezultat;
+	}
+	public void addUnfinishedExam(Course c) {
+		unfinishedExams.add(new Grade(this, c, 5, LocalDate.now()));
+	}
+	public void deleteUnfinishedExam(Course c) {	
+		unfinishedExams.removeIf(x ->(c.getCourseID()==x.getCourse().getCourseID()));
+	}
+	public ArrayList<Course> getPassedCourses(){
+		ArrayList<Course> rezultat = new ArrayList<Course>();
+		for(Grade ocena : passedExams) {
+			rezultat.add(ocena.getCourse());
+		}
+		return rezultat;
+	}
+	
+	public double calcAvgGrade() {
+		double sum = 0;
+		if(passedExams == null)
+			return 0;
+		if(passedExams.isEmpty())
+			return 0;
+		for(Grade ocena : passedExams) {
+			sum += ocena.getGrade();
+		}
+		double avg = sum / passedExams.size();
+		return avg;
+	}
+	
+	public int calcEcts() {
+		int sum = 0;
+		if(passedExams == null)
+			return 0;
+		for(Grade ocena : passedExams) {
+			sum += ocena.getCourse().getEctsPoints();
+		}
+		return sum;
+	}
+	
 	
 	
 
