@@ -29,7 +29,7 @@ public class AbstractTableModelPassedExams extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		int index = StudentTable.getInstance().getSelectedRow();
-		Student selectedStudent = StudentDataBase.getInstance().getStudent(index);
+		Student selectedStudent = StudentDataBase.getInstance().getStudent(StudentTable.getInstance().convertRowIndexToModel(index));
 		Grade grade = selectedStudent.getPassedExams().get(rowIndex);
 		switch (columnIndex) {
 		case 0:

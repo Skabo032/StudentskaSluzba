@@ -368,6 +368,7 @@ public class StudentEditDialog extends JDialog {
 		
 		JPanel pPassedExamsInfo1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JLabel lbAvgGradeTxt = new JLabel(MainFrame.getInstance().getResourceBundle().getString("avgGrade") + Double.toString(selectedStud.calcAvgGrade()));
+		
 		pPassedExamsInfo1.add(lbAvgGradeTxt);
 		
 		JPanel pPassedExamsInfo2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));

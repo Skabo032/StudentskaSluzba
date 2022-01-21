@@ -70,6 +70,10 @@ public class Student {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public Address getAddress() {
+		if(address == null)
+		{
+			return new Address("","","","");
+		}
 		return address;
 	}
 	public void setAddress(Address address) {
