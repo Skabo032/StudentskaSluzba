@@ -114,6 +114,16 @@ public class ProfessorDataBase {
 		
 		this.professors.add(p1);
 		this.professors.add(p2);*/
+//		for(int i = 0; i < CourseDataBase.getInstance().getRowCount(); i++) 
+//		{
+//			Course c = CourseDataBase.getInstance().getCourse(i);
+//			for(int j = 0; j < professors.size(); j++)
+//			{
+//				if(professors.get(j).equals(c.getCourseProffesor())) {
+//					professors.get(j).addCourse(c);
+//				}
+//			}
+//		}
 	}
 	
 	public int getColumnCount() {

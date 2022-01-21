@@ -3,6 +3,7 @@ package view;
 import javax.swing.table.AbstractTableModel;
 
 import model.Course;
+import model.CourseDataBase;
 import model.Professor;
 import model.ProfessorDataBase;
 
@@ -29,6 +30,15 @@ public class AbstractTableModelProfessorTeaching extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		int index = ProfessorTable.getInstance().getSelectedRow();
 		Professor selectedProf = ProfessorDataBase.getInstance().getProfessor(ProfessorTable.getInstance().convertRowIndexToModel(index));
+		
+//ovo sam probao da dodam profesorima predmete koje predaju al nije radilo
+//		for(int i = 0; i < CourseDataBase.getInstance().getRowCount(); i++) {
+//			Course c = CourseDataBase.getInstance().getCourse(i);
+//			if(selectedProf.equals(c.getCourseProffesor())) {
+//				selectedProf.addCourse(c);
+//			}
+//		}
+		
 		Course course = selectedProf.getCourses().get(rowIndex);
 		switch (columnIndex) {
 		case 0:

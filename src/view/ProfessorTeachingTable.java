@@ -27,6 +27,8 @@ private static ProfessorTeachingTable instance = null;
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelProfessorTeaching());
+		
+		
 	}
 	
 	public void update() {

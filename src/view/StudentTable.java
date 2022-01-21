@@ -42,6 +42,7 @@ public class StudentTable extends JTable{
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelStudent());
+		this.setAutoCreateRowSorter(true);
 	}
 	
 	@Override
